@@ -1,0 +1,164 @@
+---
+title: "Aula14"
+author: "Nívia"
+format: html
+---
+
+# Análise de Correlação
+A análise de correlação é usada para avaliar a força e a direção da relação entre duas variáveis contínuas. Ela mede o grau de associação linear entre as variáveis, ou seja, o quanto as variáveis se movem juntas em uma relação linear. A medida mais comum de correlação é o coeficiente de correlação de Pearson, que varia de -1 a +1. Um valor próximo de +1 indica uma forte correlação positiva, um valor próximo de -1 indica uma forte correlação negativa, e um valor próximo de zero indica uma correlação fraca ou inexistente. A análise de correlação não implica causalidade, apenas indica a presença e a intensidade da relação linear entre as variáveis.
+
+Carregando Pacotes:
+```{r}
+library(tidyverse)
+library(readxl)
+library(ggplot2)
+```
+
+Conjunto de dados:
+```{r}
+estande <- read_excel("dados-diversos.xlsx", "estande")
+
+estande |>
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  facet_wrap(~ exp)+
+  ylim(0,max(estande$nplants))+
+  geom_smooth(se =  F)
+```
+## Ajustando modelo linear simples e quadratico:
+
+Utiliza-se a função lm() para ajustar o modelo linear. Essa função recebe a fórmula do modelo e os dados como argumentos. A fórmula especifica a relação entre a variável dependente e a variável independente. Por exemplo, se sua variável dependente for "y" e sua variável independente for "x", a fórmula seria y ~ x. A função lm() retornará um objeto do tipo "lm" que representa o modelo ajustado.
+Usa-se a função summary() para obter uma visão geral dos resultados do modelo ajustado. Isso inclui os coeficientes estimados, estatísticas de ajuste (como o coeficiente de determinação R²), valores-p e outros diagnósticos do modelo.
+
+1. Ver qual que se adapta melhor.
+
+Filtrar o experimento 2:
+O group_by vai agrupar pelos tratamentos e o summarise vai dar a média do número de plantas. Se eu quiser seguir a linha em cima dos pontos eu posso colocar o argumento span = 0.7 dentro da função geom_smooth. 
+O R ao quadrado da regressão linear simples é o coeficiente de determinação.
+```{r}
+estande2 <- estande |>
+  filter(exp ==2) |>
+  group_by(trat) |>
+  summarise(mean_nplants = mean(nplants))
+  
+estande2|>
+  ggplot(aes(trat, mean_nplants))+
+  geom_point()+
+  #geom_line()
+  geom_smooth(formula = y ~ poly(x, 2), method = "lm", color = "black")+
+  annotate(geom = "text", 
+           x = 25, y = 70,
+           label = "y = 66.3 - 1.777x + 0.0222x2
+           R2 = 0.0.88")
+
+```
+Olhando o ajuste do modelo quadrático:
+
+Para ajustar os dados a um modelo linear quadrático, basta utilizar a função lm(). A diferença é que precisará adicionar a variável independente ao quadrado na fórmula do modelo. Por exemplo, se sua variável dependente for "y" e sua variável independente for "x", a fórmula seria y ~ x + I(x^2). A função I() é usada para indicar uma operação especial, neste caso, elevar "x" ao quadrado. A função lm() retornará um objeto do tipo "lm" que representa o modelo ajustado.
+
+```{r}
+estande2 <- estande2 |>
+  mutate(trat2 = trat^2)
+  m1 <- lm(mean_nplants ~ trat, data = estande2)
+summary(m1)
+hist(m1$residuals)
+
+m2 <- lm(mean_nplants ~ trat + trat2,
+         data = estande2)
+summary(m2)
+
+AIC(m1, m2)
+```
+
+# Duas variáveis resposta
+
+Quando se tem 2 variáveis resposta do tipo numerica continia, estuda-se a relação das 2 respostas.
+Na análise de correlação, da-se o coeficiente de correlação de pearson (R). O R vai ser sempre maior que o R ao quadrado. 
+
+```{r}
+mofo <- read_excel("dados-diversos.xlsx", "mofo")
+
+mofo |>
+  ggplot(aes(inc, yld))+
+  geom_point()+
+  geom_smooth(se = F, method = "lm")+
+  facet_wrap(~ study)
+```
+
+Para calcular o coeficiente de correlação: função cor.test
+
+Filtrando o experimento 1:
+```{r}
+mofo1 <- mofo |>
+  filter(study ==1)
+mofo1
+cor.test(mofo1$inc, mofo1$yld)
+```
+Filtrando o experimento 2:
+```{r}
+mofo1 <- mofo |>
+  filter(study ==2)
+mofo1
+cor.test(mofo1$inc, mofo1$yld)
+```
+
+Filtrando o experimento 4 (study = 4):
+```{r}
+mofo1 <- mofo |>
+  filter(study ==4)
+mofo1
+cor.test(mofo1$inc, mofo1$yld)
+```
+Filtrando o experimento 3 (study = 3):
+```{r}
+mofo1 <- mofo |>
+  filter(study ==3)
+mofo1
+cor.test(mofo1$inc, mofo1$yld)
+```
+Para gerar matriz de correlação para as variáveis selecionadas:
+
+```{r}
+mofo1 <- mofo |>
+  filter(study ==3)
+mofo1
+cor.test(mofo1$inc, mofo1$yld)
+cor(mofo1 |> select(3:5))
+```
+Para gerar gráfico de correlação: 
+Usa-se o pacote "corrplot", que fornece funções para visualizar e analisar matrizes de correlação. Ele é frequentemente usado para explorar a relação entre variáveis e identificar padrões de correlação em conjuntos de dados. Ele oferece uma variedade de gráficos e opções de personalização para representar as correlações de maneira visualmente atraente.
+Principais funções:
+---- corr.test(): Essa função realiza testes estatísticos de correlação para matrizes de correlação, calcula estatísticas de correlação, valores-p e intervalos de confiança para avaliar a significância das correlações.
+
+---- corrplot(): Essa função cria uma matriz de plotagem de correlação que permite ajustar diferentes tipos de gráficos, como gráficos de matriz de correlação, gráficos de círculo de correlação, gráficos de barra de correlação e muito mais. Também oferece opções para personalizar cores, adicionar números de correlação e realizar agrupamentos hierárquicos.
+Existem sete métodos de visualização (parâmetro method) no pacote corrplot, denominados 'circle', 'square', 'ellipse', 'number' (números de coeficientes com cores diferentes), 'shade', 'color', 'pie'. A intensidade da cor do glifo é proporcional aos coeficientes de correlação por configuração de cor padrão.
+Existem três tipos de layout (parâmetro type): 'full', 'upper'e 'lower'.
+
+
+
+```{r}
+mofo1 <- mofo |>
+  filter(study ==3)
+mofo1
+cor.test(mofo1$inc, mofo1$yld)
+pcor <- cor(mofo1 |> select(3:5))
+
+library(corrplot)
+corrplot(pcor, method = 'number', type = "lower")
+```
+
+Quando os dados estão ordinais (variável ordinal) usa-se o método de Kendall. Usa-se correlação que não é de Person, quando não assume normalidade. Person é o método padrão.
+```{r}
+mofo1 <- mofo |>
+  filter(study ==3)
+mofo1
+shapiro.test(mofo1$inc)
+shapiro.test(mofo1$yld)
+
+cor.test(mofo1$inc, mofo1$yld, method = "spearman")
+pcor <- cor(mofo1 |> select(3:5), method = "spearman")
+
+library(corrplot)
+corrplot(pcor, method = 'number', type = "lower")
+```
+

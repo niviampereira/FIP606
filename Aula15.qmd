@@ -1,0 +1,177 @@
+---
+title: "Aula15"
+author: "Nívia"
+format: html
+---
+
+# Variáveis categóricas
+
+Para variaveis resposta categoricas, não se tira a média dos dados, ao inves disso, se monta uma tabela de contigencia e visualiza por meio de grafico de barras/colunas, pois se é sada para ver frequencia de ocorrencias, quando se tem variáveis categóricas nominais.
+
+```{r}
+#| warning: false
+#| message: false
+library(tidyverse)
+library(dplyr)
+library(readxl)
+library(ggplot2)
+library(janitor)
+library(epifitter)
+```
+
+Dados: Quantas ocorrências tem em cada ano. Cruzando duas variáveis. Quantas espécies dos dados tem em cada ano (função table)
+
+```{r}
+survey <- read_excel("dados-diversos.xlsx","survey")
+survey |>
+  count(year)
+q <- table(survey$residue, survey$species)
+```
+
+```{r}
+#library(janitor)
+survey |>
+  tabyl(year, species)
+```
+
+## Pacote janitor: Para dar os valores em porcentagem usa-se a função adorn_percentages().
+
+```{r}
+survey |>
+  filter(residue != "NA") |>
+  count(residue, species) |>
+  ggplot(aes(residue, n, fill = species))+
+  geom_col()
+```
+
+Teste q quadrado:
+
+```{r}
+q <- table(survey$residue, survey$species)
+chisq.test(q)
+
+```
+
+Hipótese nula: as populações são iguais.
+
+Usa-se o fisher.test(q) quando o número de observações é baixo, algo em torno de 6 ou 7.
+
+A severidade é influenciada pelo resíduo?
+
+```{r}
+q <- table(survey$residue, survey$inc_class)
+chisq.test(q)
+
+survey|>
+  filter(residue != "NA") |>
+  count(residue, inc_class) |>
+  ggplot(aes(residue, n, fill = inc_class))+
+  geom_col()
+```
+
+Pelo p valor, a classe de severidade independe do resto cultura, ou seja, o resto cultural não influencia na severidade.
+
+Novo conjunto de dados:
+
+```{r}
+curve <- read_excel("dados-diversos.xlsx", "curve")
+
+curve2 <- curve |> 
+  group_by(Irrigation, day) |>
+  summarize(mean_severity = mean(severity),
+            sd_severity = sd(severity))
+
+  curve2 |>
+    ggplot(aes(day, mean_severity, color = Irrigation))+
+    geom_point()+
+    geom_errorbar(aes(ymin = mean_severity - sd_severity, ymax = mean_severity + sd_severity, width = 0.01))+
+    geom_line()
+  
+  
+  curve3 <- curve |>
+    group_by(Irrigation, rep) |>
+    summarise(audpc = AUDPC(day, severity, 
+                            y_proportion = F)) |>
+    pivot_wider(1, names_from = Irrigation,
+              values_from = audpc)
+  
+  t.test(curve3$Drip, curve$Furrow)
+```
+
+Exercício:
+
+-Carregando o conjunto de dados, mutando a variável lesion size de categórica para numerica, agrupando as variáveis e resumindo os dados:
+
+```{r}
+lesion_size <- read_excel("tan-spot-wheat.xlsx", "lesion_size")
+
+lesion2 <- lesion_size |>
+mutate(lesion_size = as.numeric(lesion_size)) |>
+group_by(cult, silicio, hai) |>
+summarise(mean_lesion = mean(lesion_size), sd_lesion = sd(lesion_size))
+```
+
+Visualizando os dados graficamente:
+
+```{r}
+lesion2 |>
+  ggplot(aes(hai, mean_lesion, color = silicio))+
+  geom_line()+
+  geom_point()+
+    geom_errorbar(aes(ymin = mean_lesion - sd_lesion, 
+                     ymax = mean_lesion + sd_lesion), 
+                     width = 0.01)+
+    facet_wrap(~cult)+
+  labs(y = "Lesion size (mm)",
+       x = "Hours after inoculation (hai)", color = "Treatment")
+
+```
+
+```{r}
+lesion3 <- lesion_size |>
+  mutate(lesion_size = as.numeric(lesion_size)) |>
+  group_by(exp, cult, silicio, rep) |>
+  summarise(audpc = AUDPC(lesion_size, hai))
+
+lesion3 |>
+  ggplot(aes(cult, audpc, color = silicio))+
+  geom_boxplot()+
+  facet_wrap(~ exp)
+  
+```
+
+Teste:
+
+```{r}
+aov1<- aov(audpc ~ exp*cult*silicio, data = lesion3)
+summary(aov1)
+```
+
+Se não der significativo, reduz o modelo:
+
+```{r}
+aov1<- aov(audpc ~ cult*silicio, data = lesion3)
+summary(aov1)
+```
+
+Para ver se o modelo está correto, checa as premissas:
+
+```{r}
+library(performance)
+check_normality(aov1)
+check_heteroscedasticity(aov1)
+```
+
+Se não atende as premissas, transforma:
+
+```{r}
+aov1<- aov(sqrt(audpc) ~ cult*silicio, data = lesion3)
+summary(aov1)
+check_normality(aov1)
+check_heteroscedasticity(aov1)
+
+library(emmeans)
+
+m1 <- emmeans(aov1, ~ cult | silicio, type = "response")
+m1
+```

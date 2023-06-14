@@ -1,0 +1,60 @@
+---
+title: "Aula18"
+author: "Nívia"
+format: html
+---
+
+# Dados não paramétricos com 2 fatores
+
+Para dados com um fator, pode-se usar as 3 alternativas citadas na aula 10. Quando se tem 2 fatores, pode-se analisar cada fator separadamente, mas para testar a interação usa-se outra alternativa.
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(ggplot2)
+library(emmeans)
+library(multcomp)
+library(multcompView)
+```
+Conjunto de dados:
+
+```{r}
+fung <- read_excel("dados-diversos.xlsx", "fungicida_vaso")
+fung2 <- fung |>
+  mutate(inc = inf_seeds/n_seeds*100,
+         rank_inc = rank(inc))
+rank_anova <- aov(rank_inc ~treat*dose, data = fung2)
+summary(rank_anova)
+```
+Depois usa o emmeans para ver as médias com o rank.
+
+```{r}
+means_rank <- emmeans(rank_anova, ~treat | dose)
+cld(means_rank)
+```
+
+Na tabela coloca os dados originais com os dados rankeados.
+
+
+# Transformação de variável tipo boxcox
+
+```{r}
+library(MASS)
+```
+
+Dados:
+```{r}
+insects <- InsectSprays
+
+b <- boxcox(lm(insects$count+0.1 ~1))
+
+lambda <- b$x[which.max(b$y)]
+lambda
+
+insects$count2 <-(insects$count ^ lambda - 1) / lambda
+hist(insects$count)
+hist(insects$count2)
+insects$count2
+
+```
+

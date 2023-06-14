@@ -1,0 +1,20 @@
+---
+title: "Nívia Maria"
+image: "nivia.jpg"
+about: 
+  template: jolla
+  image-shape: round
+  links:
+    - icon: instagram
+      text: Instagram
+      href: instagram.com/oxenivia
+    - icon: linkedin
+      text: LinkedIn
+      href: www.linkedin.com/in/nívia-pereira-17211b1a7
+---
+
+# Bem-vindo ao meu website!
+
+Este website foi criado por mim em Quarto Markdown para a disciplina FIP606 - Análise e visualização de dados em Fitopatologia. Essa página contém o material das aulas ministradas organizados em tópicos. Eu possuo graduação em Engenharia Agronômica pela Universidade Federal de Sergipe (Aracaju, SE), mestrado em Fitopatologia (2022) pela Universidade Federal de Viçosa (Viçosa, MG) e, atualmente, sou doutoranda em Fitopatologia (2022) pela Universidade Federal de Viçosa.
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.

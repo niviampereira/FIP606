@@ -1,0 +1,94 @@
+---
+title: "Aula8"
+author: "Nívia"
+format: html
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+# Testes estatísticos
+
+## Definindo hipóteses
+
+Como anotar no gráfico: Função annotate () Função geom_jitter() -
+existem dois argumentos para o jitter: width - controla a quantidade de
+deslocamento vertical, e height - controla a quantidade de deslocamento
+horizontal. O geom geom_jitter()adiciona variação aleatória aos pontos
+de localização do gráfico. Em outras palavras, ele "agita" ligeiramente
+as localizações dos pontos. Este método reduz o overplotting, pois é
+improvável que dois pontos com a mesma localização tenham a mesma
+variação aleatória.
+
+```{r}
+library(tidyverse)
+library(readxl)
+
+mg <- read_excel("dados-diversos.xlsx")
+mg |>
+  ggplot(aes(trat, comp))+
+  geom_jitter(width = 0.05)+
+  geom_boxplot(fill = NA,
+               outlier.colour = NA)+
+  ylim(5, 20)+
+  annotate(geom = "text",
+           x = 0.7, y = 19,
+           label = "t = 8.15; p < 0.001")
+
+```
+
+## Para teste t
+
+A função pivot_wider()"alarga" os dados, aumentando o número de colunas
+e diminuindo o número de linhas. Nesta função usa-se names_from e
+values_from, onde: names_from - A coluna cujos valores serão usados como
+nomes de coluna. values_from - A coluna cujos valores serão usados como
+valores de célula.
+
+```{r}
+mg2 <- mg |> 
+  pivot_wider(1,
+              names_from = trat,
+              values_from = comp)
+```
+
+Usa-se a função t.teste para calcular o valor de t.
+
+```{r}
+t <- t.test(mg2$Mg2, mg2$control)
+
+library(report)
+report(t)
+```
+
+Mean_se calcula a média e o erro padrão da média. Para fazer isso,
+podemos usar a função stat_summary. Fun.data: função de resumo
+completa - uma função que recebe os dados completos e deve retornar um
+quadro de dados com variáveis ymin, y e ymax. Deve receber o quadro de
+dados como entrada e retornar o quadro de dados como saída.
+
+```{r}
+mg |>
+  ggplot(aes(trat, comp))+
+  stat_summary(fun.data = "mean_se")
+```
+
+## Using the infer package
+
+Esse pacote realiza a inferência estatística usando uma linguagem que
+seja coerente com a estrutura do tidyverse. O pacote é centrado em 4
+funções principais para visualizar e extrair valores:
+
+specify() - permite especificar a variável, ou relacionamento entre
+variáveis, em que se está interessado. hypothesize() - permite declarar
+a hipótese nula. generate() - permite gerar dados que refletem a
+hipótese nula. calculate() - permite calcular uma distribuição de
+estatísticas a partir dos dados gerados para formar a distribuição nula.
+
+
+```{r}
+library(infer) 
+mg |> t_test(comp ~ trat, order =
+c("control", "Mg2"))
+```
+

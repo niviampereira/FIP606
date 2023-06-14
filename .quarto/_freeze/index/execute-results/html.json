@@ -1,0 +1,14 @@
+{
+  "hash": "94e3e1d4917e80df42cae01a8e664d72",
+  "result": {
+    "markdown": "---\ntitle: \"Bem-vindo\"\n---\n\n\nEste website foi criado em Quarto Markdown para a disciplina FIP606 - Análise e visualização de dados em Fitopatologia. Essa página contém o material das aulas organizados em tópicos. \n\n\n::: {.cell hash='index_cache/html/unnamed-chunk-1_35765f74551f514b3a3165e494ff00b1'}\n\n:::\n\n\n## Education\n\nGraduação em Engenharia Agronômica (2020)\nUniversidade Federal de Sergipe | Aracaju, SE\n\nMestrado em Fitopatologia (2022)\nUniversidade Federal de Viçosa | Viçosa, MG\n\nDoutorado em andamento em Fitopatologia (2022)\nUniversidade Federal de Viçosa | Viçosa, MG\n\n\nTo learn more about Quarto websites visit <https://quarto.org/docs/websites>.",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

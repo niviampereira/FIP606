@@ -1,0 +1,73 @@
+project:
+  type: website
+  output-dir: docs
+
+execute: 
+  cache: true
+  freeze: auto
+  
+website:
+  title: "FIP606"
+  navbar:
+    left:
+      - text: Básico do R
+        menu:
+          - href: Aula2.qmd
+            text: Carregando pacotes
+          - href: Aula3.qmd
+            text: Dataframe
+      - text: Gráficos em R
+        menu: 
+        - href: Aula4.qmd
+          text: Visualização de dados em GGPLOT
+        - href: Aula5.qmd
+          text: Boxplot
+        - href: Aula6.qmd
+          text: Scatterplot
+      - text: Análise estatítica em R
+        menu:  
+        - href: Aula7.qmd
+          text: Transformando dados
+        - href: Aula8.qmd
+          text: Teste de hipóteses
+        - href: Aula9.qmd
+          text: Tipos de análise  
+        - href: Aula10.qmd
+          text: ANOVA - um fator
+        - href: Aula11.qmd
+          text: ANOVA Fatorial
+        - href: Aula12.qmd
+          text: ANOVA com bloco (DBC)
+        - href: Aula13.qmd
+          text: Regressão linear
+        - href: Aula17.qmd
+          text: Regressão não-linear
+        - href: Aula14.qmd
+          text: Análise de correlação 
+        - href: Aula15.qmd
+          text: Tabela de contigência
+      - text: Mapas em R
+        menu: 
+        - href: Aula16.qmd
+          text: Elaboração de Mapas
+  
+  
+    right: 
+     - icon: github
+       href: https://github.com/
+    
+
+  page-navigation: true
+  page-footer: 
+    left: "Copyright 2023, Nívia Maria Pereira"
+
+
+format:
+  html:
+    theme: minty
+    css: styles.css
+    toc: true
+    warning: false
+
+editor: visual
+

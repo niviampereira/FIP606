@@ -1,0 +1,149 @@
+---
+title: "Aula13"
+author: "Nívia"
+format: html
+---
+
+# Dados quantitativos e o uso de análise de regressão
+
+Quando se tem dados quantitativos, a análise de regressão é geralmente mais apropriada do que a análise de variância (ANOVA), pois a análise de regressão permite estudar a relação entre uma variável dependente (Y) e uma ou mais variáveis independentes (X).
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(ggplot2)
+```
+
+## Regressão linear simples
+
+Na regressão linear simples, testamos a hipótese de que a reta de regressão (linha de melhor ajuste), que representa a relação entre as variáveis independentes e a variável dependente, tem um coeficiente de inclinação diferente de zero. Ou seja, testamos a hipótese de que a inclinação da reta de regressão é significativamente diferente de zero (testa se o p valor é diferente de 0).
+
+Conjunto de dados estande (dados-diversos): Visualização em ggplot
+Para ajustar para uma regressão linear usa-se o argumento method = "lm" dentro da função geom_smooth.
+
+Equação da R. LM simples: Y =  b1 - b2x
+```{r}
+estande <- read_excel("dados-diversos.xlsx", "estande")
+estande |>
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  facet_wrap(~ exp)+
+  geom_smooth(se =  F, method = "lm")
+```
+Posteriomente, deve-se testar o modelo que melhor se ajusta aos dados.Pode-se testar fazer a análise de regressão para cada experimento (isola cada experimento) ou analisar em grupos (modelos mistos).
+
+### Analisando cada experimento isoladamente:
+
+Para isso, cria um novo objeto para os dados (exp1) e atribui estande a ele, depois deve-se filtrar o experimento que deseja e criar um objeto para esse conjunto para viabilizar a realização da análise de regressão.
+
+Exp 1:
+```{r}
+exp1 <- estande |>
+  filter(exp == 1)
+
+m1 <- lm(nplants ~trat, data = exp1)
+summary(m1)
+```
+O valor do intercept e o valor de trat (slope) são utilizados na tabela.
+Intercept é o valor da variável dependente quando a variável independente é igual a zero. 
+Já o slope é a medida da inclinação da linha de regressão, que representa a mudança na variável dependente associada a uma mudança na variável independente.
+
+Para o experimento 2:
+```{r}
+exp2 <- estande |>
+  filter(exp == 2)
+
+m2 <- lm(nplants ~trat, data = exp2)
+summary(m2)
+```
+
+Para o exp3:
+```{r}
+exp3 <- estande |>
+  filter(exp == 3)
+
+m3 <- lm(nplants ~trat, data = exp3)
+summary(m3)
+
+library(report)
+report(m3)
+```
+
+Gráfico para representar a regressão - Para unir os 3 graficos, usa o patchwork.
+```{r}
+g1 <- exp1 |>
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  geom_smooth(method = "lm", se = F)+
+  annotate(geom = "text", x = 24,
+           y = 70, label = "y = 52.5 - 0.24x")
+
+g2 <- exp2 |>
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  geom_smooth(method = "lm", se = F)+
+  annotate(geom = "text", x = 24,
+           y = 70, label = "y = 60 - 0.07x")
+g3 <- exp3 |>
+  ggplot(aes(trat, nplants))+
+  geom_point()+
+  geom_smooth(method = "lm", se = F)+
+  annotate(geom = "text", x = 24,
+           y = 70, label = "y = 95 - 0.07x")
+
+library(patchwork)
+g1|g2|g3
+```
+
+## Modelo misto
+
+Em um modelo misto, as observações são divididas em grupos ou subgrupos. Cada grupo pode ter um conjunto diferente de efeitos aleatórios e/ou fixos, dependendo da estrutura dos dados. Por exemplo, se os dados foram coletados em diferentes locais geográficos, podemos ter um efeito aleatório para cada local (como no caso do conjunto de dados estande).
+
+Equação: b1 - b2x -  cx2
+
+```{r}
+library(lme4)
+mix <- lmer(nplants ~trat + (trat | exp),
+            data = estande)
+summary(mix)
+
+library(car)
+Anova(mix)
+```
+Quando se usa o modelo misto, considera que todos os experimentos são agrupados, então considera que amostra é aleatória.
+
+Para fazer o modelo de regressão em grupo (misto) acrescenta-se na função aestetic o argumento group = exp. 
+```{r}
+estande <- read_excel("dados-diversos.xlsx", "estande")
+estande |>
+  ggplot(aes(trat, nplants, group = exp))+
+  geom_point()+
+  #facet_wrap(~ exp)+
+  geom_smooth(se =  F, method = "lm")
+```
+
+Em geral, os modelos mistos são mais poderosos do que os modelos que tratam cada experimento isoladamente, pois levam em conta a variação tanto entre quanto dentro dos experimentos. Além disso, os modelos mistos permitem que os dados sejam analisados em sua totalidade, sem perder informações importantes sobre a estrutura dos dados.
+
+# Modelo GLM
+
+O modelo linear generalizado é uma alternativa ao modelo linear. O GLM é considerado uma extensão do modelo linear que permite acomodar uma variedade de tipos de variáveis resposta, incluindo variáveis categóricas e contínuas. Além disso, o modelo linear generalizado permite que a relação entre a variável resposta e as variáveis explicativas seja não-linear. Ou seja, ele não se limita à suposição de que a relação é uma linha reta.
+
+```{r}
+lm1 <- lm(nplants ~ trat, data = exp3)
+summary(lm1)
+
+glm1 <- glm(nplants ~ trat, family = "gaussian",
+            data = exp3)
+
+glm2 <- glm(nplants ~ trat, family = poisson(link = "log"),
+            data = exp3)
+AIC(glm1)
+AIC(glm2)
+
+summary(glm1)
+summary(glm2)
+```
+
+O modelo linear generalizado com distribuição gaussiana (family = gaussian) é usado quando a variável resposta é contínua e tem uma distribuição normal, ou seja, o mesmo que "lm".
+Já o modelo linear generalizado com distribuição de Poisson é usado quando a variável resposta é um número inteiro e não negativo e segue uma distribuição de Poisson (family = poisson).
+O AIC (Akaike's Information Criterion) é um critério de seleção de modelo usado para escolher o melhor modelo entre vários modelos candidatos. A escolha do modelo com o menor AIC é importante porque ele é uma medida de qualidade do modelo que leva em consideração tanto o ajuste aos dados quanto a complexidade do modelo. Como o AIC de menor valor é melhor, a família poisson é o ideal para os dados analisados.
