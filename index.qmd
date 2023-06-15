@@ -1,8 +1,8 @@
 ---
-title: "Nívia Maria"
-image: "nivia.jpg"
 about: 
   template: jolla
+  id: about-block
+  image: "nivia.jpg"
   image-shape: round
   links:
     - icon: instagram
@@ -11,10 +11,19 @@ about:
     - icon: linkedin
       text: LinkedIn
       href: www.linkedin.com/in/nívia-pereira-17211b1a7
+    - icon: github
+      text: Githube
+      href: https://github.com/niviampereira
+    - icon: envelope
+      text: Email
+      href: "nivia.alves1401@gmail.com"
 ---
+
+::: {#about-block}
+:::
 
 # Bem-vindo ao meu website!
 
-Este website foi criado por mim em Quarto Markdown para a disciplina FIP606 - Análise e visualização de dados em Fitopatologia. Essa página contém o material das aulas ministradas organizados em tópicos. Eu possuo graduação em Engenharia Agronômica pela Universidade Federal de Sergipe (Aracaju, SE), mestrado em Fitopatologia (2022) pela Universidade Federal de Viçosa (Viçosa, MG) e, atualmente, sou doutoranda em Fitopatologia (2022) pela Universidade Federal de Viçosa.
+Eu sou [Nívia Maria]{.underline}, doutoranda do programa de pós-graduação em Fitopatologia da Universidade Federal de Viçosa (Viçosa, MG). Eu possuo graduação em Engenharia Agronômica pela Universidade Federal de Sergipe (Aracaju, SE) e mestrado em Fitopatologia (2022) pela Universidade Federal de Viçosa. Este website foi criado por mim em Quarto Markdown para a disciplina FIP606 - Análise e visualização de dados em Fitopatologia. Neste site, você encontrará o material das aulas ministradas organizados em tópicos. Convido você a explorar meu site e um pouco sobre o fascinante mundo da análise de dados fitopatológicos no Rstudio.
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+Sinta-se à vontade para entrar em contato comigo se tiver alguma dúvida.

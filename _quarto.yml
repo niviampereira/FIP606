@@ -54,17 +54,21 @@ website:
   
     right: 
      - icon: github
-       href: https://github.com/
-    
+       href: https://github.com/niviampereira
+     - icon: instagram
+       href: instagram.com/oxenivia
 
   page-navigation: true
   page-footer: 
-    left: "Copyright 2023, Nívia Maria Pereira"
-
+    center: "Copyright 2023, Nívia Maria Pereira"
+    background: light
 
 format:
   html:
-    theme: minty
+    fontsize: 1.1em
+    theme: 
+      light: minty
+      dark: darkly
     css: styles.css
     toc: true
     warning: false
