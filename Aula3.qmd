@@ -4,11 +4,13 @@ author: "Nívia"
 format: html
 ---
 
-# import data
+# Data frames
+
+## Importando dados
 
 Para a leitura de dados em R, deve-se salvar o arquivo em um formato adequado.
 
-## From packages
+## Dados de pacotes (packages)
 
 Para carregar o dataframe, pode-se usar pacotes do R, a exemplo do pacote dataset, que tem em suas funções o pacote cars.
 
@@ -19,7 +21,8 @@ speed <- cars2$speed
 speed
 ```
 
-Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Para atribuir uma função a outra, basta usar \<-. Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.
+Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Para atribuir uma função a outra, basta usar \<-. 
+Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.
 
 ```{r}
 library(r4pde)
@@ -27,9 +30,9 @@ df <- RustSoybean
 df
 ```
 
-A função para a leitura de dados no R e a read.table. O R possui um bom número de variantes desta função,usadas pára importar uma variedade de formatos de arquivos diferentes no R. As variações da função read.table mais uteis são as funções read.csv e read.csv2 e readxl.
+A função para a leitura de dados no R é a read.table. O R possui um bom número de variantes desta função, usadas para importar uma variedade de formatos de arquivos diferentes no R. As variações da função read.table mais úteis são as funções read.csv e read.csv2 e readxl.
 
-## From Excel
+## Dados em formato Excel
 
 Para importar dados diretamente de outros softwares, é necessário instalar pacotes, a exemplo do readxl, usado para a importação de planilhas do excel. O pacote readxl permite gerar dataframe de planilhas excel e é a forma mais simples de carregar um arquivo neste formato. O pacote readxl não é do conjunto tidyverse, então precisa ser carregado sempre antes de usar. A maioria das funções do readxl permite ler dados de planilhas excel, a exemplo de read_excel. O primeiro argumento para read-excel é o caminho do arquivo que deve ser lido.O caminho do arquivo e o nome do arquivo (incluindo a extensão do arquivo) precisam ser colocados entre aspas duplas, pois a função espera que seja uma função de caractere.
 
@@ -40,7 +43,7 @@ escala1 <- read_excel("dados-diversos.xlsx", "escala")
 escala2 <- read_excel("dados-diversos.xlsx", 2)
 ```
 
-## From csv
+## Dados em formato csv
 
 Para chamar um arquivo csv, usa-se a função read.csv. A função read.csv é usada para importar arquivos de valores separados por , e com a primeira linha dos dados com os nomes das variáveis). Também temos a função read.csv2, que assume que os dados são separados por ; e que uma vírgula é usada ao inves de um ponto decimal.
 
@@ -58,7 +61,7 @@ magnesio3 <- read_csv("dados-diversos.csv")
 magnesio3
 ```
 
-## From txt
+## Dados em formato txt
 
 Arquivos em formato txt devem ser importados usando o read.table.
 
@@ -71,7 +74,7 @@ magnesio4
 
 **Obs.:** O argumento header = TRUE especifica que a primeira linha dos dados contem o nome das variáveis (ex. magnesio, nitrogenio), se este não for o caso é só usar o argumento header = FALSE.
 
-## From google sheet
+## Dados em planilhas google sheet
 
 Para importar planilhas google, usa a função gsheet (read_sheet), presente no pacote googlesheets4. Como esse pacote também não faz parte do conjunto tidyverse, precisa carrega-lo para usar. A função read_gsheet lê o arquivo (planilha google) a partir de uma URL (copia e cola o link da planilha desejada).
 

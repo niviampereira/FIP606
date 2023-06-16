@@ -13,9 +13,9 @@ website:
       - text: Básico do R
         menu:
           - href: Aula2.qmd
-            text: Carregando pacotes
+            text: Pacotes e carregamento em R
           - href: Aula3.qmd
-            text: Dataframe
+            text: Data frame
       - text: Gráficos em R
         menu: 
         - href: Aula4.qmd
@@ -24,7 +24,7 @@ website:
           text: Boxplot
         - href: Aula6.qmd
           text: Scatterplot
-      - text: Análise estatítica em R
+      - text: Análise estatística em R
         menu:  
         - href: Aula7.qmd
           text: Transformando dados

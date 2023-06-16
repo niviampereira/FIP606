@@ -3,13 +3,15 @@ title: "Pacotes no R"
 format: html
 ---
 
-# Aula 2
+# Pacotes no R
 
-## Carregar pacotes
+Os pacotes necessários para realizar análises no R depende do objetivo do trabalho a ser realizado, mas pacotes alguns pacotes são básicos e essenciais para a maioria das análises, como: Tidyverse, readxl, ggplot, etc. Nas próximas aulas, aprofundaremos um pouco mais sobre esses pacotes.
 
-O carregamento de **pacotes** pode ser feito pelo menu ou então com um comando no *console*. O fluxo básico pode ser conferido [neste link](https://r4ds.hadley.nz/workflow-basics.html).
+## Instalação e carregamento pacotes
 
-Abaixo demonstraremos como instalar e carregar um pacote. A instalação é feita através do menu: tools \> install packages. Library é uma função para carregar os pacotes. O carregamento pode ser feito tanto pelo library, anotando entre parênteses o nome do programa, quanto separando os programas por vírgula dentro do mesmo parêntese.
+A instalação e o carregamento de **pacotes** pode ser feito pelo menu ou então com um comando no *console*. O fluxo básico pode ser conferido [neste link](https://r4ds.hadley.nz/workflow-basics.html).
+
+A instalação é feita através do menu: tools \> install packages, indo em packages > install e digitando o nome do pacote para baixar ou usando a função instal.packages(nome do pacote) no console. Para o carregamento de pacotes, a função utilizada é library(nome do pacote). O carregamento pode ser feito tanto pelo library, anotando entre parênteses o nome do pacote, quanto separando os programas por vírgula dentro do mesmo parêntese. Muitas vezes, durante o carregamento de pacotes, usamos as hashtags (#) seguidas por / warning: false e / message: false para desativar a exibição de avisos (warnings) e mensagens durante a execução do código, já que muitos pacotes exibem mensagens e avisos grandes após o carregamento que poluem o arquivo.
 
 ```{r}
 #| warning: false
@@ -19,6 +21,8 @@ library(metafor)
 library(gsheet)
 library(remotes)
 ```
+
+## Funções de pacotes:
 
 Vamos ver como invocar uma função de um pacote. O sinal de igual é utilizado para atribuição, que pode ser substituido por \<-.
 
