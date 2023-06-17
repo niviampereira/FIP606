@@ -7,7 +7,7 @@ about:
   links:
     - icon: instagram
       text: Instagram
-      href: instagram.com/oxenivia
+      href: https://www.instagram.com/oxenivia/
     - icon: linkedin
       text: LinkedIn
       href: www.linkedin.com/in/nívia-pereira-17211b1a7
@@ -16,7 +16,7 @@ about:
       href: https://github.com/niviampereira
     - icon: envelope
       text: Email
-      href: "nivia.alves1401@gmail.com"
+      href: "mailto:nivia.alves1401@gmail.com"
 ---
 
 ::: {#about-block}

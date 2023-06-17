@@ -88,12 +88,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./logodedondo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -104,7 +104,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -136,6 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./logodedondo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
     </a>
@@ -152,11 +155,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-básico-do-r">    
         <li>
     <a class="dropdown-item" href="./Aula2.html">
- <span class="dropdown-text">Carregando pacotes</span></a>
+ <span class="dropdown-text">Pacotes e carregamento em R</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula3.html">
- <span class="dropdown-text">Dataframe</span></a>
+ <span class="dropdown-text">Data frame</span></a>
   </li>  
     </ul>
   </li>
@@ -180,10 +183,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-análise-estatítica-em-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Análise estatítica em R</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-análise-estatística-em-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Análise estatística em R</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatítica-em-r">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
  <span class="dropdown-text">Transformando dados</span></a>
@@ -245,7 +248,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./instagram.com/oxenivia"><i class="bi bi-instagram" role="img">
+    <a class="nav-link" href="https://www.instagram.com/oxenivia/"><i class="bi bi-instagram" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -267,13 +270,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#import-data" id="toc-import-data" class="nav-link active" data-scroll-target="#import-data">import data</a>
+  <li><a href="#data-frames" id="toc-data-frames" class="nav-link active" data-scroll-target="#data-frames">Data frames</a>
   <ul class="collapse">
-  <li><a href="#from-packages" id="toc-from-packages" class="nav-link" data-scroll-target="#from-packages">From packages</a></li>
-  <li><a href="#from-excel" id="toc-from-excel" class="nav-link" data-scroll-target="#from-excel">From Excel</a></li>
-  <li><a href="#from-csv" id="toc-from-csv" class="nav-link" data-scroll-target="#from-csv">From csv</a></li>
-  <li><a href="#from-txt" id="toc-from-txt" class="nav-link" data-scroll-target="#from-txt">From txt</a></li>
-  <li><a href="#from-google-sheet" id="toc-from-google-sheet" class="nav-link" data-scroll-target="#from-google-sheet">From google sheet</a></li>
+  <li><a href="#importando-dados" id="toc-importando-dados" class="nav-link" data-scroll-target="#importando-dados">Importando dados</a></li>
+  <li><a href="#dados-de-pacotes-packages" id="toc-dados-de-pacotes-packages" class="nav-link" data-scroll-target="#dados-de-pacotes-packages">Dados de pacotes (packages)</a></li>
+  <li><a href="#dados-em-formato-excel" id="toc-dados-em-formato-excel" class="nav-link" data-scroll-target="#dados-em-formato-excel">Dados em formato Excel</a></li>
+  <li><a href="#dados-em-formato-csv" id="toc-dados-em-formato-csv" class="nav-link" data-scroll-target="#dados-em-formato-csv">Dados em formato csv</a></li>
+  <li><a href="#dados-em-formato-txt" id="toc-dados-em-formato-txt" class="nav-link" data-scroll-target="#dados-em-formato-txt">Dados em formato txt</a></li>
+  <li><a href="#dados-em-planilhas-google-sheet" id="toc-dados-em-planilhas-google-sheet" class="nav-link" data-scroll-target="#dados-em-planilhas-google-sheet">Dados em planilhas google sheet</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -304,13 +308,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="import-data" class="level1">
-<h1>import data</h1>
+<section id="data-frames" class="level1">
+<h1>Data frames</h1>
+<section id="importando-dados" class="level2">
+<h2 class="anchored" data-anchor-id="importando-dados">Importando dados</h2>
 <p>Para a leitura de dados em R, deve-se salvar o arquivo em um formato adequado.</p>
-<section id="from-packages" class="level2">
-<h2 class="anchored" data-anchor-id="from-packages">From packages</h2>
+</section>
+<section id="dados-de-pacotes-packages" class="level2">
+<h2 class="anchored" data-anchor-id="dados-de-pacotes-packages">Dados de pacotes (packages)</h2>
 <p>Para carregar o dataframe, pode-se usar pacotes do R, a exemplo do pacote dataset, que tem em suas funções o pacote cars.</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-1_de230aefcd4b9da51f22e0b82bf8b963">
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-1_4f8f997d4485672e643518a619fba1e3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   speed dist
@@ -374,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Para atribuir uma função a outra, basta usar &lt;-. Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-2_e5cef375a4b54ac689b471e2d630d109">
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-2_d38341b5322a368345884f1808d0c5f7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r4pde)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> RustSoybean</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -395,56 +402,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 # ℹ 24 more rows</code></pre>
 </div>
 </div>
-<p>A função para a leitura de dados no R e a read.table. O R possui um bom número de variantes desta função,usadas pára importar uma variedade de formatos de arquivos diferentes no R. As variações da função read.table mais uteis são as funções read.csv e read.csv2 e readxl.</p>
+<p>A função para a leitura de dados no R é a read.table. O R possui um bom número de variantes desta função, usadas para importar uma variedade de formatos de arquivos diferentes no R. As variações da função read.table mais úteis são as funções read.csv e read.csv2 e readxl.</p>
 </section>
-<section id="from-excel" class="level2">
-<h2 class="anchored" data-anchor-id="from-excel">From Excel</h2>
+<section id="dados-em-formato-excel" class="level2">
+<h2 class="anchored" data-anchor-id="dados-em-formato-excel">Dados em formato Excel</h2>
 <p>Para importar dados diretamente de outros softwares, é necessário instalar pacotes, a exemplo do readxl, usado para a importação de planilhas do excel. O pacote readxl permite gerar dataframe de planilhas excel e é a forma mais simples de carregar um arquivo neste formato. O pacote readxl não é do conjunto tidyverse, então precisa ser carregado sempre antes de usar. A maioria das funções do readxl permite ler dados de planilhas excel, a exemplo de read_excel. O primeiro argumento para read-excel é o caminho do arquivo que deve ser lido.O caminho do arquivo e o nome do arquivo (incluindo a extensão do arquivo) precisam ser colocados entre aspas duplas, pois a função espera que seja uma função de caractere.</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-3_6d22c40592091db7aa0a9af2da0705b9">
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-3_635407c3aaf6707d6d03d2227bcfc7c1">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>magnesio <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>escala1 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="st">"escala"</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>escala2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="from-csv" class="level2">
-<h2 class="anchored" data-anchor-id="from-csv">From csv</h2>
+<section id="dados-em-formato-csv" class="level2">
+<h2 class="anchored" data-anchor-id="dados-em-formato-csv">Dados em formato csv</h2>
 <p>Para chamar um arquivo csv, usa-se a função read.csv. A função read.csv é usada para importar arquivos de valores separados por , e com a primeira linha dos dados com os nomes das variáveis). Também temos a função read.csv2, que assume que os dados são separados por ; e que uma vírgula é usada ao inves de um ponto decimal.</p>
 <p>Diversas funções do pacote reader também podem ser utilizadas para importação de quadro de dados. O pacote reader faz parte da coleção de pacotes tidyverse. As funções do reader são usadas de forma semelhante as do read.table e read.csv, sendo que muitas vezes usam os mesmos argumentos. Ex: podem ser utilizadas as funções read_table,read_csv e read_csv2, ao invés das dunções do read.table.</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-4_b068f0324784c0328cb657681a6e311b">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggplot2' was built under R version 4.2.3</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
-✔ dplyr     1.1.0     ✔ readr     2.1.4
-✔ forcats   1.0.0     ✔ stringr   1.5.0
-✔ ggplot2   3.4.2     ✔ tibble    3.1.8
-✔ lubridate 1.9.2     ✔ tidyr     1.3.0
-✔ purrr     1.0.1     
-── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-✖ dplyr::filter() masks stats::filter()
-✖ dplyr::lag()    masks stats::lag()
-ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">#using read.csv</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>magnesio2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados-diversos.csv"</span>)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#using read_csv</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>magnesio3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados-diversos.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 60 Columns: 4
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): Irrigation
-dbl (3): rep, day, severity
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>magnesio3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-4_d90bcfba448e689cf07bc6dc24d47457">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#using read.csv</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>magnesio2 <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"dados-diversos.csv"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#using read_csv</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>magnesio3 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados-diversos.csv"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>magnesio3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 60 × 4
    Irrigation   rep   day severity
@@ -463,14 +446,14 @@ dbl (3): rep, day, severity
 </div>
 </div>
 </section>
-<section id="from-txt" class="level2">
-<h2 class="anchored" data-anchor-id="from-txt">From txt</h2>
+<section id="dados-em-formato-txt" class="level2">
+<h2 class="anchored" data-anchor-id="dados-em-formato-txt">Dados em formato txt</h2>
 <p>Arquivos em formato txt devem ser importados usando o read.table.</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-5_31edf11b16d22ca2e3bf32981075a0c7">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using read.table</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>magnesio4 <span class="ot">&lt;-</span><span class="fu">read.table</span>(<span class="st">"dados-diversos.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>magnesio4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-5_55fc048b1457204f3825e7112afc8dbe">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using read.table</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>magnesio4 <span class="ot">&lt;-</span><span class="fu">read.table</span>(<span class="st">"dados-diversos.txt"</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>magnesio4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Irrigation.rep.day.severity
 1              Furrow,1,0,0.01
@@ -537,31 +520,21 @@ dbl (3): rep, day, severity
 </div>
 <p><strong>Obs.:</strong> O argumento header = TRUE especifica que a primeira linha dos dados contem o nome das variáveis (ex. magnesio, nitrogenio), se este não for o caso é só usar o argumento header = FALSE.</p>
 </section>
-<section id="from-google-sheet" class="level2">
-<h2 class="anchored" data-anchor-id="from-google-sheet">From google sheet</h2>
+<section id="dados-em-planilhas-google-sheet" class="level2">
+<h2 class="anchored" data-anchor-id="dados-em-planilhas-google-sheet">Dados em planilhas google sheet</h2>
 <p>Para importar planilhas google, usa a função gsheet (read_sheet), presente no pacote googlesheets4. Como esse pacote também não faz parte do conjunto tidyverse, precisa carrega-lo para usar. A função read_gsheet lê o arquivo (planilha google) a partir de uma URL (copia e cola o link da planilha desejada).</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-6_a9537eba5cd63111f2c589610b8ffaa1">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using gsheet package</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gsheet)</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>magnesio5 <span class="ot">&lt;-</span> <span class="fu">gsheet2tbl</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit?usp=sharing"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">gsheet2tbl</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit#gid=366054269"</span>)</span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co"># no caso de ter um link da internet</span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>fusarium <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/emdelponte/epidemiology-R/main/data/fusarium_banana.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Rows: 163 Columns: 4
-── Column specification ────────────────────────────────────────────────────────
-Delimiter: ","
-chr (1): marker
-dbl (3): lon, lat, field
-
-ℹ Use `spec()` to retrieve the full column specification for this data.
-ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fusarium</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-6_d380530b175c3d548655acd02a305b00">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using gsheet package</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gsheet)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>magnesio5 <span class="ot">&lt;-</span> <span class="fu">gsheet2tbl</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit?usp=sharing"</span>)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">gsheet2tbl</span>(<span class="st">"https://docs.google.com/spreadsheets/d/1aID5Dh6PlBVCKzU1j7k-WA6zuWQWE2NhtWEgdJtt5iA/edit#gid=366054269"</span>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># no caso de ter um link da internet</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>fusarium <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/emdelponte/epidemiology-R/main/data/fusarium_banana.csv"</span>)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>fusarium</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 163 × 4
      lon   lat marker  field

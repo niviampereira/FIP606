@@ -87,12 +87,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./logodedondo.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,7 +103,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -135,6 +135,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <img src="./logodedondo.png" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
     </a>
@@ -151,11 +154,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-básico-do-r">    
         <li>
     <a class="dropdown-item" href="./Aula2.html">
- <span class="dropdown-text">Carregando pacotes</span></a>
+ <span class="dropdown-text">Pacotes e carregamento em R</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula3.html">
- <span class="dropdown-text">Dataframe</span></a>
+ <span class="dropdown-text">Data frame</span></a>
   </li>  
     </ul>
   </li>
@@ -179,10 +182,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-análise-estatítica-em-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">Análise estatítica em R</span>
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-análise-estatística-em-r" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Análise estatística em R</span>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatítica-em-r">    
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
  <span class="dropdown-text">Transformando dados</span></a>
@@ -244,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="./instagram.com/oxenivia"><i class="bi bi-instagram" role="img">
+    <a class="nav-link" href="https://www.instagram.com/oxenivia/"><i class="bi bi-instagram" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -266,9 +269,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#aula-2" id="toc-aula-2" class="nav-link active" data-scroll-target="#aula-2">Aula 2</a>
+  <li><a href="#pacotes-no-r" id="toc-pacotes-no-r" class="nav-link active" data-scroll-target="#pacotes-no-r">Pacotes no R</a>
   <ul class="collapse">
-  <li><a href="#carregar-pacotes" id="toc-carregar-pacotes" class="nav-link" data-scroll-target="#carregar-pacotes">Carregar pacotes</a></li>
+  <li><a href="#instalação-e-carregamento-pacotes" id="toc-instalação-e-carregamento-pacotes" class="nav-link" data-scroll-target="#instalação-e-carregamento-pacotes">Instalação e carregamento pacotes</a></li>
+  <li><a href="#funções-de-pacotes" id="toc-funções-de-pacotes" class="nav-link" data-scroll-target="#funções-de-pacotes">Funções de pacotes:</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -293,20 +297,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="aula-2" class="level1">
-<h1>Aula 2</h1>
-<section id="carregar-pacotes" class="level2">
-<h2 class="anchored" data-anchor-id="carregar-pacotes">Carregar pacotes</h2>
-<p>O carregamento de <strong>pacotes</strong> pode ser feito pelo menu ou então com um comando no <em>console</em>. O fluxo básico pode ser conferido <a href="https://r4ds.hadley.nz/workflow-basics.html">neste link</a>.</p>
-<p>Abaixo demonstraremos como instalar e carregar um pacote. A instalação é feita através do menu: tools &gt; install packages. Library é uma função para carregar os pacotes. O carregamento pode ser feito tanto pelo library, anotando entre parênteses o nome do programa, quanto separando os programas por vírgula dentro do mesmo parêntese.</p>
+<section id="pacotes-no-r" class="level1">
+<h1>Pacotes no R</h1>
+<p>Os pacotes necessários para realizar análises no R depende do objetivo do trabalho a ser realizado, mas pacotes alguns pacotes são básicos e essenciais para a maioria das análises, como: Tidyverse, readxl, ggplot, etc. Nas próximas aulas, aprofundaremos um pouco mais sobre esses pacotes.</p>
+<section id="instalação-e-carregamento-pacotes" class="level2">
+<h2 class="anchored" data-anchor-id="instalação-e-carregamento-pacotes">Instalação e carregamento pacotes</h2>
+<p>A instalação e o carregamento de <strong>pacotes</strong> pode ser feito pelo menu ou então com um comando no <em>console</em>. O fluxo básico pode ser conferido <a href="https://r4ds.hadley.nz/workflow-basics.html">neste link</a>.</p>
+<p>A instalação é feita através do menu: tools &gt; install packages, indo em packages &gt; install e digitando o nome do pacote para baixar ou usando a função instal.packages(nome do pacote) no console. Para o carregamento de pacotes, a função utilizada é library(nome do pacote). O carregamento pode ser feito tanto pelo library, anotando entre parênteses o nome do pacote, quanto separando os programas por vírgula dentro do mesmo parêntese. Muitas vezes, durante o carregamento de pacotes, usamos as hashtags (#) seguidas por / warning: false e / message: false para desativar a exibição de avisos (warnings) e mensagens durante a execução do código, já que muitos pacotes exibem mensagens e avisos grandes após o carregamento que poluem o arquivo.</p>
 <div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-1_d78866d77a9569f7a6b321975d9f837a">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metafor)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gsheet)</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(remotes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="funções-de-pacotes" class="level2">
+<h2 class="anchored" data-anchor-id="funções-de-pacotes">Funções de pacotes:</h2>
 <p>Vamos ver como invocar uma função de um pacote. O sinal de igual é utilizado para atribuição, que pode ser substituido por &lt;-.</p>
-<div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-2_1da42bf35b1072ea19950fb34bebf067">
+<div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-2_e344fb3be6df37f046141f45ba476211">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                     mpg cyl  disp  hp drat    wt  qsec vs am gear carb
@@ -423,61 +431,24 @@ Maserati Bora       15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8</code></
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> url</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install_github</span>(<span class="st">"emdelponte/r4pde"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Downloading GitHub repo emdelponte/r4pde@HEAD</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
-<pre><code>vctrs  (0.5.2 -&gt; 0.6.2) [CRAN]
+<pre><code>vctrs  (0.5.2 -&gt; 0.6.3) [CRAN]
 cli    (3.6.0 -&gt; 3.6.1) [CRAN]
 tibble (3.1.8 -&gt; 3.2.1) [CRAN]
-dplyr  (1.1.0 -&gt; 1.1.2) [CRAN]</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installing 4 packages: vctrs, cli, tibble, dplyr</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: packages 'tibble', 'dplyr' are in use and will not be installed</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installing packages into 'C:/Users/nivia/AppData/Local/R/win-library/4.2'
-(as 'lib' is unspecified)</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>package 'vctrs' successfully unpacked and MD5 sums checked</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: cannot remove prior installation of package 'vctrs'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in file.copy(savedcopy, lib, recursive = TRUE): problem copying
-C:\Users\nivia\AppData\Local\R\win-library\4.2\00LOCK\vctrs\libs\x64\vctrs.dll
-to C:\Users\nivia\AppData\Local\R\win-library\4.2\vctrs\libs\x64\vctrs.dll:
-Permission denied</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: restored 'vctrs'</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>package 'cli' successfully unpacked and MD5 sums checked</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: cannot remove prior installation of package 'cli'</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning in file.copy(savedcopy, lib, recursive = TRUE): problem copying
-C:\Users\nivia\AppData\Local\R\win-library\4.2\00LOCK\cli\libs\x64\cli.dll to
-C:\Users\nivia\AppData\Local\R\win-library\4.2\cli\libs\x64\cli.dll: Permission
-denied</code></pre>
-</div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: restored 'cli'</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+dplyr  (1.1.0 -&gt; 1.1.2) [CRAN]
+igraph (1.4.3 -&gt; 1.5.0) [CRAN]
+
+  There is a binary version available but the source version is later:
+       binary source needs_compilation
+igraph  1.4.3  1.5.0              TRUE
+
+package 'vctrs' successfully unpacked and MD5 sums checked
+package 'cli' successfully unpacked and MD5 sums checked
+
 The downloaded binary packages are in
-    C:\Users\nivia\AppData\Local\Temp\Rtmp2Vv8Ug\downloaded_packages
+    C:\Users\nivia\AppData\Local\Temp\RtmpmaWy57\downloaded_packages
 ── R CMD build ─────────────────────────────────────────────────────────────────
-* checking for file 'C:\Users\nivia\AppData\Local\Temp\Rtmp2Vv8Ug\remotes10acab91bc2\emdelponte-r4pde-6695075/DESCRIPTION' ... OK
+* checking for file 'C:\Users\nivia\AppData\Local\Temp\RtmpmaWy57\remotes3bfc5dd13bbb\emdelponte-r4pde-c1cc0b7/DESCRIPTION' ... OK
 * preparing 'r4pde':
 * checking DESCRIPTION meta-information ... OK
 * checking for LF line-endings in source and make files and shell scripts
@@ -485,11 +456,7 @@ The downloaded binary packages are in
 * building 'r4pde_0.0.0.9000.tar.gz'
 </code></pre>
 </div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Installing package into 'C:/Users/nivia/AppData/Local/R/win-library/4.2'
-(as 'lib' is unspecified)</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(mtcars)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
 Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
@@ -500,33 +467,33 @@ Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 </div>
-<div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-3_5bd6e43c12c47aabe6878a4b675706ac">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r4pde)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>unit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>class <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(unit, class)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a><span class="fu">DSI</span>(<span class="at">unit =</span> ratings<span class="sc">$</span>unit, <span class="at">class =</span> ratings<span class="sc">$</span>class, <span class="at">max =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-3_4d8804db36cfcd01c39df93bfc66666c">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r4pde)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>unit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>class <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">2</span>,<span class="dv">1</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>ratings <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(unit, class)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">DSI</span>(<span class="at">unit =</span> ratings<span class="sc">$</span>unit, <span class="at">class =</span> ratings<span class="sc">$</span>class, <span class="at">max =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 40.27778</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>ratings<span class="sc">$</span>class</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>ratings<span class="sc">$</span>class</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 2 3 1 1 3 4 5 0 2 5 2 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ratings<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(ratings<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.416667</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ratings<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(ratings<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1.621354</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ratings<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(ratings<span class="sc">$</span>class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   0.000   1.000   2.000   2.417   3.250   5.000 </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(class)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
   0.000   1.000   2.000   2.417   3.250   5.000 </code></pre>
