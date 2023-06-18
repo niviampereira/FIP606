@@ -1,14 +1,20 @@
 ---
-title: "Aula5"
+title: "Tipos de gráficos"
 author: "Nívia"
 format: html
 ---
 
-# Segundo plot
+# Tipos de gráficos e funções
 
-## Importa dados
+Existe uma grande diversidade de gráficos que podem ser utilizados para representar dados. Os de uso mais comum em nossas aulas são: boxplots, scatterplots, histogramas, gráficos de linha e gráficos de barra e colunas.
 
-Sempre carregar primeiro o tidyverse e depois o pacote que irá usar para importar os dados, no caso de planilhas excel, o pacote readxl. Após isso, deve escolher a atribuição dos dados.
+## BoxPlot
+
+Boxplots são úteis para estudarmos a distribuição de uma variável, principalmente quando queremos comparar várias distribuições. São frequentemente usados para representar dados numéricos, como medidas de tendência central, variabilidade e distribuição. Eles mostram a distribuição de um conjunto de dados por meio de um diagrama que inclui a mediana, quartis, outliers e limites do conjunto de dados. Os boxplots ajudam a visualizar a distribuição de um conjunto de dados e identificar possíveis outliers ou pontos de dados incomuns. Para construir um boxplot no ggplot, utilizamos a função geom_boxplot. Ele precisa dos atributos x e y, sendo que ao atributo x devemos mapear uma variável categórica.
+
+A função geom_boxplot compreende as seguintes estéticas: • outlier.color = NA: Retira a cor de fungo do boxplot; • fill = define a cor. O nome da cor, por ser texto, deve ser escrita entre aspas; • size = (número): define o tamanho do box, retorna um vetor numérico de comprimento length(x ).
+
+**Importação de dados**: sempre carregar primeiro o tidyverse e depois o pacote que irá usar para importar os dados, no caso de planilhas excel, o pacote readxl. Após isso, deve escolher a atribuição dos dados.
 
 ```{r}
 library(tidyverse)
@@ -16,9 +22,7 @@ library(readxl)
 mg <- read_excel("dados-diversos.xlsx")
 ```
 
-## Visualiza
-
-O ggplot é o pacote usado para visualização dos dados. Para visualizar os dados, basta usar a função ggplot.É importante que se defina antes quem será o eixo x e y (no caso, y é o comprimento da lesão, enquanto x são os tratamentos - controle e mg2). Depois, usa a função aes (aesthetic) do que deseja que apareça no gráfico e adiciona a camada geom_point para que os dados sejam vistos em forma de pontos.
+**Visualização dos dados**: como abordado na aula aunterior, o ggplot é o pacote usado para visualização dos dados. Para visualizar os dados, basta usar a função ggplot.É importante que se defina antes quem será o eixo x e y (no caso, y é o comprimento da lesão, enquanto x são os tratamentos - controle e mg2). Depois, usa a função aes (aesthetic) do que deseja que apareça no gráfico e adiciona a camada geom_point para que os dados sejam vistos em forma de pontos.
 
 ```{r}
 mg |> 
@@ -26,7 +30,7 @@ mg |>
   geom_point()
 ```
 
-Muitas vezes, ocorre a sobreposição de pontos no gráfico. Para desagregar esses pontos, usa-se a função geo_jitter e, para evitar que os dados fiquem muiito dispersos, pode-se definir a largura.
+Muitas vezes, ocorre a sobreposição de pontos no gráfico. Para desagregar esses pontos, usa-se a função geo_jitter(). Esta função adiciona variação aleatória aos pontos de localização do gráfico. Em outras palavras, ele "agita" ligeiramente as localizações dos pontos. Este método reduz o overplotting, pois é improvável que dois pontos com a mesma localização tenham a mesma variação aleatória. Para evitar que os dados fiquem muito dispersos, pode-se definir a largura (Width - controla a quantidade de deslocamento vertical).
 
 ```{r}
 mg |> 
@@ -34,7 +38,7 @@ mg |>
   geom_jitter(width = 0.1)
 ```
 
-Para adicionar o boxplot e mudar a visão do gráfico, basta adicionar mais uma camada, ou seja, aciona função geom_boxplot.
+Para adicionar o boxplot e mudar a visão do gráfico, basta adicionar mais uma camada, ou seja, acionar a função geom_boxplot.
 
 ```{r}
 mg |> 
@@ -95,9 +99,9 @@ Instalando o ggthemes e carregando pacote:
 library(ggthemes)
 ```
 
-## Composição de plots - Pacote PATCHWORK
+### Composição de plots - Pacote PATCHWORK
 
-O patchwork torna possível combinar ggplots diferentes e separados em um mesmo gráfico. Depois de instalar, carrega o pacote. Para unis diferentes ggplots, é necessário utilizar o títullo desses ggplots separados pelo sinal de + ou pela barra reta (\|).
+O patchwork torna possível combinar ggplots diferentes e separados em um mesmo gráfico. Depois de instalar, carrega o pacote. Primeiramente, deve-se definir um nome para cada gráfico. Os nomes devem ser dados dentro do chunk de cada gráfico. O nome deve ser escolhido e o banco de dados estudado deve ser atribuído a ele, tendo logo em seguida a necessidade de inserção de um pipe. Então, para unir diferentes ggplots, é necessário utilizar o título desses ggplots separados pelo sinal de + ou pela barra reta (\|).
 
 ```{r}
 library(patchwork)
@@ -115,9 +119,10 @@ ggsave("figs/combined.png")
 
 ```
 
-## Gráfico com dados survey
+## Gráfico de Colunas
 
-Para inverter as barras usa-se a função coord_flip().
+Os gráficos de colunas são usados para representar dados categóricos ou discretos (que podem ser divididos em grupos ou categorias). Um gráfico de colunas pode ajudar a identificar as tendências e padrões nos dados e destacar diferenças significativas entre as categorias. Para transformar gráficos em gráficos de colunas, usa-se a função geom_col ().
+Para esse tipo de gráficos, vamos utilizar o conjunto de dados survey. Para inverter as barras usa-se a função coord_flip().
 
 ```{r}
 survey <- read_excel("dados-diversos.xlsx",
@@ -138,9 +143,7 @@ survey |>
   
 ```
 
-## Adiconar faceta
-
-Fução facet_wrap:
+**Adição de faceta**: Função facet_wrap
 
 ```{r}
 survey |> 

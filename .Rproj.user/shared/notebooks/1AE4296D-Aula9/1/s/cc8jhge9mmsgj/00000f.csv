@@ -1,0 +1,2 @@
+"0","data_mg <- read_excel(""dados-diversos.xlsx"")"
+"0","head(data_mg)"

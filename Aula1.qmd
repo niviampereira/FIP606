@@ -1,0 +1,30 @@
+---
+title: "Introdução ao R"
+---
+
+# Descobrindo o mundo da análise de dados em R
+
+![](quarto_schematic.png){fig-align="left"}
+
+Ao adentrar o fascinante mundo da análise de dados com o Rstudio, é importante saber por onde começar. Existem diversos materiais interessantes e extremamente utéis disponíveis, basta acessá-los e saber usar as informações a seu favor. Dentre os materias disponíveis, livros como [Introdução ciência de dados no R](https://r4ds.hadley.nz/), [Introduction to R](https://intro2r.com/) e [The Art of Data Science](https://bookdown.org/rdpeng/artofdatascience/) são essenciais para obter uma compreensão básica da ciência de dados e um entendimento mais aprofundada de como realizar exploração e nálise de dados corretamente no R.
+
+É importante ressaltar que os materiais liberados neste site são aulas que foram disponibilizadas com o intuíto de agregar ao conhecimento mas, como se trata de assuntos complexos, não foi possível realizar anotações de qualidade sobre todos os assuntos abordados, portanto, esse não deve ser o seu ponto de partida para estudo das anpalises. Estes materiais, por si só, não são capazes de elucidar questões complexas do R, por isso é importante não focar apenas neste conteúdo.
+Assim, damos início a nossa jornada de conhecimento no R apresentando alguns de seus mais básicos objetos e funções.
+
+## Objetos e funções
+
+**Objeto**: um objeto é simplesmente um nome que guarda um valor e, para criá-lo, utilizamos o operador \<-. Ex.: a \<- 1. No R, uma base de dados é representada por objetos chamados de data frames. Sempre que roda-se uma função, o código que ela guarda será executado e um resultado nos será devolvido. Entre parênteses, após o nome da função, temos o que chamamos de *argumentos*. Uma função pode ter qualquer número de argumentos e eles são sempre separados por vírgula. Ex.: sum(1, 2). A função sum() recebeu os argumentos 1 e 2.
+
+**Classes**: para criar texto no R, colocamos os caracteres entre aspas (" "). As aspas servem para diferenciar nomes (objetos, funções, pacotes) de textos (letras e palavras). Os textos são muito comuns em variáveis categóricas.As classes mais básicas dentro do R são: numeric, character e logical.
+
+**Vetores**: Vetores no R são apenas conjuntos indexados de valores. Para criá-los, basta colocar os valores separados por vírgulas dentro de um c().Cada coluna de um data frame será representada como um vetor. Ex.: vetor1 \<- c(1, 5, 3, -10).Uma maneira fácil de criar um vetor com uma sequência de números é utilizar o operador :.
+
+**Testes lógicos**: uma operação lógica nada mais é do que um teste que retorna verdadeiro ou falso. O verdadeiro no R vai ser representado pelo valor TRUE e o falso pelo valor FALSE. Esses nomes no R são reservados, isto é, você não pode chamar nenhum objeto de TRUE ou FALSE. Ex.: para testar se um valor é igual ao outro (operador ==) - 1 == 1 \[TRUE\] ou 1 == 2 \[FALSE\]. Alguns dos principais operadores lógicos são:
+
+x \< y (x menor que y?) x \<= y (x menor ou igual a y?) x \> y x (maior que y?) x \>= y (x maior ou igual a y?) x == y (x igual a y?) x != y (x diferente de y?) !x (Negativa de x) x \| y (x ou y são verdadeiros?) x & y (x e y são verdadeiros?) x %in% y (x pertence a y?) xor(x, y) x ou y são verdadeiros (apenas um deles)?
+
+**Valores especiais**: NA - representa a ausência de informação, isto é, a informação existe, mas nós (e o R) não sabemos qual é. O NA para o R nada mais é do que o valor faltante ou omisso da Estatística.
+
+**Operador pipe**: a ideia do operador %\>% (pipe) é bem simples: usar o valor resultante da expressão do lado esquerdo como primeiro argumento da função do lado direito. Usa-se o pipe (\|\> ou %\>%) para enfatizar uma sequência de comandos ou ações no chunk e para evitar adicionar o nome do data frame dentro da função ggplot. O pipe deve ter sempre um espaço antes dele e, geralmente, deve ser seguido por uma nova linha. Após a primeira etapa, cada linha deve ter dois espaços, o que torna mais fácil adicionar outras etapas ou reorganizar as já existentes.
+
+\*\*Operador cifrão: usar o comando cifrão permite acessar colunas pelo nome. O uso é basicamente o seguinte - dados(cifrão)variável, onde - dados especifica o conjunto de dados e variável a variável que deseja extrair. Por exemplo, para extrair os dados de macacos use: \> macac\$macacos.

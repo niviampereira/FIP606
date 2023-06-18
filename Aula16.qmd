@@ -1,10 +1,10 @@
 ---
-title: "Aula16"
+title: "Elaboração de mapas"
 author: "Nívia"
 format: html
 ---
 
-## Mapas no R
+# Mapas no R
 
 ```{r}
 library(tidyverse)
@@ -44,7 +44,7 @@ geom_sf(color = "white",
   theme_void()
 ```
 
-Para selecionar um estado: Para
+Para selecionar um estado:
 
 ```{r}
 BRA <- ne_states(country = "Brazil", 
@@ -57,7 +57,7 @@ geom_sf(color = "black",
             fill = "green")
 ```
 
-Para inserir os pontos especificos dos dados (latitude e longitude): Para plotar os pontos, precisa-se das coordenadas de onde foram coletados os pontos. Ex.: pontos de coleta - precisa-se coletar as coordenadas para plotar em um mapa (no caso de ser só o municipio, pode pegar na internet as coordenadas).
+Para inserir os pontos especificos dos dados (latitude e longitude): Para plotar os pontos, precisa-se das coordenadas de onde foram coletados os pontos. Ex.: pontos de coleta - precisa-se coletar as coordenadas para plotar em um mapa (no caso de ser só o municipio, pode pegar as coordenadas na internet).
 
 ```{r}
 BRA <- ne_states(country = "Brazil", 

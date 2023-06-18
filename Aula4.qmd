@@ -1,14 +1,18 @@
 ---
-title: "Aula4_visualização"
+title: "Visualização de dados"
 author: "Nívia"
 format: html
 ---
 
 # Gráficos em ggplot
 
+O ggplot2 é o pacote usado para visualização dos dados. O pacote ggplot2 pode ser carregado individualmente, ou pode ser carregado pelo tidyverse.Para visualizar os dados, basta usar a função ggplot.
+
+![](img/ggplot2.png){fig-align="center"}
+
 ## Importação de dados
 
-O pacote ggplot2 pode ser carregado individualmente, ou pode ser carregado pelo tidyverse.Após carregar o pacote, importa-se um banco de dados para trabalho. Para o formato csv, é necessário carregar o pacote tidyverse. As variáveis podem ser categóricas ou numéricas. As variáveis categóricas são entendidas no R como caracteres.
+Após carregar o pacote, importa-se um banco de dados para trabalho. Para o formato csv, é necessário carregar o pacote tidyverse. As variáveis podem ser categóricas ou numéricas. As variáveis categóricas são entendidas no R como caracteres.
 
 ```{r}
 library(tidyverse)
@@ -18,13 +22,13 @@ mg <- read_csv("dados-diversos.csv")
 
 ## GGPLOT - Definindo camadas
 
-A primeira função para criar um ggplot é a função ggplot, que define o conjunto de dados e elementos de estética dos gráficos.O primeiro elemento da função é o conjunto de dados a ser utilizado. A programação de gráficos em ggplot2 é feito na forma de camadas, que são adiconadas a medida que se confecciona o gráfico, por isso que se usa o sinal de +, porque significa a adição de mais uma camada. O primeiro argumento da função é o data frame onde nossos dados foram armazenados (Ex. mg). Usa-se o pipe (\|\>) para enfatizar uma sequência de comandos ou ações no chunk e para evitar adiconar o nome do dataframe dentro da função ggplot. O pipe deve ter sempre um espaço antes dele e, geralmente, deve ser seguido por uma nova linha. Após a primeira etapa, cada linha deve ter dois espaços, o que torna mais fácil adicionar outras etapas ou reorganizar as já existentes.
+A programação de gráficos em ggplot2 é feito na forma de camadas, que são adicionadas à medida que se confecciona o gráfico, por isso que se usa o sinal de +, porque significa a adição de mais uma camada. Usa-se o pipe (\|\>) para enfatizar uma sequência de comandos ou ações no chunk e para evitar adicionar o nome do data frame dentro da função ggplot.O pipe deve ter sempre um espaço antes dele e, geralmente, deve ser seguido por uma nova linha. Após a primeira etapa, cada linha deve ter dois espaços, o que torna mais fácil adicionar outras etapas ou reorganizar as já existentes.
 
 ```{r}
 library(ggplot2)
 ```
 
-A função ggplot() define o plano com os eixos x e y. Uma das primeiras funções em ggplot é a aes, usada para descrever como as variáveis são mapeadas (eixos x e y). Para adionar cor usa-se a função color = nopme da cor. Ao incluir esta função dentro da função aes, dizemos ao ggplot que os pontos devem ser mapeados esteticamente utilizando cores para cada variavel (ex.irrigação). A função geo_point define que a forma geométrica a ser utilizada é baseada em pontos, gerando um gráfico de dispersão. A função alpha trabalha com a tansparência.
+**ggplot**: A primeira função para criar um ggplot é a função ggplot, que define o conjunto de dados e elementos de estética dos gráficos. O primeiro elemento ou argumento da função é o conjunto de dados a ser utilizado (o data frame onde nossos dados foram armazenados, ex. mg). A função ggplot() define o plano com os eixos x e y. **aes**: Após isso, precisamos especificar como as observações serão mapeadas nos aspectos visuais do gráfico e quais formas geométricas serão utilizadas. Para isso, usamos a função aestetic (aes), uma das primeiras funções em ggplot, usada para descrever como as variáveis são mapeadas (eixos x e y). Para adionar cor usa-se a função color = nome da cor. Ao incluir esta função dentro da função aes, dizemos ao ggplot que os pontos devem ser mapeados esteticamente utilizando cores para cada variavel (ex.irrigação). A função geo_point define que a forma geométrica a ser utilizada é baseada em pontos, gerando um gráfico de dispersão. A função alpha trabalha com a tansparência.
 
 ```{r}
 mg |>
@@ -55,7 +59,7 @@ mg |>
   geom_point(alpha = 0.5)+geom_line()
 ```
 
-A função facet_wrap adiciona facetas.Ou seja, com essa função informamos que um grafico deve ser criado para cada ambiente, um grafico digferente para cada variável.
+A função facet_wrap adiciona facetas. Ou seja, com essa função informamos que um gráfico deve ser criado para cada ambiente, um grafico diferente para cada variável.
 
 ```{r}
 # Dividindo o número de repetições - função facet_wrap
@@ -73,11 +77,23 @@ Outras funções:
 mg |> 
 select(Irrigation, severity) |>
 ggplot(aes(Irrigation, severity, shape = Irrigation))+geom_point(alpha = 0.5)
+
+
+# Retirando group e geom_boxplot
+mg |> 
+  select(day, severity) |>
+  ggplot(aes(day, severity))+
+  geom_point()
+
+# Agrupando por repetição: As primeiras 3 linhas separam a severidade por dia.
+mg |> 
+  select(day, rep, severity) |>
+  group_by(day) |>
+  summarise(sev = mean(severity)) |>
+  ggplot(aes(day, sev))+
+  geom_point()
 ```
 
-### BoxPlot
-
-Usado para estatistica descritiva. Para adicionar um boxplot com o ggplot, basta fazer a adição da função geom_boxplot.
 
 ```{r}
 mg |> 
@@ -99,19 +115,6 @@ mg |>
   geom_boxplot()+
   geom_point()
 
-# Retirando group e geom_boxplot
-mg |> 
-  select(day, severity) |>
-  ggplot(aes(day, severity))+
-  geom_point()
-
-# Agrupando por repetição: As primeiras 3 linhas separam a severidade por dia.
-mg |> 
-  select(day, rep, severity) |>
-  group_by(day) |>
-  summarise(sev = mean(severity)) |>
-  ggplot(aes(day, sev))+
-  geom_point()
 ```
 
 Criando um novo conjunto, fazendo a media e adicionando titulo no gráfico:

@@ -1,0 +1,29 @@
+"0","library(magrittr) # para usar pipes"
+"0","library(ggplot2) # para gráficos"
+"2","Warning: package ‘ggplot2’ was built under R version 4.2.3"
+"0","library(dplyr)"
+"2","
+Attaching package: ‘dplyr’
+
+"
+"2","The following objects are masked from ‘package:stats’:
+
+    filter, lag
+
+"
+"2","The following objects are masked from ‘package:base’:
+
+    intersect, setdiff, setequal, union
+
+"
+"0","library(readxl)"
+"0","library(tidyr)"
+"2","
+Attaching package: ‘tidyr’
+
+"
+"2","The following object is masked from ‘package:magrittr’:
+
+    extract
+
+"

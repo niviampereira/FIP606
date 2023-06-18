@@ -1,17 +1,18 @@
 ---
-title: "Aula12"
+title: "ANOVA em DBC e parcela subdividida"
 author: "Nívia"
 format: html
 ---
 
-# DBC
+# Anova com bloco (DBC)
 
+**Preparo pré-ánalise**:
 ```{r}
 library(tidyverse)
 library(readxl)
 ```
 
-Usando o conjunto de dados fungicida_campo.
+Usando o conjunto de dados fungicida_campo:
 
 ```{r}
 fungicidas <- read_excel("dados-diversos.xlsx", "fungicida_campo")
@@ -20,14 +21,12 @@ fungicidas <- read_excel("dados-diversos.xlsx", "fungicida_campo")
 ## Modelo Anova com bloco
 
 No delineamento em blocos, adiciona o sinal de + para adicionar a repetição.
-
 ```{r}
 aov_fung <- aov(sev ~trat + rep, data = fungicidas)
 summary(aov_fung)
 ```
 
-Checando as premissas:
-
+**Checando as premissas**:
 ```{r}
 library(performance)
 library(DHARMa)
@@ -36,8 +35,7 @@ check_heteroscedasticity(aov_fung)
 plot(simulateResiduals(aov_fung))
 ```
 
-Estimando as médias:
-
+**Estimando as médias**:
 ```{r}
 library(emmeans)
 means_fung <- emmeans(aov_fung, ~trat)
@@ -52,14 +50,13 @@ plot(means_fung)+
 
 # Delineamento em parcela subdividida (Split-plot)
 
-Usar o conjunto milho
+**Preparo pré-ánalise**: usamos o conjunto milho,
 
 ```{r}
 milho <- read_excel("dados-diversos.xlsx", "milho")
 ```
 
-Ajustabndo o modelo:
-
+**Ajustabndo o modelo**:
 ```{r}
 aov_milho_bloco <- aov(index ~ factor(block) + hybrid*method + 
 Error(factor(block)/hybrid/method), data = milho)
@@ -67,7 +64,8 @@ Error(factor(block)/hybrid/method), data = milho)
 summary(aov_milho_bloco)
 ```
 
-Checa as premissas: Em parcelas subdivididas não é possível checar as premissas pelo check\_, então usa lme4, para checar pelo modelo misto.
+**Checa as premissas**: 
+Em parcelas subdivididas não é possível checar as premissas pelo check\_, então usa lme4, para checar pelo modelo misto.
 
 ```{r}
 library(lme4)
@@ -93,14 +91,14 @@ check_normality(mix2)
 check_heteroscedasticity(mix2)
 ```
 
-Agora compara as médias, analisando a media para cada interação:
-
+**Comparação de médias**: 
+Agora compara as médias, analisando a media para cada interação.
 ```{r}
 means_mix2 <- emmeans(mix2, ~hybrid | method)
 means_mix2
 cld(means_mix2)
 
-#Se quer comparar os 2 mpétodos dentro de cada hibrido:
+#Se quer comparar os 2 métodos dentro de cada hibrido:
 #means_mix2 <- emmeans(mix2, ~ method | )
 #means_mix2
 #cld(means_mix2)

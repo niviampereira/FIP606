@@ -1,0 +1,14 @@
+"0","library(performance)"
+"2","Warning: package ‘performance’ was built under R version 4.2.3"
+"0","check_normality(m1)"
+"1","[31mWarning: Non-normality of residuals detected (p = 0.018).
+[39m"
+"0","check_heteroscedasticity(m1)"
+"1","[31mWarning: Heteroscedasticity (non-constant error variance) detected (p < .001).
+[39m"
+"0","library(DHARMa)"
+"2","Warning: package ‘DHARMa’ was built under R version 4.2.3"
+"2","This is DHARMa 0.4.6. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')
+"
+"0","plot(simulateResiduals(m1))"
+"2","Warning: DHARMa: fittedModel not in class of supported models. Absolutely no guarantee that this will work!"

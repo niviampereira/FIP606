@@ -1,10 +1,10 @@
 ---
-title: "Aula15"
+title: "Tabela de contingência"
 author: "Nívia"
 format: html
 ---
 
-# Variáveis categóricas
+# Variáveis categóricas e tabelas de contingência
 
 Para variaveis resposta categoricas, não se tira a média dos dados, ao inves disso, se monta uma tabela de contigencia e visualiza por meio de grafico de barras/colunas, pois se é sada para ver frequencia de ocorrencias, quando se tem variáveis categóricas nominais.
 
@@ -34,7 +34,7 @@ survey |>
   tabyl(year, species)
 ```
 
-## Pacote janitor: Para dar os valores em porcentagem usa-se a função adorn_percentages().
+**Pacote janitor**: Para dar os valores em porcentagem usa-se a função adorn_percentages().
 
 ```{r}
 survey |>
@@ -98,9 +98,9 @@ curve2 <- curve |>
   t.test(curve3$Drip, curve$Furrow)
 ```
 
-Exercício:
+# Exercício prático:
 
--Carregando o conjunto de dados, mutando a variável lesion size de categórica para numerica, agrupando as variáveis e resumindo os dados:
+- Carregando o conjunto de dados, mutando a variável lesion size de categórica para numerica, agrupando as variáveis e resumindo os dados:
 
 ```{r}
 lesion_size <- read_excel("tan-spot-wheat.xlsx", "lesion_size")
@@ -126,6 +126,8 @@ lesion2 |>
        x = "Hours after inoculation (hai)", color = "Treatment")
 
 ```
+
+# Análise de área abaixo da curva da doença
 
 ```{r}
 lesion3 <- lesion_size |>

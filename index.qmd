@@ -24,6 +24,8 @@ about:
 
 # Bem-vindo ao meu website!
 
-Eu sou [Nívia Maria]{.underline}, doutoranda do programa de pós-graduação em Fitopatologia da Universidade Federal de Viçosa (Viçosa, MG). Eu possuo graduação em Engenharia Agronômica pela Universidade Federal de Sergipe (Aracaju, SE) e mestrado em Fitopatologia (2022) pela Universidade Federal de Viçosa. Este website foi criado por mim em Quarto Markdown para a disciplina FIP606 - Análise e visualização de dados em Fitopatologia. Neste site, você encontrará o material das aulas ministradas organizados em tópicos. Convido você a explorar meu site e um pouco sobre o fascinante mundo da análise de dados fitopatológicos no Rstudio.
+Eu sou [Nívia Maria]{.underline}, doutoranda do [programa de pós-graduação em Fitopatologia](https://www.dfp.ufv.br/) da [Universidade Federal de Viçosa](https://www.ufv.br/campus-vicosa/). Eu possuo graduação em Engenharia Agronômica pela [Universidade Federal de Sergipe](https://www.ufs.br/) (Aracaju, SE) e mestrado em Fitopatologia (2022) pela Universidade Federal de Viçosa.
+
+Este website foi criado por mim em Quarto Markdown para a disciplina FIP606 - **Análise e visualização de dados em Fitopatologia**, ministrada pelo professor [Emerson Del Ponte](https://emersondelponte.netlify.app/). Neste site, você encontrará o material das aulas ministradas organizados em tópicos. Convido você a explorar meu site e um pouco sobre o fascinante mundo da análise de dados fitopatológicos no Rstudio.
 
 Sinta-se à vontade para entrar em contato comigo se tiver alguma dúvida.

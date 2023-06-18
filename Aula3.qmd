@@ -1,16 +1,16 @@
 ---
-title: "Aula3dataframe"
+title: "Dataframe"
 author: "Nívia"
 format: html
 ---
 
-# Data frames
+# Data frames e importação de dados
 
-## Importando dados
+A base de dados é representada por objetos chamados de data frames. A principal característica de um data frame é possuir linhas e colunas. Para a leitura de dados em R, deve-se salvar o arquivo em um formato adequado.
 
-Para a leitura de dados em R, deve-se salvar o arquivo em um formato adequado.
+## Tipos de data frames e as funções de pacotes
 
-## Dados de pacotes (packages)
+Como mencionado na aula anterior (Pacotes e carregamento de pacotes), existem alguns pacotes que são essenciais para realizar análises no R e, tratando-se de data frames, alguns deles se destacam.
 
 Para carregar o dataframe, pode-se usar pacotes do R, a exemplo do pacote dataset, que tem em suas funções o pacote cars.
 
@@ -21,8 +21,7 @@ speed <- cars2$speed
 speed
 ```
 
-Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Para atribuir uma função a outra, basta usar \<-. 
-Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.
+Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Como já mencionado, para atribuir uma função a outra, basta usar \<-. Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.
 
 ```{r}
 library(r4pde)
@@ -32,9 +31,13 @@ df
 
 A função para a leitura de dados no R é a read.table. O R possui um bom número de variantes desta função, usadas para importar uma variedade de formatos de arquivos diferentes no R. As variações da função read.table mais úteis são as funções read.csv e read.csv2 e readxl.
 
-## Dados em formato Excel
+**Tidyverse**: é um pacote que consolida uma série de ferramentas. Fazem parte do tidyverse os pacotes [dplyr]{.underline}, [tidyr]{.underline}, [readr]{.underline}, [ggplot2]{.underline}, entre muitos outros.
 
-Para importar dados diretamente de outros softwares, é necessário instalar pacotes, a exemplo do readxl, usado para a importação de planilhas do excel. O pacote readxl permite gerar dataframe de planilhas excel e é a forma mais simples de carregar um arquivo neste formato. O pacote readxl não é do conjunto tidyverse, então precisa ser carregado sempre antes de usar. A maioria das funções do readxl permite ler dados de planilhas excel, a exemplo de read_excel. O primeiro argumento para read-excel é o caminho do arquivo que deve ser lido.O caminho do arquivo e o nome do arquivo (incluindo a extensão do arquivo) precisam ser colocados entre aspas duplas, pois a função espera que seja uma função de caractere.
+![](usopacotes.png)
+
+## Dados em formato Excel (pacote readxl)
+
+Para importar dados diretamente de outros softwares, é necessário instalar pacotes, a exemplo do readxl, usado para a importação de planilhas do excel. O pacote readxl permite gerar dataframe de planilhas excel e é a forma mais simples de carregar um arquivo neste formato. O pacote readxl não é do conjunto tidyverse, então precisa ser carregado sempre antes de usar. A maioria das funções do readxl permite ler dados de planilhas excel, a exemplo de read_excel. O primeiro argumento para read-excel é o caminho do arquivo que deve ser lido. O caminho do arquivo e o nome do arquivo (incluindo a extensão do arquivo) precisam ser colocados entre aspas duplas, pois a função espera que seja uma função de caractere.
 
 ```{r}
 library(readxl)
@@ -43,12 +46,15 @@ escala1 <- read_excel("dados-diversos.xlsx", "escala")
 escala2 <- read_excel("dados-diversos.xlsx", 2)
 ```
 
-## Dados em formato csv
+No Excel, um arquivo pode ter várias planilhas. Por padrão, as funções de leitura trarão apenas a primeira planilha do arquivo. Para trazer outra planilha específica, basta utilizarmos o argumento sheet+o número da planilha (linha 3 do comando acima), ou adicionar o nome da planilha desejada entre aspas duplas, separada do nome da planilha geral por uma vírgula (linha 2 do comando acima).
 
-Para chamar um arquivo csv, usa-se a função read.csv. A função read.csv é usada para importar arquivos de valores separados por , e com a primeira linha dos dados com os nomes das variáveis). Também temos a função read.csv2, que assume que os dados são separados por ; e que uma vírgula é usada ao inves de um ponto decimal.
+### Dados em formato csv e txt (pacote readr)
 
-Diversas funções do pacote reader também podem ser utilizadas para importação de quadro de dados. O pacote reader faz parte da coleção de pacotes tidyverse. As funções do reader são usadas de forma semelhante as do read.table e read.csv, sendo que muitas vezes usam os mesmos argumentos. Ex: podem ser utilizadas as funções read_table,read_csv e read_csv2, ao invés das dunções do read.table.
+O pacote readr do tidyverse é utilizado para importar arquivos de texto, como .txt ou .csv, para o R e seu carregamento é feito, assim como os demais, pela função library. O readr transforma arquivos de textos em tibbles usando as funções como:
+read.csv() ou	read_csv() - usada para importar arquivos de valores separados por , e com a primeira linha dos dados com os nomes das variáveis. 
+read.csv2 ou read_csv2() - usada para importar bases de arquivos separados por ponto-e-vírgula no R. Em alguns países, como o Brasil, as vírgulas são utilizadas para separar as casas decimais dos números, inviabilizando o uso de arquivos .csv. Nesses casos, quando a vírgula é o separador de decimal, os arquivos .csv passam a ser separados por ponto-e-vírgula, assim, esta função assume que os dados são separados por ; e que uma vírgula é usada ao inves de um ponto decimal.
 
+**CSV**:
 ```{r}
 library(tidyverse)
 
@@ -61,9 +67,9 @@ magnesio3 <- read_csv("dados-diversos.csv")
 magnesio3
 ```
 
-## Dados em formato txt
-
-Arquivos em formato txt devem ser importados usando o read.table.
+**TXT**:
+As funções do reader são usadas de forma semelhante as do read.table, sendo que muitas vezes usam os mesmos argumentos.
+Arquivos em formato txt podem ser importados usando o read.table.
 
 ```{r}
 # using read.table
@@ -72,11 +78,11 @@ magnesio4 <-read.table("dados-diversos.txt", header = TRUE)
 magnesio4
 ```
 
-**Obs.:** O argumento header = TRUE especifica que a primeira linha dos dados contem o nome das variáveis (ex. magnesio, nitrogenio), se este não for o caso é só usar o argumento header = FALSE.
+*Obs.:* O argumento header = TRUE especifica que a primeira linha dos dados contem o nome das variáveis (ex. magnesio, nitrogenio), se este não for o caso é só usar o argumento header = FALSE.
 
 ## Dados em planilhas google sheet
 
-Para importar planilhas google, usa a função gsheet (read_sheet), presente no pacote googlesheets4. Como esse pacote também não faz parte do conjunto tidyverse, precisa carrega-lo para usar. A função read_gsheet lê o arquivo (planilha google) a partir de uma URL (copia e cola o link da planilha desejada).
+Para importar planilhas google, usa a função gsheet (read_sheet), presente no pacote googlesheets4 ou o pacote gsheet. Como esses pacotes também não fazem parte do conjunto tidyverse, precisa carregá-los para usar. A função read_gsheet lê o arquivo (planilha google) a partir de uma URL (copia e cola o link da planilha desejada).
 
 ```{r}
 # using gsheet package

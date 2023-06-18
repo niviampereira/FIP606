@@ -4,10 +4,13 @@ author: "Nívia"
 format: html
 ---
 
-# Transformação de dados
+# Transformação de dados no R - log e srqt
 
-Como já é de conhecimento, o primeiro passo é carregar os pacotes necessários (tidyverse e readxl).
-Para a transformação de dados, será utilizado o conjunto de dados mofo, presente dentro do banco de dados da planilha dados-diversos. 
+Antes de realizar uma análise estatística no R, pode ser necessário realizar transformações nos dados, dependendo da natureza dos dados e dos requisitos da análise. As transformações podem ajudar a atender aos pressupostos da análise estatística, como a normalidade e a homogeneidade de variâncias.
+
+## Exploração dos dados
+
+Antes de realizar transformações, precisamos entender a natureza dos dados, então vamos nos familiarizar com um conjunto de dados, nesse caso, o conjunto de dados mofo, presente dentro do banco de dados da planilha dados-diversos.
 
 ```{r}
 library(tidyverse)
@@ -16,8 +19,7 @@ library(readxl)
 mofo <- read_excel("dados-diversos.xlsx", "mofo")
 ```
 
-Agora, vamos visualizar os dados de inc (incidencia) pelos tratamentos e pelo estudo (tratamento dentro de estudo). Então, o tratamento vai dentro do ggplot, enquanto o study vai dentro de facet.
-A função facet_wrap() replica o gráfico especificado para cada categoria de uma coluna. 
+Os dados podem ser visualizados de diferentes formas - gráficos de dispersão, histogramas, boxplots, etc. Inicialmente, vamos visualizar os dados de inc (incidência) pelos tratamentos e pelo estudo (tratamento dentro de estudo). Então, o tratamento vai dentro do ggplot, enquanto o study vai dentro de facet. A função facet_wrap() replica o gráfico especificado para cada categoria de uma coluna.
 
 ```{r}
 mofo |>
@@ -28,9 +30,7 @@ mofo |>
 
 Também pode usar a função geom_col para visualizar os dados de uma forma diferente.
 
-## Histograma
-
-Agora, faremos um histograma para visualizar a incidência e outro para visualizar os dados de escleródio.
+**Histograma**: Faremos um histograma para visualizar a incidência e outro para visualizar os dados de escleródio.
 
 ```{r}
 inc <- mofo |>
@@ -42,7 +42,7 @@ mofo |>
     geom_histogram()
 ```
 
-Depois disso, montaremos um boxplot para visualizar os dados de scl.
+**Boxplot**: montaremos um boxplot para visualizar os dados de scl.
 
 ```{r}
 scl <- mofo |>
@@ -57,17 +57,16 @@ library(patchwork)
 inc + scl
 ```
 
-Após isso, podemos encontrar a média dos dados. Para achar a média podemos usar as funções $, mean+conjunto ou summary.
+Após isso, podemos encontrar a média dos dados. Para achar a média podemos usar as funções \$, mean+conjunto ou summary.
 
 ```{r}
 mofo$scl
 mean(mofo$scl)
 ```
 
-## Transformando os dados
+## Finalmente transformando os dados
 
-Nós podemos transformar os dados de diferentes maneiras. Ex.: log e raiz quadrada.
-Para transformar os dados para o logaritimo dos números usa-se a função mutate e log (). Através da função mutate() realizamos a criação/adição de uma nova variável (ou novas variaveis), que são funções de variáveis existentes, e também criamos/modificamos colunas.
+Nós podemos transformar os dados de diferentes maneiras, sendo as mais comuns log e raiz quadrada. **Transformação logarítmica**: é útil quando os dados possuem uma distribuição assimétrica positiva ou quando a variação aumenta exponencialmente com o aumento dos valores. Para transformar os dados para o logaritimo dos números usa-se a função log (). Podemos realizar essa transformação com o uso da função mutate. Através da função mutate() realizamos a criação/adição de uma nova variável (ou novas variaveis), que são funções de variáveis existentes, e também criamos/modificamos colunas.
 
 ```{r}
 mofo2 <- mofo |>
@@ -84,7 +83,7 @@ mofo2 |>
 
 ```
 
-Para transformar os dados em raiz quadrada, usamos a função mutate e sqrt ().
+**Transformação em raiz quadrada**: é útil para reduzir a assimetria em dados com uma distribuição assimétrica positiva. Para transformar os dados em raiz quadrada, usamos a função mutate e sqrt ().
 
 ```{r}
 mofo2 <- mofo |>
@@ -103,15 +102,9 @@ mofo2 |>
     geom_histogram(bins = 10)
 ```
 
-## Usando a função arrange
+### Usando a função arrange
 
-Faremos uso agora da função arrange com o conjunto de dados survey. 
-A função arrange () é usada para ordenar linhas. Essa função ordena os dados por ordem crescente ou decrescente (depende se coloca o sinal de menos ou não dentro da função).
-O primeiro argumento é a base de dados, os demais argumentos são as colunas pelas quais queremos ordenar as linhas. 
-A função slice mostra determinada linha pela posição dela, que você solicita. 
-A função filter escolhe casos com base em seus valores.
-A função count conta o número de linhas com cada valor exclusivo de uma variável (com ou sem pesos).
-A função slice seleciona linhas por posição.
+Faremos uso agora da função arrange com o conjunto de dados survey. A função arrange () é usada para ordenar linhas. Essa função ordena os dados por ordem crescente ou decrescente (depende se coloca o sinal de menos ou não dentro da função). O primeiro argumento é a base de dados, os demais argumentos são as colunas pelas quais queremos ordenar as linhas. A função slice mostra determinada linha pela posição dela, que você solicita. A função filter escolhe casos com base em seus valores. A função count conta o número de linhas com cada valor exclusivo de uma variável (com ou sem pesos). A função slice seleciona linhas por posição.
 
 ```{r}
 survey <- read_excel("dados-diversos.xlsx", "survey")
@@ -127,4 +120,3 @@ mutate(n_class = case_when(
   n < 30 ~ "baixa",
        TRUE ~ "Alta"))
 ```
-

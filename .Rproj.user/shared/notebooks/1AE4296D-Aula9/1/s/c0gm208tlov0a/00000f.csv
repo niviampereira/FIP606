@@ -1,0 +1,2 @@
+"0","escala <- read_excel(""dados-diversos.xlsx"", ""escala"")"
+"0","head(escala)"

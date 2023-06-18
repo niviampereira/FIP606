@@ -1,0 +1,7 @@
+"0","milho <- read_excel(""dados-diversos.xlsx"", ""armazena"")"
+"0","milho |>"
+"0","  filter(tempo ==8) |>"
+"0","  ggplot(aes(factor(tipo), peso_mil,"
+"0","             color = factor(umidade)))+"
+"0","  geom_jitter(width = 0.1)+"
+"0","  facet_wrap(~ umidade)"

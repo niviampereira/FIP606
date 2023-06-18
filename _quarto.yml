@@ -8,17 +8,17 @@ execute:
   
 website:
   title: "FIP606"
-  image: logodedondo.png
-  
-  favicon: logodedondo.png
+  favicon: favicon.png
+  image: nivia.png
   
   navbar:
     pinned: true
-    logo: logodedondo.png
-    
+    logo: icon.png
     left:
       - text: Básico do R
         menu:
+          - href: Aula1.qmd
+            text: Introdução ao R
           - href: Aula2.qmd
             text: Pacotes e carregamento em R
           - href: Aula3.qmd
@@ -34,7 +34,9 @@ website:
       - text: Análise estatística em R
         menu:  
         - href: Aula7.qmd
-          text: Transformando dados
+          text: Transformação de dados
+        - href: Aula18.qmd
+          text: Transformação (Box-Cox)
         - href: Aula8.qmd
           text: Teste de hipóteses
         - href: Aula9.qmd
@@ -74,7 +76,7 @@ format:
   html:
     fontsize: 1.1em
     theme: 
-      light: minty
+      light: flatly
       dark: darkly
     css: styles.css
     toc: true

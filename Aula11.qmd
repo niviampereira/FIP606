@@ -1,12 +1,14 @@
 ---
-title: "Aula11"
+title: "Anova Fatorial"
 author: "Nívia"
 format: html
 ---
 
 # ANOVA - 2 ou mais fatores
 
-Na anova com 2 fatores ou mais, não se tem a opção de usar teste não paramétrico (Kruskal). O aov() em um fator é apenas resposta \~ tratamento, mas com 2 ou mais o aov() é a resposta \~ do tratamento \* tratamento (ex.: resposta em função dos tratamento versus o cultivar).
+Quando se tem dois fatores ou mais, não se tem a opção de usar teste não paramétrico (Kruskal). A função aov() em 1 fator é apenas variável resposta em função do tratamento (resposta \~ tratamento), mas com 2 ou mais o aov() é a resposta \~ do tratamento1\*tratamento2 (ex.: resposta em função do fator 1 versus o fator2).
+
+**Preparo pré-ánalise**:
 
 ```{r}
 library(tidyverse)
@@ -84,9 +86,9 @@ library(agricolae)
 cv.model(m1)
 ```
 
-## Novo conjunto de dados - 3 fatores
+## ANOVA com 3 fatores
 
-Interação entre tipo de armazenamento e umidade.
+Dados sobre a interação entre tipo de armazenamento e umidade.
 
 ```{r}
 milho <- read_excel("dados-diversos.xlsx", "armazena")
@@ -140,3 +142,25 @@ medias_m5
 cld(medias_m5)
 pwpm(medias_m5)
 ```
+
+# Dados não paramétricos com 2 ou mais fatores - Rank
+
+Para dados com um fator, pode-se usar as 3 alternativas citadas na aula 10. Quando se tem 2 fatores, pode-se analisar cada fator separadamente, mas para testar a interação usa-se outra alternativa, o ranck.
+
+```{r}
+fung <- read_excel("dados-diversos.xlsx", "fungicida_vaso")
+fung2 <- fung |>
+  mutate(inc = inf_seeds/n_seeds*100,
+         rank_inc = rank(inc))
+rank_anova <- aov(rank_inc ~treat*dose, data = fung2)
+summary(rank_anova)
+```
+
+**Médias do rank**:
+Depois usa o emmeans para ver as médias com o rank.
+```{r}
+means_rank <- emmeans(rank_anova, ~treat | dose)
+cld(means_rank)
+```
+
+Na tabela coloca os dados originais com os dados rankeados.

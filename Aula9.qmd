@@ -1,8 +1,29 @@
 ---
-title: "Aula9"
+title: "análises estatísticas"
 author: "Nívia"
 format: html
 ---
+
+# Tipos de testes para análise estatística
+
+Veremos nesta aula os tipos de análise de acordo com o número e tipo de variáveis independentes (níveis do fator) e também o número de tratamentos ou grupos a serem comparados.
+
+## Teste T
+
+O teste t compara DUAS MÉDIAS (2 tratamentos) e mostra se as diferenças entre essas médias são significativas. Como todo teste estatístico, o teste t também tem como produto a medida do valor de p. Ou seja, no final das contas, teremos calculado a probabilidade da diferença encontrada (entre as médias) terem sido por acaso. Existem 2 tipos mais comuns de teste t:
+
+-   teste t para 2 amostras **dependentes** (ou pareadas): compara as médias da [mesma população]{.underline} em diferentes momentos de tempo (ex.: antes e depois).
+
+-   teste t para 2 amostras **independentes** (ou não pareadas): compara as médias de [duas populações distintas]{.underline}.
+
+Os termos paramétrico e não-paramétrico referem-se à média e ao desvio-padrão, que são os parâmetros que definem as populações que apresentam distribuição normal.
+Veremos como trabalahar nessas duas diferentes sutuações.
+
+### Dois tratamentos independentes
+
+*Situação*:Um pesquisador conduziu um experimento com o objetivo de avaliar o efeito de um micronutriente, o magnésio (Mg), adicionado na solução do solo cultivado com plantas de arroz, no manejo de uma doença fúngica. O experimento foi conduzido em delineamento inteiramente casualizado com 10 repetições, sendo cada repetição um vaso de planta. Um dos tratamentos é o chamado controle, ou testemunha, sem o suplemento mineral. O segundo é aquele com o suplemento do Mg na dose de 2 mM. Em cada uma das repetições foi obtido um valor médio do comprimento de lesões em um determinado tempo após a inoculação.
+
+**Preparo pré-análise**: carregamento de pacotes e importação do conjunto de dados.
 
 ```{r}
 library(magrittr) # para usar pipes
@@ -10,13 +31,14 @@ library(ggplot2) # para gráficos
 library(dplyr)
 library(readxl)
 library(tidyr)
-
 ```
 
 ```{r}
 data_mg <- read_excel("dados-diversos.xlsx")
 head(data_mg)
 ```
+
+Agora, vamos começar a trabalhar esses dados e obter estatísticas que descrevem o conjunto de dados, seja a tendência central ou a dispersão dos dados. Neste caso, trabalhamos com a média (mean), variância (var), desvio padrão (sd), erro padrão (se) e intervalo de confiança (ci). O intervalo de confiança é apenas para inferência visual.
 
 ```{r}
 data2 <- data_mg %>%
@@ -31,7 +53,7 @@ data2 <- data_mg %>%
 data2
 ```
 
-Gráfico de barras vertical com erro padrão
+**Visualização**: A maneira mais simples é visualizar, no caso de mais de 6 repetições, usando boxplots juntamente com os dados de cada repetição. Aqui visualizaremos os dados em gráfico de barras vertical com erro padrão.
 
 ```{r}
 data2 |> 
@@ -46,7 +68,7 @@ data2 |>
 labs(x = "", y = "Mean size (mm)")
 ```
 
-Intervalo de confiança
+*Intervalo de confiança*: Agora visualizamos os dados com o ci. Abaixo, as barras verticais representam o intervalo de confiança 95%.
 
 ```{r}
 data2 |> 
@@ -60,6 +82,8 @@ data2 |>
 labs(x = "", y = "Mean size (mm)")
 ```
 
+O conjunto de dados está no formato largo, assim a variável resposta de interesse está apenas em uma coluna. Existem várias formas de separar em dois vetores os dados de resposta para cada tratamento. Uma delas é por meio da função pivot_winder, a qual coloca as respostas em duas colunas, uma para cada tratamento. Para isso, criaremos o conjunto data_mg2. Agora é posspivel visualizar as respostas (tamanho da lesão) para cada tratamento usando o conjunto de dados original, já que O ggplot2 requer os dados no formato largo.
+
 ```{r}
 data_mg2 <- data_mg |>
   pivot_wider(1,
@@ -68,34 +92,38 @@ data_mg2 <- data_mg |>
 data_mg2
 ```
 
-## Teste de hipótese - teste t
+#### Teste de hipótese - teste t
+
+Teste t é um teste paramétrico e para ele precisa seguir 2 premissas - normalidade e homogeneidade da variância (homocedasticidade). Caso hja necessidade de transformação dos dados para deixá-los normais, é aceitável.
 
 ```{r}
 t.test(data_mg2$Mg2, data_mg2$control, 
 paired = F)
 ```
 
-Teste t é um teste paramétrico e para ele precisa seguir 2 premissas - normalidade e homogeneidade da variância (homocedasticidade). Se precisa fazer transformação nos dados para deixá-los normais, pode.
+A ordem de execução dos testes deve ser: Shapiro.teste (teste de normalidade) \> var.test (teste de homocedasticidade) \> se p menor que 0,05 \> t.test. No caso da variância dar heterogênea, var EQUAL = F. No caso dos dados pareados usa-se o argumento pared = TRUE
 
-### Homocedastididade
+##### Homocedastididade
 
-Podemos confirmar a premissa da homocedasticidade pelo teste F.
+Podemos confirmar a premissa da homocedasticidade pelo teste F. No caso de dois grupos, a função que pode ser usada é a var.test do R. Vamos usar o formato largo e chamar os dois vetores do conjunto. Verifique o P-valor na saída da análise.
 
 ```{r}
 attach(data_mg2)
 var.test(Mg2, control)
 ```
 
-### Normalidade
+A verificação deste pressuposto também pode ser realizada graficamente através do boxplot para os tratamentos vs resíduos. Se existir homocedasticidade espera-se que os boxplots sejam semelhantes.
 
-Para testar a normalidade dos dados, fazemos o teste shapiro.
+##### Normalidade
+
+A normalidade pode ser testada por meio de procedimentos visuais e testes específicos. Para testar a normalidade dos dados, fazemos o teste shapiro.
 
 ```{r}
 shapiro.test(Mg2)
 shapiro.test(control)
 ```
 
-Análise visual da premissa de normalidade:
+**Análise visual da premissa de normalidade**: A análise visual da premissa de normalidade é realizada por qqplot (QQ-Plot), que permite verificar se uma amostra segue uma distribuição gaussiana. Podemos simplesmente fazer usando as funções qqnorm() e qqline() para cada umas das variáveis analisadas.
 
 ```{r}
 qqnorm (Mg2)
@@ -104,8 +132,13 @@ qqnorm(control)
 qqline(control)
 ```
 
-Testando um novo conjunto de dados:
+### Dois tratamentos dependentes
+Se as premissas de normalidade não fossem atendidas, qual o teste que poderia ser usado? Nesse caso de dois grupos há duas possibilidades, uma é usar um teste não paramétrico ou um teste baseado em reamostragem (bootstrapping) dos dados, os quais independem do modelo de distribuição.
+Vejamos um exemplo.
 
+*Situação*: Um experimento foi conduzido para avaliar o efeito do uso da escala na acurácia e precisão de avaliações visuais de severidade por avaliadores. A hipótese a ser testada foi que avaliações utilizando uma escala digramática como auxílio são mais acuradas do que sem o uso do auxílio. Dez avaliadores foram escolhidos aleatoriamente e fizeram duas avaliações cada. Cinco variáveis que compõe a medida da concordância das estimativas foram obtidas. Uma vez que as medidas foram repetidas no tempo para cada avaliador, as amostras são do tipo dependentes.
+
+**Preparo pré-análise**: importação dos dados e preparo do conjunto.
 ```{r}
 escala <- read_excel("dados-diversos.xlsx", "escala")
 head(escala)
@@ -119,11 +152,42 @@ escala3 <- escala2|>
 
 ```
 
-### Teste não paramétrico
+**Checagem das premissas**:
+```{r}
+## homocedasticidade dois grupos
+attach(escala3)
+var.test(Aided1, Unaided)
 
+## normalidade
+shapiro.test(Aided1)$p.value
+shapiro.test(Unaided)$p.value
+```
+
+*Análise visual da normalidade*:
+```{r}
+qqnorm(Aided1)
+qqline(Aided1)
+qqnorm(Unaided)
+qqline(Unaided)
+```
+
+### Teste T paramétrico
+
+```{r}
+## teste t para amostras pareadas
+t_escala <- t.test(escala3$Aided1, escala3$Unaided,
+  paired = TRUE,
+  var.equal = F
+)
+
+t_escala
+```
+
+### Teste para dados não paramétricos
+
+Um teste não paramétrico não faz nenhuma suposição sobre a distribuição da população ou tamanho da amostra.
 O Wilcox.test é o teste para dados não paramétricos equivalente ao teste t para dados paramétricos. o teste de Wilcoxon é usado para testar se as medianas das amostras são iguais nos casos em que a suposição de normalidade não é satisfeita ou quando não for possível checar essa suposição.
 
 ```{r}
 wilcox.test(escala3$Aided1, escala3$Unaided, paired = TRUE)
 ```
-
