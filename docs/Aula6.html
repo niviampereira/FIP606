@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Aula6</title>
+<title>FIP606 - Gráficos 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -193,7 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -274,11 +278,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#scatter-plot" id="toc-scatter-plot" class="nav-link active" data-scroll-target="#scatter-plot">Scatter Plot</a>
+  <li><a href="#gráficos-de-dispersão-histograma-e-gráfico-de-densidade" id="toc-gráficos-de-dispersão-histograma-e-gráfico-de-densidade" class="nav-link active" data-scroll-target="#gráficos-de-dispersão-histograma-e-gráfico-de-densidade">Gráficos de dispersão, histograma e gráfico de densidade</a>
   <ul class="collapse">
-  <li><a href="#experimento-fatorial" id="toc-experimento-fatorial" class="nav-link" data-scroll-target="#experimento-fatorial">Experimento fatorial</a></li>
+  <li><a href="#scatterplots" id="toc-scatterplots" class="nav-link" data-scroll-target="#scatterplots">Scatterplots</a>
+  <ul class="collapse">
+  <li><a href="#gráficos-de-dispersão-para-análise-fatorial" id="toc-gráficos-de-dispersão-para-análise-fatorial" class="nav-link" data-scroll-target="#gráficos-de-dispersão-para-análise-fatorial">Gráficos de dispersão para análise fatorial</a></li>
+  </ul></li>
+  <li><a href="#histogramas" id="toc-histogramas" class="nav-link" data-scroll-target="#histogramas">Histogramas</a></li>
   <li><a href="#gráfico-de-densidade" id="toc-gráfico-de-densidade" class="nav-link" data-scroll-target="#gráfico-de-densidade">Gráfico de densidade</a></li>
-  <li><a href="#formato-largo-para-longo" id="toc-formato-largo-para-longo" class="nav-link" data-scroll-target="#formato-largo-para-longo">Formato largo para longo</a></li>
+  <li><a href="#gráfico-de-colunas" id="toc-gráfico-de-colunas" class="nav-link" data-scroll-target="#gráfico-de-colunas">Gráfico de colunas</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -288,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aula6</h1>
+<h1 class="title">Gráficos 2</h1>
 </div>
 
 
@@ -309,16 +317,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="scatter-plot" class="level1">
-<h1>Scatter Plot</h1>
-<p>Gráficos criados para 2 respostas relacionadas. Procura-se a resposta de qual o tipo de relação entre essas variáveis. Primeiro aplica a variável x e depois a y. Pode atribuir os dados de uma aba especifica do excel, usa-se o nome da aba e após isso a função read_excel seguido do o nome do arquivo excel entre aspas (endereço) e logo após insere a vírgula e o nome da aba dos dados (também pode ser usado o número da aba de dados).</p>
-<div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-1_9761388983ceb75c43549b23b795a815">
+<section id="gráficos-de-dispersão-histograma-e-gráfico-de-densidade" class="level1">
+<h1>Gráficos de dispersão, histograma e gráfico de densidade</h1>
+<section id="scatterplots" class="level2">
+<h2 class="anchored" data-anchor-id="scatterplots">Scatterplots</h2>
+<p>Um Scatterplot exibe a relação entre 2 variáveis numéricas, ajudando a identificar padrões ou correlações entre elas, cada ponto representa uma observação. Os gráficos de dispersão são frequentemente usados para representar dados que possuem duas variáveis contínuas, como comprimento e largura, tempo e velocidade, ou temperatura e umidade. A sua posição no eixo X (horizontal) e Y (vertical) representa os valores das 2 variáveis (primeiro aplica a variável x e depois a y). Usando ggplot2, os gráficos de dispersão são construídos usando a função geom_point. A função geom_point() compreende a seguinte estética:</p>
+<ul>
+<li><p><u>alpha</u>: trabalha com a transparência dos pontos (pontos ficam mais transparentes e ajuda caso haja sobreposição);</p></li>
+<li><p><u>colour</u>: usada adicionar cor usa-se a (função color = nome da cor);</p></li>
+<li><p>fill: define a cor. O nome da cor, por ser texto, deve ser escrita entre aspas;</p></li>
+<li><p>shape: utilizada para adicionar diferentes formas ou tipos de marcadores para diferenciar as variáveis (ex. quadrado e triângulo);</p></li>
+<li><p>Size: define o tamanho do box, retorna um vetor numérico de comprimento length(x ).</p></li>
+</ul>
+<p><strong>Importação dos dados</strong>: Para atribuir os dados de uma aba especifica do excel, usa-se o nome da aba e após isso a função read_excel seguido do nome do arquivo excel entre aspas (endereço) e logo após insere a vírgula e o nome da aba dos dados (também pode ser usado o número da aba de dados). O data frame deve ter o mesmo nome da aba quando for ser atribuido.</p>
+<div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-1_ae0b475fc8af0d0ee992016521f81c72">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fungicida_campo <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, </span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"fungicida_campo"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>O data frame deve ter o mesmo nome da aba quando for ser atribuido. Depois, plota-se os dados.Define-se o eixo x e depois o o eixo y. Usa-se o stat_summary para plotar a média de forma simples.</p>
+<p><strong>Visualização</strong>: Depois, plota-se os dados definindo-se o eixo x e depois o eixo y. Usa-se o stat_summary para plotar a média de forma simples.</p>
 <div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-2_619724f80331c63216dfcf6fddc5fdbc">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>fungicida_campo <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, sev))<span class="sc">+</span></span>
@@ -354,7 +372,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula6_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Para criar uma linha de tendência, usa-se a função geom_smooth. Para retirar o erro, usa-se a função se = FALSE e linetype. Method lm ajusta os dados a função linear.</p>
+<p><em>Linha de tendência</em>: para criar uma linha de tendência, usa-se a função geom_smooth. Para retirar o erro, usa-se a função se = FALSE e linetype. Method lm ajusta os dados a função linear.</p>
 <div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-5_fe5e3966f19ec19ac264fa71f0fd97a7">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fungicida_campo <span class="sc">|&gt;</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(sev, yld))<span class="sc">+</span></span>
@@ -369,8 +387,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula6_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<section id="experimento-fatorial" class="level2">
-<h2 class="anchored" data-anchor-id="experimento-fatorial">Experimento fatorial</h2>
+<section id="gráficos-de-dispersão-para-análise-fatorial" class="level3">
+<h3 class="anchored" data-anchor-id="gráficos-de-dispersão-para-análise-fatorial">Gráficos de dispersão para análise fatorial</h3>
 <p>Mudando o subconjunto de dados para milho: Ver a variação da produtividade dos hibridos de milho em função dos métodos de inoculação.</p>
 <div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-6_e939c1317b35c176725f97be2d307e70">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>milho <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="st">"milho"</span>)</span>
@@ -390,8 +408,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula6_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Trabalhando com 1 variável continua</p>
-<p>Usanso produtividade: No histograma, tem-se os valores organizados em classe. Qual o padrão de distribuição dos pontos? Para mudar a cor da dos blocos, usa-se fill =.</p>
+</section>
+</section>
+<section id="histogramas" class="level2">
+<h2 class="anchored" data-anchor-id="histogramas">Histogramas</h2>
+<p>Para construir histogramas, usamos o geom_histogram. Esse geom só precisa do atributo x (o eixo y é construído automaticamente). Histogramas são úteis para avaliarmos a distribuição de uma variável. São frequentemente usados para representar dados contínuos, como medidas físicas, tempo, idade ou outras variáveis que podem ser divididas em intervalos. Os histogramas ajudam a visualizar a forma da distribuição de dados contínuos, incluindo informações sobre tendência central, variabilidade e assimetria. A função geom_histogram() suporta as seguintes estéticas:</p>
+<ul>
+<li><p>Bins = refere-se ao número de barras presente no gráfico.</p></li>
+<li><p>Color = função usada para mudar a cor da linha do bloco.</p></li>
+<li><p>Fill = função para mudar a cor dos blocos.</p></li>
+</ul>
+<p>Agora, montaremos um histograma brabalhando com 1 variável continua (produtividade). No histograma, tem-se os valores organizados em classe. Qual o padrão de distribuição dos pontos?</p>
 <div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-7_afbadb484b93a902042af477e7dc9951">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>p_yield <span class="ot">&lt;-</span> milho <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> yield))<span class="sc">+</span></span>
@@ -416,7 +443,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="gráfico-de-densidade" class="level2">
 <h2 class="anchored" data-anchor-id="gráfico-de-densidade">Gráfico de densidade</h2>
-<p>Para fazer um gráfico de densidade:</p>
+<p>Gráficos de densidade podem ajudar a identificar padrões, tendências, assimetrias e são geralmente usados para representar a distribuição de probabilidade de uma variável contínua (ex.:distribuição de alturas ou pesos de uma população, distribuição de pontuações em um teste padronizado). Para esse tipo de gráfico, a função a ser utilizada é geom_density().</p>
 <div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-10_1150443c0910cca63b0f7d8514019a58">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>milho <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> index))<span class="sc">+</span></span>
@@ -426,9 +453,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="formato-largo-para-longo" class="level2">
-<h2 class="anchored" data-anchor-id="formato-largo-para-longo">Formato largo para longo</h2>
-<p>Testando um novo subconjunto de dados: criou-se um gráfico de colunas, onde, no x tem-se inseticida e y é o status.</p>
+<section id="gráfico-de-colunas" class="level2">
+<h2 class="anchored" data-anchor-id="gráfico-de-colunas">Gráfico de colunas</h2>
+<p>Testando um novo subconjunto de dados: criou-se um gráfico de colunas, onde, no x tem-se inseticida e y é o status. Alterado de formato largo para longo.</p>
 <div class="cell" data-hash="Aula6_cache/html/unnamed-chunk-11_8168616e987f67921e30ef41f178c9c6">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>insect <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="st">"mortalidade"</span>)</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>insect <span class="sc">|&gt;</span></span>

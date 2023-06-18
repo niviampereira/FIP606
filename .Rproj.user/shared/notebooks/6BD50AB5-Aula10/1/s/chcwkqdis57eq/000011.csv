@@ -1,0 +1,3 @@
+"0","insects <- tibble::as_tibble(InsectSprays) |>"
+"0","  dplyr::select(spray, count)"
+"0","insects"

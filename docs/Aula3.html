@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Aula3dataframe</title>
+<title>FIP606 - Dataframe</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -193,7 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -274,13 +278,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#data-frames" id="toc-data-frames" class="nav-link active" data-scroll-target="#data-frames">Data frames</a>
+  <li><a href="#data-frames-e-importação-de-dados" id="toc-data-frames-e-importação-de-dados" class="nav-link active" data-scroll-target="#data-frames-e-importação-de-dados">Data frames e importação de dados</a>
   <ul class="collapse">
-  <li><a href="#importando-dados" id="toc-importando-dados" class="nav-link" data-scroll-target="#importando-dados">Importando dados</a></li>
-  <li><a href="#dados-de-pacotes-packages" id="toc-dados-de-pacotes-packages" class="nav-link" data-scroll-target="#dados-de-pacotes-packages">Dados de pacotes (packages)</a></li>
-  <li><a href="#dados-em-formato-excel" id="toc-dados-em-formato-excel" class="nav-link" data-scroll-target="#dados-em-formato-excel">Dados em formato Excel</a></li>
-  <li><a href="#dados-em-formato-csv" id="toc-dados-em-formato-csv" class="nav-link" data-scroll-target="#dados-em-formato-csv">Dados em formato csv</a></li>
-  <li><a href="#dados-em-formato-txt" id="toc-dados-em-formato-txt" class="nav-link" data-scroll-target="#dados-em-formato-txt">Dados em formato txt</a></li>
+  <li><a href="#tipos-de-data-frames-e-as-funções-de-pacotes" id="toc-tipos-de-data-frames-e-as-funções-de-pacotes" class="nav-link" data-scroll-target="#tipos-de-data-frames-e-as-funções-de-pacotes">Tipos de data frames e as funções de pacotes</a></li>
+  <li><a href="#dados-em-formato-excel-pacote-readxl" id="toc-dados-em-formato-excel-pacote-readxl" class="nav-link" data-scroll-target="#dados-em-formato-excel-pacote-readxl">Dados em formato Excel (pacote readxl)</a>
+  <ul class="collapse">
+  <li><a href="#dados-em-formato-csv-e-txt-pacote-readr" id="toc-dados-em-formato-csv-e-txt-pacote-readr" class="nav-link" data-scroll-target="#dados-em-formato-csv-e-txt-pacote-readr">Dados em formato csv e txt (pacote readr)</a></li>
+  </ul></li>
   <li><a href="#dados-em-planilhas-google-sheet" id="toc-dados-em-planilhas-google-sheet" class="nav-link" data-scroll-target="#dados-em-planilhas-google-sheet">Dados em planilhas google sheet</a></li>
   </ul></li>
   </ul>
@@ -291,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aula3dataframe</h1>
+<h1 class="title">Dataframe</h1>
 </div>
 
 
@@ -312,14 +316,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="data-frames" class="level1">
-<h1>Data frames</h1>
-<section id="importando-dados" class="level2">
-<h2 class="anchored" data-anchor-id="importando-dados">Importando dados</h2>
-<p>Para a leitura de dados em R, deve-se salvar o arquivo em um formato adequado.</p>
-</section>
-<section id="dados-de-pacotes-packages" class="level2">
-<h2 class="anchored" data-anchor-id="dados-de-pacotes-packages">Dados de pacotes (packages)</h2>
+<section id="data-frames-e-importação-de-dados" class="level1">
+<h1>Data frames e importação de dados</h1>
+<p>A base de dados é representada por objetos chamados de data frames. A principal característica de um data frame é possuir linhas e colunas. Para a leitura de dados em R, deve-se salvar o arquivo em um formato adequado.</p>
+<section id="tipos-de-data-frames-e-as-funções-de-pacotes" class="level2">
+<h2 class="anchored" data-anchor-id="tipos-de-data-frames-e-as-funções-de-pacotes">Tipos de data frames e as funções de pacotes</h2>
+<p>Como mencionado na aula anterior (Pacotes e carregamento de pacotes), existem alguns pacotes que são essenciais para realizar análises no R e, tratando-se de data frames, alguns deles se destacam.</p>
 <p>Para carregar o dataframe, pode-se usar pacotes do R, a exemplo do pacote dataset, que tem em suas funções o pacote cars.</p>
 <div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-1_4f8f997d4485672e643518a619fba1e3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -384,8 +386,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 [26] 15 16 16 17 17 17 18 18 18 18 19 19 19 20 20 20 20 20 22 23 24 24 24 24 25</code></pre>
 </div>
 </div>
-<p>Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Para atribuir uma função a outra, basta usar &lt;-. Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.</p>
-<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-2_d38341b5322a368345884f1808d0c5f7">
+<p>Para criar um dataframe de pacote, basta carregar o pacote e depois atribui-lo. Como já mencionado, para atribuir uma função a outra, basta usar &lt;-. Ex.: buscar em packages o pacote r4pde e carrega-lo (usando a função library), dentro do quadro de ajuda deste pacote, é possível encontrar os dataframes incorporados, como o RustSoybean. Para usar esse quadro de dados basta usar a função de atribuição.</p>
+<div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-2_9ad662a32809883b0b4d9495cae46cdc">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r4pde)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> RustSoybean</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -407,21 +409,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>A função para a leitura de dados no R é a read.table. O R possui um bom número de variantes desta função, usadas para importar uma variedade de formatos de arquivos diferentes no R. As variações da função read.table mais úteis são as funções read.csv e read.csv2 e readxl.</p>
+<p><strong>Tidyverse</strong>: é um pacote que consolida uma série de ferramentas. Fazem parte do tidyverse os pacotes <u>dplyr</u>, <u>tidyr</u>, <u>readr</u>, <u>ggplot2</u>, entre muitos outros.</p>
+<p><img src="img/usopacotes.png" class="img-fluid"></p>
 </section>
-<section id="dados-em-formato-excel" class="level2">
-<h2 class="anchored" data-anchor-id="dados-em-formato-excel">Dados em formato Excel</h2>
-<p>Para importar dados diretamente de outros softwares, é necessário instalar pacotes, a exemplo do readxl, usado para a importação de planilhas do excel. O pacote readxl permite gerar dataframe de planilhas excel e é a forma mais simples de carregar um arquivo neste formato. O pacote readxl não é do conjunto tidyverse, então precisa ser carregado sempre antes de usar. A maioria das funções do readxl permite ler dados de planilhas excel, a exemplo de read_excel. O primeiro argumento para read-excel é o caminho do arquivo que deve ser lido.O caminho do arquivo e o nome do arquivo (incluindo a extensão do arquivo) precisam ser colocados entre aspas duplas, pois a função espera que seja uma função de caractere.</p>
+<section id="dados-em-formato-excel-pacote-readxl" class="level2">
+<h2 class="anchored" data-anchor-id="dados-em-formato-excel-pacote-readxl">Dados em formato Excel (pacote readxl)</h2>
+<p>Para importar dados diretamente de outros softwares, é necessário instalar pacotes, a exemplo do readxl, usado para a importação de planilhas do excel. O pacote readxl permite gerar dataframe de planilhas excel e é a forma mais simples de carregar um arquivo neste formato. O pacote readxl não é do conjunto tidyverse, então precisa ser carregado sempre antes de usar. A maioria das funções do readxl permite ler dados de planilhas excel, a exemplo de read_excel. O primeiro argumento para read-excel é o caminho do arquivo que deve ser lido. O caminho do arquivo e o nome do arquivo (incluindo a extensão do arquivo) precisam ser colocados entre aspas duplas, pois a função espera que seja uma função de caractere.</p>
 <div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-3_635407c3aaf6707d6d03d2227bcfc7c1">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>magnesio <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>escala1 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="st">"escala"</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>escala2 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="dados-em-formato-csv" class="level2">
-<h2 class="anchored" data-anchor-id="dados-em-formato-csv">Dados em formato csv</h2>
-<p>Para chamar um arquivo csv, usa-se a função read.csv. A função read.csv é usada para importar arquivos de valores separados por , e com a primeira linha dos dados com os nomes das variáveis). Também temos a função read.csv2, que assume que os dados são separados por ; e que uma vírgula é usada ao inves de um ponto decimal.</p>
-<p>Diversas funções do pacote reader também podem ser utilizadas para importação de quadro de dados. O pacote reader faz parte da coleção de pacotes tidyverse. As funções do reader são usadas de forma semelhante as do read.table e read.csv, sendo que muitas vezes usam os mesmos argumentos. Ex: podem ser utilizadas as funções read_table,read_csv e read_csv2, ao invés das dunções do read.table.</p>
+<p>No Excel, um arquivo pode ter várias planilhas. Por padrão, as funções de leitura trarão apenas a primeira planilha do arquivo. Para trazer outra planilha específica, basta utilizarmos o argumento sheet+o número da planilha (linha 3 do comando acima), ou adicionar o nome da planilha desejada entre aspas duplas, separada do nome da planilha geral por uma vírgula (linha 2 do comando acima).</p>
+<section id="dados-em-formato-csv-e-txt-pacote-readr" class="level3">
+<h3 class="anchored" data-anchor-id="dados-em-formato-csv-e-txt-pacote-readr">Dados em formato csv e txt (pacote readr)</h3>
+<p>O pacote readr do tidyverse é utilizado para importar arquivos de texto, como .txt ou .csv, para o R e seu carregamento é feito, assim como os demais, pela função library. O readr transforma arquivos de textos em tibbles usando as funções como: read.csv() ou read_csv() - usada para importar arquivos de valores separados por , e com a primeira linha dos dados com os nomes das variáveis. read.csv2 ou read_csv2() - usada para importar bases de arquivos separados por ponto-e-vírgula no R. Em alguns países, como o Brasil, as vírgulas são utilizadas para separar as casas decimais dos números, inviabilizando o uso de arquivos .csv. Nesses casos, quando a vírgula é o separador de decimal, os arquivos .csv passam a ser separados por ponto-e-vírgula, assim, esta função assume que os dados são separados por ; e que uma vírgula é usada ao inves de um ponto decimal.</p>
+<p><strong>CSV</strong>:</p>
 <div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-4_d90bcfba448e689cf07bc6dc24d47457">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -449,10 +453,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 # ℹ 50 more rows</code></pre>
 </div>
 </div>
-</section>
-<section id="dados-em-formato-txt" class="level2">
-<h2 class="anchored" data-anchor-id="dados-em-formato-txt">Dados em formato txt</h2>
-<p>Arquivos em formato txt devem ser importados usando o read.table.</p>
+<p><strong>TXT</strong>: As funções do reader são usadas de forma semelhante as do read.table, sendo que muitas vezes usam os mesmos argumentos. Arquivos em formato txt podem ser importados usando o read.table.</p>
 <div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-5_55fc048b1457204f3825e7112afc8dbe">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using read.table</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -522,11 +523,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 60              Drip,3,63,0.43</code></pre>
 </div>
 </div>
-<p><strong>Obs.:</strong> O argumento header = TRUE especifica que a primeira linha dos dados contem o nome das variáveis (ex. magnesio, nitrogenio), se este não for o caso é só usar o argumento header = FALSE.</p>
+<p><em>Obs.:</em> O argumento header = TRUE especifica que a primeira linha dos dados contem o nome das variáveis (ex. magnesio, nitrogenio), se este não for o caso é só usar o argumento header = FALSE.</p>
+</section>
 </section>
 <section id="dados-em-planilhas-google-sheet" class="level2">
 <h2 class="anchored" data-anchor-id="dados-em-planilhas-google-sheet">Dados em planilhas google sheet</h2>
-<p>Para importar planilhas google, usa a função gsheet (read_sheet), presente no pacote googlesheets4. Como esse pacote também não faz parte do conjunto tidyverse, precisa carrega-lo para usar. A função read_gsheet lê o arquivo (planilha google) a partir de uma URL (copia e cola o link da planilha desejada).</p>
+<p>Para importar planilhas google, usa a função gsheet (read_sheet), presente no pacote googlesheets4 ou o pacote gsheet. Como esses pacotes também não fazem parte do conjunto tidyverse, precisa carregá-los para usar. A função read_gsheet lê o arquivo (planilha google) a partir de uma URL (copia e cola o link da planilha desejada).</p>
 <div class="cell" data-hash="Aula3_cache/html/unnamed-chunk-6_d380530b175c3d548655acd02a305b00">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># using gsheet package</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>

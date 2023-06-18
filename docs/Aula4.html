@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Aula4_visualização</title>
+<title>FIP606 - Visualização de dados</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -193,7 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -277,10 +281,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#gráficos-em-ggplot" id="toc-gráficos-em-ggplot" class="nav-link active" data-scroll-target="#gráficos-em-ggplot">Gráficos em ggplot</a>
   <ul class="collapse">
   <li><a href="#importação-de-dados" id="toc-importação-de-dados" class="nav-link" data-scroll-target="#importação-de-dados">Importação de dados</a></li>
-  <li><a href="#ggplot---definindo-camadas" id="toc-ggplot---definindo-camadas" class="nav-link" data-scroll-target="#ggplot---definindo-camadas">GGPLOT - Definindo camadas</a>
-  <ul class="collapse">
-  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">BoxPlot</a></li>
-  </ul></li>
+  <li><a href="#ggplot---definindo-camadas" id="toc-ggplot---definindo-camadas" class="nav-link" data-scroll-target="#ggplot---definindo-camadas">GGPLOT - Definindo camadas</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -290,7 +291,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aula4_visualização</h1>
+<h1 class="title">Visualização de dados</h1>
 </div>
 
 
@@ -313,21 +314,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="gráficos-em-ggplot" class="level1">
 <h1>Gráficos em ggplot</h1>
+<p>O ggplot2 é o pacote usado para visualização dos dados. O pacote ggplot2 pode ser carregado individualmente, ou pode ser carregado pelo tidyverse.Para visualizar os dados, basta usar a função ggplot.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/ggplot2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 <section id="importação-de-dados" class="level2">
 <h2 class="anchored" data-anchor-id="importação-de-dados">Importação de dados</h2>
-<p>O pacote ggplot2 pode ser carregado individualmente, ou pode ser carregado pelo tidyverse.Após carregar o pacote, importa-se um banco de dados para trabalho. Para o formato csv, é necessário carregar o pacote tidyverse. As variáveis podem ser categóricas ou numéricas. As variáveis categóricas são entendidas no R como caracteres.</p>
-<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-1_2de812714889c8b6eaa235564652bfc6">
+<p>Após carregar o pacote, importa-se um banco de dados para trabalho. Para o formato csv, é necessário carregar o pacote tidyverse. As variáveis podem ser categóricas ou numéricas. As variáveis categóricas são entendidas no R como caracteres.</p>
+<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-1_a1b350c4288c8cfca58a31bdbe3765ba">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>mg <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dados-diversos.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="ggplot---definindo-camadas" class="level2">
 <h2 class="anchored" data-anchor-id="ggplot---definindo-camadas">GGPLOT - Definindo camadas</h2>
-<p>A primeira função para criar um ggplot é a função ggplot, que define o conjunto de dados e elementos de estética dos gráficos.O primeiro elemento da função é o conjunto de dados a ser utilizado. A programação de gráficos em ggplot2 é feito na forma de camadas, que são adiconadas a medida que se confecciona o gráfico, por isso que se usa o sinal de +, porque significa a adição de mais uma camada. O primeiro argumento da função é o data frame onde nossos dados foram armazenados (Ex. mg). Usa-se o pipe (|&gt;) para enfatizar uma sequência de comandos ou ações no chunk e para evitar adiconar o nome do dataframe dentro da função ggplot. O pipe deve ter sempre um espaço antes dele e, geralmente, deve ser seguido por uma nova linha. Após a primeira etapa, cada linha deve ter dois espaços, o que torna mais fácil adicionar outras etapas ou reorganizar as já existentes.</p>
-<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-2_3c2df7b5db17ab3c39b5c23c5812d282">
+<p>A programação de gráficos em ggplot2 é feito na forma de camadas, que são adicionadas à medida que se confecciona o gráfico, por isso que se usa o sinal de +, porque significa a adição de mais uma camada. Usa-se o pipe (|&gt;) para enfatizar uma sequência de comandos ou ações no chunk e para evitar adicionar o nome do data frame dentro da função ggplot.O pipe deve ter sempre um espaço antes dele e, geralmente, deve ser seguido por uma nova linha. Após a primeira etapa, cada linha deve ter dois espaços, o que torna mais fácil adicionar outras etapas ou reorganizar as já existentes.</p>
+<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-2_0016b325d88ea416820445c53d3de806">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>A função ggplot() define o plano com os eixos x e y. Uma das primeiras funções em ggplot é a aes, usada para descrever como as variáveis são mapeadas (eixos x e y). Para adionar cor usa-se a função color = nopme da cor. Ao incluir esta função dentro da função aes, dizemos ao ggplot que os pontos devem ser mapeados esteticamente utilizando cores para cada variavel (ex.irrigação). A função geo_point define que a forma geométrica a ser utilizada é baseada em pontos, gerando um gráfico de dispersão. A função alpha trabalha com a tansparência.</p>
+<p><strong>ggplot</strong>: A primeira função para criar um ggplot é a função ggplot, que define o conjunto de dados e elementos de estética dos gráficos. O primeiro elemento ou argumento da função é o conjunto de dados a ser utilizado (o data frame onde nossos dados foram armazenados, ex. mg). A função ggplot() define o plano com os eixos x e y. <strong>aes</strong>: Após isso, precisamos especificar como as observações serão mapeadas nos aspectos visuais do gráfico e quais formas geométricas serão utilizadas. Para isso, usamos a função aestetic (aes), uma das primeiras funções em ggplot, usada para descrever como as variáveis são mapeadas (eixos x e y). Para adionar cor usa-se a função color = nome da cor. Ao incluir esta função dentro da função aes, dizemos ao ggplot que os pontos devem ser mapeados esteticamente utilizando cores para cada variavel (ex.irrigação). A função geo_point define que a forma geométrica a ser utilizada é baseada em pontos, gerando um gráfico de dispersão. A função alpha trabalha com a tansparência.</p>
 <div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-3_73016998469f4f7824581d3cd5f6f9af">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Irrigation, severity, <span class="at">color =</span> Irrigation))<span class="sc">+</span></span>
@@ -363,7 +370,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula4_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>A função facet_wrap adiciona facetas.Ou seja, com essa função informamos que um grafico deve ser criado para cada ambiente, um grafico digferente para cada variável.</p>
+<p>A função facet_wrap adiciona facetas. Ou seja, com essa função informamos que um gráfico deve ser criado para cada ambiente, um grafico diferente para cada variável.</p>
 <div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-6_de780e27c402ac66c9601c92a4f38c7e">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Dividindo o número de repetições - função facet_wrap</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
@@ -376,7 +383,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 <p>Outras funções:</p>
-<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-7_1911ba743485dcd9b8ba8c91c152e6ee">
+<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-7_9fdf3e1a2a7ccbb56096e671af37fbf1">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Função select - seleciona colunas</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(Irrigation, severity) <span class="sc">|&gt;</span></span>
@@ -384,53 +391,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output-display">
 <p><img src="Aula4_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid" width="672"></p>
 </div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retirando group e geom_boxplot</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, severity) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, severity))<span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Aula4_files/figure-html/unnamed-chunk-7-2.png" class="img-fluid" width="672"></p>
 </div>
-<section id="boxplot" class="level3">
-<h3 class="anchored" data-anchor-id="boxplot">BoxPlot</h3>
-<p>Usado para estatistica descritiva. Para adicionar um boxplot com o ggplot, basta fazer a adição da função geom_boxplot.</p>
-<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-8_2f50afd9b46531ac96d7b44f8f5a4b77">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Irrigation, severity) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Irrigation, severity, <span class="at">shape =</span> Irrigation))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupando por repetição: As primeiras 3 linhas separam a severidade por dia.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, rep, severity) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day) <span class="sc">|&gt;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sev =</span> <span class="fu">mean</span>(severity)) <span class="sc">|&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, sev))<span class="sc">+</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Aula4_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell" data-hash="Aula4_cache/html/unnamed-chunk-8_293e3f85b6cb29cdc243c89f9c9207e1">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Irrigation, severity) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(Irrigation, severity, <span class="at">shape =</span> Irrigation))<span class="sc">+</span><span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="Aula4_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mudando a variável irrigação por day</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, severity) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, severity))<span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Aula4_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separando por grupo - função group</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, severity) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, severity, <span class="at">group =</span> day))<span class="sc">+</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="Aula4_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="672"></p>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Retirando group e geom_boxplot</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Mudando a variável irrigação por day</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, severity) <span class="sc">|&gt;</span></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, severity))<span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Aula4_files/figure-html/unnamed-chunk-8-4.png" class="img-fluid" width="672"></p>
+<p><img src="Aula4_files/figure-html/unnamed-chunk-8-2.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Agrupando por repetição: As primeiras 3 linhas separam a severidade por dia.</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Separando por grupo - função group</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, rep, severity) <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(day) <span class="sc">|&gt;</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">sev =</span> <span class="fu">mean</span>(severity)) <span class="sc">|&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, sev))<span class="sc">+</span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(day, severity) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(day, severity, <span class="at">group =</span> day))<span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()<span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="Aula4_files/figure-html/unnamed-chunk-8-5.png" class="img-fluid" width="672"></p>
+<p><img src="Aula4_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Criando um novo conjunto, fazendo a media e adicionando titulo no gráfico:</p>
@@ -444,7 +448,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 
-</section>
 </section>
 </section>
 

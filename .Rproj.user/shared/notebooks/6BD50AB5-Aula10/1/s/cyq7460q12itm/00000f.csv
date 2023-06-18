@@ -1,0 +1,13 @@
+"0","library(performance)"
+"2","Warning: package ‘performance’ was built under R version 4.2.3"
+"0","check_heteroscedasticity(aov1)"
+"1","[32mOK: Error variance appears to be homoscedastic (p = 0.175).
+[39m"
+"0","check_normality(aov1)"
+"1","[32mOK: residuals appear as normally distributed (p = 0.074).
+[39m"
+"0","library(DHARMa)"
+"2","Warning: package ‘DHARMa’ was built under R version 4.2.3"
+"2","This is DHARMa 0.4.6. For overview type '?DHARMa'. For recent changes, type news(package = 'DHARMa')
+"
+"0","hist (aov1$residuals)"

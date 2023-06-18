@@ -1,0 +1,2 @@
+"0","plot(simulateResiduals(aov1))"
+"2","Warning: DHARMa: fittedModel not in class of supported models. Absolutely no guarantee that this will work!"

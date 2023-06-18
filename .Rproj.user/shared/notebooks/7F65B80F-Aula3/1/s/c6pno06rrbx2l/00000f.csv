@@ -1,0 +1,5 @@
+"0","#| warning: false"
+"0","#| message: false"
+"0","library(r4pde)"
+"0","df <- RustSoybean"
+"0","df"

@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Aula5</title>
+<title>FIP606 - Tipos de gráficos</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -193,7 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -274,13 +278,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#segundo-plot" id="toc-segundo-plot" class="nav-link active" data-scroll-target="#segundo-plot">Segundo plot</a>
+  <li><a href="#tipos-de-gráficos-e-funções" id="toc-tipos-de-gráficos-e-funções" class="nav-link active" data-scroll-target="#tipos-de-gráficos-e-funções">Tipos de gráficos e funções</a>
   <ul class="collapse">
-  <li><a href="#importa-dados" id="toc-importa-dados" class="nav-link" data-scroll-target="#importa-dados">Importa dados</a></li>
-  <li><a href="#visualiza" id="toc-visualiza" class="nav-link" data-scroll-target="#visualiza">Visualiza</a></li>
+  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">BoxPlot</a>
+  <ul class="collapse">
   <li><a href="#composição-de-plots---pacote-patchwork" id="toc-composição-de-plots---pacote-patchwork" class="nav-link" data-scroll-target="#composição-de-plots---pacote-patchwork">Composição de plots - Pacote PATCHWORK</a></li>
-  <li><a href="#gráfico-com-dados-survey" id="toc-gráfico-com-dados-survey" class="nav-link" data-scroll-target="#gráfico-com-dados-survey">Gráfico com dados survey</a></li>
-  <li><a href="#adiconar-faceta" id="toc-adiconar-faceta" class="nav-link" data-scroll-target="#adiconar-faceta">Adiconar faceta</a></li>
+  </ul></li>
+  <li><a href="#gráfico-de-colunas" id="toc-gráfico-de-colunas" class="nav-link" data-scroll-target="#gráfico-de-colunas">Gráfico de Colunas</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -290,7 +294,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aula5</h1>
+<h1 class="title">Tipos de gráficos</h1>
 </div>
 
 
@@ -311,20 +315,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="segundo-plot" class="level1">
-<h1>Segundo plot</h1>
-<section id="importa-dados" class="level2">
-<h2 class="anchored" data-anchor-id="importa-dados">Importa dados</h2>
-<p>Sempre carregar primeiro o tidyverse e depois o pacote que irá usar para importar os dados, no caso de planilhas excel, o pacote readxl. Após isso, deve escolher a atribuição dos dados.</p>
-<div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-1_becc913d8c062b002486dd66179b404d">
+<section id="tipos-de-gráficos-e-funções" class="level1">
+<h1>Tipos de gráficos e funções</h1>
+<p>Existe uma grande diversidade de gráficos que podem ser utilizados para representar dados. Os de uso mais comum em nossas aulas são: boxplots, scatterplots, histogramas, gráficos de linha e gráficos de barra e colunas.</p>
+<section id="boxplot" class="level2">
+<h2 class="anchored" data-anchor-id="boxplot">BoxPlot</h2>
+<p>Boxplots são úteis para estudarmos a distribuição de uma variável, principalmente quando queremos comparar várias distribuições. São frequentemente usados para representar dados numéricos, como medidas de tendência central, variabilidade e distribuição. Eles mostram a distribuição de um conjunto de dados por meio de um diagrama que inclui a mediana, quartis, outliers e limites do conjunto de dados. Os boxplots ajudam a visualizar a distribuição de um conjunto de dados e identificar possíveis outliers ou pontos de dados incomuns. Para construir um boxplot no ggplot, utilizamos a função geom_boxplot. Ele precisa dos atributos x e y, sendo que ao atributo x devemos mapear uma variável categórica.</p>
+<p>A função geom_boxplot compreende as seguintes estéticas: • outlier.color = NA: Retira a cor de fungo do boxplot; • fill = define a cor. O nome da cor, por ser texto, deve ser escrita entre aspas; • size = (número): define o tamanho do box, retorna um vetor numérico de comprimento length(x ).</p>
+<p><strong>Importação de dados</strong>: sempre carregar primeiro o tidyverse e depois o pacote que irá usar para importar os dados, no caso de planilhas excel, o pacote readxl. Após isso, deve escolher a atribuição dos dados.</p>
+<div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-1_1ae1b7d27770bf55c9e1821e10b451a8">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>mg <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="visualiza" class="level2">
-<h2 class="anchored" data-anchor-id="visualiza">Visualiza</h2>
-<p>O ggplot é o pacote usado para visualização dos dados. Para visualizar os dados, basta usar a função ggplot.É importante que se defina antes quem será o eixo x e y (no caso, y é o comprimento da lesão, enquanto x são os tratamentos - controle e mg2). Depois, usa a função aes (aesthetic) do que deseja que apareça no gráfico e adiciona a camada geom_point para que os dados sejam vistos em forma de pontos.</p>
+<p><strong>Visualização dos dados</strong>: como abordado na aula aunterior, o ggplot é o pacote usado para visualização dos dados. Para visualizar os dados, basta usar a função ggplot.É importante que se defina antes quem será o eixo x e y (no caso, y é o comprimento da lesão, enquanto x são os tratamentos - controle e mg2). Depois, usa a função aes (aesthetic) do que deseja que apareça no gráfico e adiciona a camada geom_point para que os dados sejam vistos em forma de pontos.</p>
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-2_617a0f81253b45fabe770527245bd31f">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, comp))<span class="sc">+</span></span>
@@ -333,7 +337,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula5_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Muitas vezes, ocorre a sobreposição de pontos no gráfico. Para desagregar esses pontos, usa-se a função geo_jitter e, para evitar que os dados fiquem muiito dispersos, pode-se definir a largura.</p>
+<p>Muitas vezes, ocorre a sobreposição de pontos no gráfico. Para desagregar esses pontos, usa-se a função geo_jitter(). Esta função adiciona variação aleatória aos pontos de localização do gráfico. Em outras palavras, ele “agita” ligeiramente as localizações dos pontos. Este método reduz o overplotting, pois é improvável que dois pontos com a mesma localização tenham a mesma variação aleatória. Para evitar que os dados fiquem muito dispersos, pode-se definir a largura (Width - controla a quantidade de deslocamento vertical).</p>
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-3_41fec14145317aa21d026347efe7c3e3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, comp))<span class="sc">+</span></span>
@@ -342,7 +346,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula5_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Para adicionar o boxplot e mudar a visão do gráfico, basta adicionar mais uma camada, ou seja, aciona função geom_boxplot.</p>
+<p>Para adicionar o boxplot e mudar a visão do gráfico, basta adicionar mais uma camada, ou seja, acionar a função geom_boxplot.</p>
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-4_de5d8d2cd3e59ca5847801ff15f6234b">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, comp))<span class="sc">+</span></span>
@@ -404,10 +408,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-7_3112ea857eef93d2205887c89a0c7dd7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggthemes)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="composição-de-plots---pacote-patchwork" class="level2">
-<h2 class="anchored" data-anchor-id="composição-de-plots---pacote-patchwork">Composição de plots - Pacote PATCHWORK</h2>
-<p>O patchwork torna possível combinar ggplots diferentes e separados em um mesmo gráfico. Depois de instalar, carrega o pacote. Para unis diferentes ggplots, é necessário utilizar o títullo desses ggplots separados pelo sinal de + ou pela barra reta (|).</p>
+<section id="composição-de-plots---pacote-patchwork" class="level3">
+<h3 class="anchored" data-anchor-id="composição-de-plots---pacote-patchwork">Composição de plots - Pacote PATCHWORK</h3>
+<p>O patchwork torna possível combinar ggplots diferentes e separados em um mesmo gráfico. Depois de instalar, carrega o pacote. Primeiramente, deve-se definir um nome para cada gráfico. Os nomes devem ser dados dentro do chunk de cada gráfico. O nome deve ser escolhido e o banco de dados estudado deve ser atribuído a ele, tendo logo em seguida a necessidade de inserção de um pipe. Então, para unir diferentes ggplots, é necessário utilizar o título desses ggplots separados pelo sinal de + ou pela barra reta (|).</p>
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-8_6c9b33e7d24447d5b1df4a3fcf09edb1">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>p_box <span class="sc">+</span> p_means</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -429,9 +432,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"figs/combined.png"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="gráfico-com-dados-survey" class="level2">
-<h2 class="anchored" data-anchor-id="gráfico-com-dados-survey">Gráfico com dados survey</h2>
-<p>Para inverter as barras usa-se a função coord_flip().</p>
+</section>
+<section id="gráfico-de-colunas" class="level2">
+<h2 class="anchored" data-anchor-id="gráfico-de-colunas">Gráfico de Colunas</h2>
+<p>Os gráficos de colunas são usados para representar dados categóricos ou discretos (que podem ser divididos em grupos ou categorias). Um gráfico de colunas pode ajudar a identificar as tendências e padrões nos dados e destacar diferenças significativas entre as categorias. Para transformar gráficos em gráficos de colunas, usa-se a função geom_col (). Para esse tipo de gráficos, vamos utilizar o conjunto de dados survey. Para inverter as barras usa-se a função coord_flip().</p>
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-9_75ea6548fb09766fc52ae899ac68a02a">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>,</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">sheet =</span> <span class="st">"survey"</span>)</span>
@@ -452,10 +456,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggsave</span>(<span class="st">"Figs/barplot.png"</span>, <span class="at">bg =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</section>
-<section id="adiconar-faceta" class="level2">
-<h2 class="anchored" data-anchor-id="adiconar-faceta">Adiconar faceta</h2>
-<p>Fução facet_wrap:</p>
+<p><strong>Adição de faceta</strong>: Função facet_wrap</p>
 <div class="cell" data-hash="Aula5_cache/html/unnamed-chunk-10_929b7c9d3b5cd0e20a0b06a2225216a5">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span> </span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(state <span class="sc">==</span> <span class="st">"RS"</span>) <span class="sc">|&gt;</span></span>

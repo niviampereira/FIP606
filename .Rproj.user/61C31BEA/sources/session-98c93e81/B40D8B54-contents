@@ -1,0 +1,66 @@
+---
+title: "regressao"
+format: html
+editor: visual
+---
+
+```{r}
+library(gsheet)
+library(tidyverse)
+
+dat <- gsheet2tbl("https://docs.google.com/spreadsheets/d/15pCj0zljvd-TGECe67OMt6sa21xO8BqUgv4d-kU8qi8/edit#gid=0")
+
+options(scipen=999)
+dat2 <- dat |> 
+  select(-Isolate, -Population) |> 
+  group_by(Code, Year, Dose) |> 
+  summarise(GC_mean = mean(GC)) 
+  
+
+FGT152 <- dat2 |> 
+  filter(Code == "FGT187")
+
+FGT152 |> 
+  ggplot(aes(factor(Dose), GC_mean))+
+  geom_point()+
+  geom_line()
+
+dat2 |> 
+   ggplot(aes(factor(Dose), GC_mean))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(~Code)
+  
+
+```
+
+## EC50 com pacote DRM
+
+```{r}
+library(drc)
+drc1 <- drm(GC_mean ~ Dose, data = FGT152,
+    fct = LL.3())
+AIC(drc1)
+summary(drc1)
+plot(drc1)
+ED(drc1, 50)
+```
+
+```{r}
+library(ec50estimator)
+
+df_ec50 <- estimate_EC50(GC_mean ~ Dose,
+                         data = dat2,
+                         isolate_col = "Code",
+                         interval = "delta",
+                         fct = drc::LL.3())
+
+df_ec50 |> 
+  ggplot(aes(Estimate, reorder(ID, Estimate)))+
+  geom_point()+
+  geom_errorbar(aes(xmin = Lower, 
+                    xmax= Upper), width = 0.1)+
+  xlim(0,30)
+
+
+```

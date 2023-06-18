@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Aula8</title>
+<title>FIP606 - Teste estatístico</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -193,7 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -274,11 +278,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#testes-estatísticos" id="toc-testes-estatísticos" class="nav-link active" data-scroll-target="#testes-estatísticos">Testes estatísticos</a>
+  <li><a href="#teste-de-hipótese" id="toc-teste-de-hipótese" class="nav-link active" data-scroll-target="#teste-de-hipótese">Teste de hipótese</a>
   <ul class="collapse">
   <li><a href="#definindo-hipóteses" id="toc-definindo-hipóteses" class="nav-link" data-scroll-target="#definindo-hipóteses">Definindo hipóteses</a></li>
-  <li><a href="#para-teste-t" id="toc-para-teste-t" class="nav-link" data-scroll-target="#para-teste-t">Para teste t</a></li>
-  <li><a href="#using-the-infer-package" id="toc-using-the-infer-package" class="nav-link" data-scroll-target="#using-the-infer-package">Using the infer package</a></li>
+  <li><a href="#p-valor" id="toc-p-valor" class="nav-link" data-scroll-target="#p-valor">P-valor</a></li>
+  <li><a href="#exemplificando-o-uso-do-teste-t" id="toc-exemplificando-o-uso-do-teste-t" class="nav-link" data-scroll-target="#exemplificando-o-uso-do-teste-t">Exemplificando o uso do teste t</a></li>
+  <li><a href="#usando-o-pacote-infer" id="toc-usando-o-pacote-infer" class="nav-link" data-scroll-target="#usando-o-pacote-infer">Usando o pacote infer</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -288,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aula8</h1>
+<h1 class="title">Teste estatístico</h1>
 </div>
 
 
@@ -309,12 +314,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="testes-estatísticos" class="level1">
-<h1>Testes estatísticos</h1>
+<section id="teste-de-hipótese" class="level1">
+<h1>Teste de hipótese</h1>
+<p>Um teste de hipótese é uma técnica estatística cujo intuito é verificar se uma dada amostra de dados é, ou não, compatível com uma hipótese feita sobre a população que lhe deu origem. Um teste de hipóteses coloca lado-a-lado duas hipóteses sobre a população que deu origem à amostra de dados que temos à disposição - uma hipótese inicial, ou hipótese nula, e uma hipótese alternativa, normalmente designadas por H0 e H1 respetivamente e referem-se a uma caraterística de uma população. O objetivo do teste de hipótese é fornecer ferramentas que nos permitam validar ou rejeitar uma hipótese através dos resultados da amostra.</p>
 <section id="definindo-hipóteses" class="level2">
 <h2 class="anchored" data-anchor-id="definindo-hipóteses">Definindo hipóteses</h2>
-<p>Como anotar no gráfico: Função annotate () Função geom_jitter() - existem dois argumentos para o jitter: width - controla a quantidade de deslocamento vertical, e height - controla a quantidade de deslocamento horizontal. O geom geom_jitter()adiciona variação aleatória aos pontos de localização do gráfico. Em outras palavras, ele “agita” ligeiramente as localizações dos pontos. Este método reduz o overplotting, pois é improvável que dois pontos com a mesma localização tenham a mesma variação aleatória.</p>
-<div class="cell" data-hash="Aula8_cache/html/unnamed-chunk-1_0bfb6bfb2b5975db1521344dd2e5b334">
+<ul>
+<li><p>Hipótese de Nulidade (H0): é a hipótese a ser testada. Se testarmos, por exemplo, as igualdades entre duas médias, podem ter: H0: media1 (igual a) media2.</p></li>
+<li><p>Hipótese Alternativa (Ha): é a hipótese que contraria H0. Para o caso das duas médias anteriores poderemos ter: Ha1: media1 (diferente da) media 2, Ha2: media1 &lt; media2 e Ha3: media1 &gt; media2.</p></li>
+</ul>
+</section>
+<section id="p-valor" class="level2">
+<h2 class="anchored" data-anchor-id="p-valor">P-valor</h2>
+<p>O p-valor é a probabilidade de observar o resultado encontrado (diferença) tão grande ou ainda maior (favorável a hipótese alternativa) considerando a hipotese nula como verdadeira. Em outras palavras, o p-valor (ou valor de probabilidade) indica a probabilidade de obter um resultado igual ou mais extremo do que o observado, assumindo-se que a hipótese nula (a hipótese de que não há diferença entre as amostras ou populações em estudo) seja verdadeira. O p-valor é uma medida de evidência contra a hipótese nula – um p-valor pequeno indica que é improvável que o resultado observado tenha ocorrido por acaso, o que sugere que a hipótese nula é falsa. Por outro lado, um p-valor grande indica que é provável que o resultado observado tenha ocorrido por acaso, o que sugere que a hipótese nula é verdadeira. O valor do p-valor é geralmente comparado com um nível de significância pré-determinado (geralmente 0,05 ou 0,01) para decidir se rejeita-se ou não a hipótese nula. Se o p-valor for menor do que o nível de significância, rejeita-se a hipótese nula e conclui-se que há evidência estatística de que há diferença entre as amostras ou populações em estudo. Caso contrário, não se rejeita a hipótese nula e conclui-se que não há evidência estatística de que haja diferença entre as amostras ou populações em estudo.</p>
+<p><strong>Exportação e visualização dos dados</strong>: usando os dados do conjunto magnésio, plotamos um gráfico boxplot. Usamos a função annotate() para escrever anotações dentro do gráfico.</p>
+<div class="cell" data-hash="Aula8_cache/html/unnamed-chunk-1_bf3a8fd138f0f2b477406b5eb92718bb">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -333,16 +347,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 </div>
 </section>
-<section id="para-teste-t" class="level2">
-<h2 class="anchored" data-anchor-id="para-teste-t">Para teste t</h2>
-<p>A função pivot_wider()“alarga” os dados, aumentando o número de colunas e diminuindo o número de linhas. Nesta função usa-se names_from e values_from, onde: names_from - A coluna cujos valores serão usados como nomes de coluna. values_from - A coluna cujos valores serão usados como valores de célula.</p>
+<section id="exemplificando-o-uso-do-teste-t" class="level2">
+<h2 class="anchored" data-anchor-id="exemplificando-o-uso-do-teste-t">Exemplificando o uso do teste t</h2>
+<p>Abaixo, criamos um novo objeto (mg2) e atribuímos mg a ele para realizar a função pivot_wider(). Esta função “alarga” os dados, aumentando o número de colunas e diminuindo o número de linhas. Nesta função usa-se names_from e values_from, onde: names_from refere-se a coluna cujos valores serão usados como nomes de coluna e values_from refere-se a coluna cujos valores serão usados como valores de célula.</p>
 <div class="cell" data-hash="Aula8_cache/html/unnamed-chunk-2_2f0a5c54c4eeea90a299c2fe9d677174">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mg2 <span class="ot">&lt;-</span> mg <span class="sc">|&gt;</span> </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="dv">1</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> trat,</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> comp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Usa-se a função t.teste para calcular o valor de t.</p>
+<p><strong>Função t.test</strong>: usa-se a função t test() para calcular o valor de t. Primeiro, realizamos um teste t para comparar as médias dos grupos “Mg2” e “control” no data frame “mg2”. Após isso, o pacote “report” é carregado e a função report() é usada para gerar um relatório formatado dos resultados do teste t.</p>
 <div class="cell" data-hash="Aula8_cache/html/unnamed-chunk-3_06c60f7517ec5c7b3ebaab8cbb56bd1c">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">t.test</span>(mg2<span class="sc">$</span>Mg2, mg2<span class="sc">$</span>control)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -358,7 +372,8 @@ negative, statistically significant, and large (difference = -5.16, 95% CI
 -2.14])</code></pre>
 </div>
 </div>
-<p>Mean_se calcula a média e o erro padrão da média. Para fazer isso, podemos usar a função stat_summary. Fun.data: função de resumo completa - uma função que recebe os dados completos e deve retornar um quadro de dados com variáveis ymin, y e ymax. Deve receber o quadro de dados como entrada e retornar o quadro de dados como saída.</p>
+<p><em>Visualizando o resultado</em>: agora, plotamos um gráfico simples usando o data frame “mg” e as variáveis trat e comp como os eixos x e y. Em seguida, solicitamos um resumo estatístico completo (função stat_summary com fun.data) ao gráfico mostrando as médias e os erros padrão da média para cada nível da variável trat (mean_se).<br>
+Fun.data: função de resumo completa - uma função que recebe os dados completos e deve retornar um quadro de dados com variáveis ymin, y e ymax. Deve receber o quadro de dados como entrada e retornar o quadro de dados como saída.</p>
 <div class="cell" data-hash="Aula8_cache/html/unnamed-chunk-4_4dfc3f990c1bb1dda967af07b4fac81c">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, comp))<span class="sc">+</span></span>
@@ -368,10 +383,9 @@ negative, statistically significant, and large (difference = -5.16, 95% CI
 </div>
 </div>
 </section>
-<section id="using-the-infer-package" class="level2">
-<h2 class="anchored" data-anchor-id="using-the-infer-package">Using the infer package</h2>
-<p>Esse pacote realiza a inferência estatística usando uma linguagem que seja coerente com a estrutura do tidyverse. O pacote é centrado em 4 funções principais para visualizar e extrair valores:</p>
-<p>specify() - permite especificar a variável, ou relacionamento entre variáveis, em que se está interessado. hypothesize() - permite declarar a hipótese nula. generate() - permite gerar dados que refletem a hipótese nula. calculate() - permite calcular uma distribuição de estatísticas a partir dos dados gerados para formar a distribuição nula.</p>
+<section id="usando-o-pacote-infer" class="level2">
+<h2 class="anchored" data-anchor-id="usando-o-pacote-infer">Usando o pacote infer</h2>
+<p>O pacote infer realiza a inferência estatística usando uma linguagem que seja coerente com a estrutura do tidyverse. O pacote é centrado em 4 funções principais para visualizar e extrair valores: specify() - permite especificar a variável, ou relacionamento entre variáveis, em que se está interessado. hypothesize() - permite declarar a hipótese nula. generate() - permite gerar dados que refletem a hipótese nula. calculate() - permite calcular uma distribuição de estatísticas a partir dos dados gerados para formar a distribuição nula.</p>
 <div class="cell" data-hash="Aula8_cache/html/unnamed-chunk-5_a46ab9d50d9be917544c97c996d00112">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer) </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mg <span class="sc">|&gt;</span> <span class="fu">t_test</span>(comp <span class="sc">~</span> trat, <span class="at">order =</span></span>
@@ -383,6 +397,7 @@ negative, statistically significant, and large (difference = -5.16, 95% CI
 1      8.15  17.4 0.000000242 two.sided       5.16     3.83     6.49</code></pre>
 </div>
 </div>
+<p>Acima, pedimos que o pacote infer fosse carregado e, em seguida, realizamos um teste t usando a função t_test() para comparar as médias dos grupos definidos pela variável “trat” no data frame “mg2”. A ordem dos níveis da variável “trat” é especificada para garantir que a comparação seja feita corretamente.</p>
 
 
 </section>

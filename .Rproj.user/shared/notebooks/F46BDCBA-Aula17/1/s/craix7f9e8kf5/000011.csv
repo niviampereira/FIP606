@@ -1,0 +1,6 @@
+"0","options(scipen=999)"
+"0","dat2 <- dat |> "
+"0","  dplyr::select(-Isolate, Population) |> "
+"0","  group_by(Code, Year, Dose) |> "
+"0","  summarise(GC_mean = mean(GC))"
+"2","`summarise()` has grouped output by 'Code', 'Year'. You can override using the `.groups` argument."

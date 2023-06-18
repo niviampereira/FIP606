@@ -1,9 +1,0 @@
-"0",""
-"0","escala2 <- escala |> "
-"0","  select(assessment, rater, acuracia)"
-"0","escala3 <- escala2|>"
-"0","  pivot_wider(1,"
-"0","              names_from = assessment,"
-"0","              values_from = acuracia)"
-"2","Warning: Specifying the `id_cols` argument by position was deprecated in tidyr 1.3.0.
-Please explicitly name `id_cols`, like `id_cols = 1`."

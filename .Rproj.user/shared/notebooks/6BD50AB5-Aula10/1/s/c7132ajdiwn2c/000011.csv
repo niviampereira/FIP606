@@ -1,0 +1,3 @@
+"0","insects |>"
+"0","  ggplot(aes(spray, count))+"
+"0","  geom_boxplot()"

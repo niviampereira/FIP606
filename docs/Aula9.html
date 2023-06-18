@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Aula9</title>
+<title>FIP606 - Análises estatísticas</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -93,7 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -137,7 +137,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -193,7 +193,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -274,11 +278,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#teste-de-hipótese---teste-t" id="toc-teste-de-hipótese---teste-t" class="nav-link active" data-scroll-target="#teste-de-hipótese---teste-t">Teste de hipótese - teste t</a>
+  <li><a href="#tipos-de-testes-para-análise-estatística" id="toc-tipos-de-testes-para-análise-estatística" class="nav-link active" data-scroll-target="#tipos-de-testes-para-análise-estatística">Tipos de testes para análise estatística</a>
   <ul class="collapse">
-  <li><a href="#homocedastididade" id="toc-homocedastididade" class="nav-link" data-scroll-target="#homocedastididade">Homocedastididade</a></li>
-  <li><a href="#normalidade" id="toc-normalidade" class="nav-link" data-scroll-target="#normalidade">Normalidade</a></li>
-  <li><a href="#teste-não-paramétrico" id="toc-teste-não-paramétrico" class="nav-link" data-scroll-target="#teste-não-paramétrico">Teste não paramétrico</a></li>
+  <li><a href="#teste-t" id="toc-teste-t" class="nav-link" data-scroll-target="#teste-t">Teste T</a>
+  <ul class="collapse">
+  <li><a href="#dois-tratamentos-independentes" id="toc-dois-tratamentos-independentes" class="nav-link" data-scroll-target="#dois-tratamentos-independentes">Dois tratamentos independentes</a></li>
+  <li><a href="#dois-tratamentos-dependentes" id="toc-dois-tratamentos-dependentes" class="nav-link" data-scroll-target="#dois-tratamentos-dependentes">Dois tratamentos dependentes</a></li>
+  <li><a href="#teste-t-paramétrico" id="toc-teste-t-paramétrico" class="nav-link" data-scroll-target="#teste-t-paramétrico">Teste T paramétrico</a></li>
+  <li><a href="#teste-para-dados-não-paramétricos" id="toc-teste-para-dados-não-paramétricos" class="nav-link" data-scroll-target="#teste-para-dados-não-paramétricos">Teste para dados não paramétricos</a></li>
+  </ul></li>
   </ul></li>
   </ul>
 </nav>
@@ -288,7 +296,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Aula9</h1>
+<h1 class="title">Análises estatísticas</h1>
 </div>
 
 
@@ -309,7 +317,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-1_6c4b88be432414a33f342cadebd93dc9">
+<section id="tipos-de-testes-para-análise-estatística" class="level1">
+<h1>Tipos de testes para análise estatística</h1>
+<p>Veremos nesta aula os tipos de análise de acordo com o número e tipo de variáveis independentes (níveis do fator) e também o número de tratamentos ou grupos a serem comparados.</p>
+<section id="teste-t" class="level2">
+<h2 class="anchored" data-anchor-id="teste-t">Teste T</h2>
+<p>O teste t compara DUAS MÉDIAS (2 tratamentos) e mostra se as diferenças entre essas médias são significativas. Como todo teste estatístico, o teste t também tem como produto a medida do valor de p.&nbsp;Ou seja, no final das contas, teremos calculado a probabilidade da diferença encontrada (entre as médias) terem sido por acaso. Existem 2 tipos mais comuns de teste t:</p>
+<ul>
+<li><p>teste t para 2 amostras <strong>dependentes</strong> (ou pareadas): compara as médias da <u>mesma população</u> em diferentes momentos de tempo (ex.: antes e depois).</p></li>
+<li><p>teste t para 2 amostras <strong>independentes</strong> (ou não pareadas): compara as médias de <u>duas populações distintas</u>.</p></li>
+</ul>
+<p>Os termos paramétrico e não-paramétrico referem-se à média e ao desvio-padrão, que são os parâmetros que definem as populações que apresentam distribuição normal. Veremos como trabalahar nessas duas diferentes sutuações.</p>
+<section id="dois-tratamentos-independentes" class="level3">
+<h3 class="anchored" data-anchor-id="dois-tratamentos-independentes">Dois tratamentos independentes</h3>
+<p><em>Situação</em>:Um pesquisador conduziu um experimento com o objetivo de avaliar o efeito de um micronutriente, o magnésio (Mg), adicionado na solução do solo cultivado com plantas de arroz, no manejo de uma doença fúngica. O experimento foi conduzido em delineamento inteiramente casualizado com 10 repetições, sendo cada repetição um vaso de planta. Um dos tratamentos é o chamado controle, ou testemunha, sem o suplemento mineral. O segundo é aquele com o suplemento do Mg na dose de 2 mM. Em cada uma das repetições foi obtido um valor médio do comprimento de lesões em um determinado tempo após a inoculação.</p>
+<p><strong>Preparo pré-análise</strong>: carregamento de pacotes e importação do conjunto de dados.</p>
+<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-1_c237af6da17cef399709eb1811acd185">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magrittr) <span class="co"># para usar pipes</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># para gráficos</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -331,6 +354,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 6 Mg2       6  11  </code></pre>
 </div>
 </div>
+<p>Agora, vamos começar a trabalhar esses dados e obter estatísticas que descrevem o conjunto de dados, seja a tendência central ou a dispersão dos dados. Neste caso, trabalhamos com a média (mean), variância (var), desvio padrão (sd), erro padrão (se) e intervalo de confiança (ci). O intervalo de confiança é apenas para inferência visual.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-3_dd16e7d6c574500aec8f341af833b191">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> data_mg <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(trat) <span class="sc">%&gt;%</span></span>
@@ -350,7 +374,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 2 control     15.7    1.27     1.61    10   0.424  -Inf</code></pre>
 </div>
 </div>
-<p>Gráfico de barras vertical com erro padrão</p>
+<p><strong>Visualização</strong>: A maneira mais simples é visualizar, no caso de mais de 6 repetições, usando boxplots juntamente com os dados de cada repetição. Aqui visualizaremos os dados em gráfico de barras vertical com erro padrão.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-4_f9ea6148e2de4476374fe384dbacc5eb">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="sc">|&gt;</span> </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, mean_com)) <span class="sc">+</span></span>
@@ -366,7 +390,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula9_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Intervalo de confiança</p>
+<p><em>Intervalo de confiança</em>: Agora visualizamos os dados com o ci. Abaixo, as barras verticais representam o intervalo de confiança 95%.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-5_c8fc920c5abebde8ed38021a67146588">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data2 <span class="sc">|&gt;</span> </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(trat, mean_com)) <span class="sc">+</span></span>
@@ -381,6 +405,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula9_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>O conjunto de dados está no formato largo, assim a variável resposta de interesse está apenas em uma coluna. Existem várias formas de separar em dois vetores os dados de resposta para cada tratamento. Uma delas é por meio da função pivot_winder, a qual coloca as respostas em duas colunas, uma para cada tratamento. Para isso, criaremos o conjunto data_mg2. Agora é posspivel visualizar as respostas (tamanho da lesão) para cada tratamento usando o conjunto de dados original, já que O ggplot2 requer os dados no formato largo.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-6_efc07aed1cbdc98426c988c2f225a00c">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data_mg2 <span class="ot">&lt;-</span> data_mg <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="dv">1</span>,</span>
@@ -403,8 +428,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 10    10  10.4    16  </code></pre>
 </div>
 </div>
-<section id="teste-de-hipótese---teste-t" class="level2">
-<h2 class="anchored" data-anchor-id="teste-de-hipótese---teste-t">Teste de hipótese - teste t</h2>
+<section id="teste-de-hipótese---teste-t" class="level4">
+<h4 class="anchored" data-anchor-id="teste-de-hipótese---teste-t">Teste de hipótese - teste t</h4>
+<p>Teste t é um teste paramétrico e para ele precisa seguir 2 premissas - normalidade e homogeneidade da variância (homocedasticidade). Caso hja necessidade de transformação dos dados para deixá-los normais, é aceitável.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-7_46ec40d606625e448054167e734466d2">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(data_mg2<span class="sc">$</span>Mg2, data_mg2<span class="sc">$</span>control, </span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="at">paired =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -422,10 +448,10 @@ mean of x mean of y
    10.520    15.678 </code></pre>
 </div>
 </div>
-<p>Teste t é um teste paramétrico e para ele precisa seguir 2 premissas - normalidade e homogeneidade da variância (homocedasticidade). Se precisa fazer transformação nos dados para deixá-los normais, pode.</p>
-<section id="homocedastididade" class="level3">
-<h3 class="anchored" data-anchor-id="homocedastididade">Homocedastididade</h3>
-<p>Podemos confirmar a premissa da homocedasticidade pelo teste F.</p>
+<p>A ordem de execução dos testes deve ser: Shapiro.teste (teste de normalidade) &gt; var.test (teste de homocedasticidade) &gt; se p menor que 0,05 &gt; t.test. No caso da variância dar heterogênea, var EQUAL = F. No caso dos dados pareados usa-se o argumento pared = TRUE</p>
+<section id="homocedastididade" class="level5">
+<h5 class="anchored" data-anchor-id="homocedastididade">Homocedastididade</h5>
+<p>Podemos confirmar a premissa da homocedasticidade pelo teste F. No caso de dois grupos, a função que pode ser usada é a var.test do R. Vamos usar o formato largo e chamar os dois vetores do conjunto. Verifique o P-valor na saída da análise.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-8_1dbfd7765664a1367d594489d1fa50bf">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(data_mg2)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(Mg2, control)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -443,10 +469,11 @@ ratio of variances
           1.478111 </code></pre>
 </div>
 </div>
+<p>A verificação deste pressuposto também pode ser realizada graficamente através do boxplot para os tratamentos vs resíduos. Se existir homocedasticidade espera-se que os boxplots sejam semelhantes.</p>
 </section>
-<section id="normalidade" class="level3">
-<h3 class="anchored" data-anchor-id="normalidade">Normalidade</h3>
-<p>Para testar a normalidade dos dados, fazemos o teste shapiro.</p>
+<section id="normalidade" class="level5">
+<h5 class="anchored" data-anchor-id="normalidade">Normalidade</h5>
+<p>A normalidade pode ser testada por meio de procedimentos visuais e testes específicos. Para testar a normalidade dos dados, fazemos o teste shapiro.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-9_17473d37ea0e51ccf1717894b5938058">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(Mg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -465,7 +492,7 @@ data:  control
 W = 0.93886, p-value = 0.5404</code></pre>
 </div>
 </div>
-<p>Análise visual da premissa de normalidade:</p>
+<p><strong>Análise visual da premissa de normalidade</strong>: A análise visual da premissa de normalidade é realizada por qqplot (QQ-Plot), que permite verificar se uma amostra segue uma distribuição gaussiana. Podemos simplesmente fazer usando as funções qqnorm() e qqline() para cada umas das variáveis analisadas.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-10_68d6355bb38f90ca09f6401f7df1ff90">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span> (Mg2)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(Mg2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -478,7 +505,14 @@ W = 0.93886, p-value = 0.5404</code></pre>
 <p><img src="Aula9_files/figure-html/unnamed-chunk-10-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Testando um novo conjunto de dados:</p>
+</section>
+</section>
+</section>
+<section id="dois-tratamentos-dependentes" class="level3">
+<h3 class="anchored" data-anchor-id="dois-tratamentos-dependentes">Dois tratamentos dependentes</h3>
+<p>Se as premissas de normalidade não fossem atendidas, qual o teste que poderia ser usado? Nesse caso de dois grupos há duas possibilidades, uma é usar um teste não paramétrico ou um teste baseado em reamostragem (bootstrapping) dos dados, os quais independem do modelo de distribuição. Vejamos um exemplo.</p>
+<p><em>Situação</em>: Um experimento foi conduzido para avaliar o efeito do uso da escala na acurácia e precisão de avaliações visuais de severidade por avaliadores. A hipótese a ser testada foi que avaliações utilizando uma escala digramática como auxílio são mais acuradas do que sem o uso do auxílio. Dez avaliadores foram escolhidos aleatoriamente e fizeram duas avaliações cada. Cinco variáveis que compõe a medida da concordância das estimativas foram obtidas. Uma vez que as medidas foram repetidas no tempo para cada avaliador, as amostras são do tipo dependentes.</p>
+<p><strong>Preparo pré-análise</strong>: importação dos dados e preparo do conjunto.</p>
 <div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-11_3fde37ff148bb7fd74489b75470bb54e">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>escala <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="st">"escala"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(escala)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -500,12 +534,78 @@ W = 0.93886, p-value = 0.5404</code></pre>
 <span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_from =</span> assessment,</span>
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> acuracia)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><strong>Checagem das premissas</strong>:</p>
+<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-12_6e84d308119156a54f047fcc2f6cdefb">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="do">## homocedasticidade dois grupos</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">attach</span>(escala3)</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="fu">var.test</span>(Aided1, Unaided)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    F test to compare two variances
+
+data:  Aided1 and Unaided
+F = 0.17041, num df = 9, denom df = 9, p-value = 0.01461
+alternative hypothesis: true ratio of variances is not equal to 1
+95 percent confidence interval:
+ 0.04232677 0.68605885
+sample estimates:
+ratio of variances 
+         0.1704073 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="do">## normalidade</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(Aided1)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4260888</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">shapiro.test</span>(Unaided)<span class="sc">$</span>p.value</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.1131276</code></pre>
+</div>
+</div>
+<p><em>Análise visual da normalidade</em>:</p>
+<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-13_596d65a6f3e52c90499bd8471825b520">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(Aided1)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(Aided1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Aula9_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qqnorm</span>(Unaided)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">qqline</span>(Unaided)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Aula9_files/figure-html/unnamed-chunk-13-2.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 </section>
-<section id="teste-não-paramétrico" class="level3">
-<h3 class="anchored" data-anchor-id="teste-não-paramétrico">Teste não paramétrico</h3>
-<p>O Wilcox.test é o teste para dados não paramétricos equivalente ao teste t para dados paramétricos. o teste de Wilcoxon é usado para testar se as medianas das amostras são iguais nos casos em que a suposição de normalidade não é satisfeita ou quando não for possível checar essa suposição.</p>
-<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-12_5ec7b94bac730c20ae7bda1dd8e92e67">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(escala3<span class="sc">$</span>Aided1, escala3<span class="sc">$</span>Unaided, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="teste-t-paramétrico" class="level3">
+<h3 class="anchored" data-anchor-id="teste-t-paramétrico">Teste T paramétrico</h3>
+<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-14_4c80a6ea5599aa64e45394ce04ea34a4">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="do">## teste t para amostras pareadas</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>t_escala <span class="ot">&lt;-</span> <span class="fu">t.test</span>(escala3<span class="sc">$</span>Aided1, escala3<span class="sc">$</span>Unaided,</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">paired =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">var.equal =</span> F</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>t_escala</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Paired t-test
+
+data:  escala3$Aided1 and escala3$Unaided
+t = 5.9364, df = 9, p-value = 0.000219
+alternative hypothesis: true mean difference is not equal to 0
+95 percent confidence interval:
+ 0.1144707 0.2554241
+sample estimates:
+mean difference 
+      0.1849474 </code></pre>
+</div>
+</div>
+</section>
+<section id="teste-para-dados-não-paramétricos" class="level3">
+<h3 class="anchored" data-anchor-id="teste-para-dados-não-paramétricos">Teste para dados não paramétricos</h3>
+<p>Um teste não paramétrico não faz nenhuma suposição sobre a distribuição da população ou tamanho da amostra. O Wilcox.test é o teste para dados não paramétricos equivalente ao teste t para dados paramétricos. o teste de Wilcoxon é usado para testar se as medianas das amostras são iguais nos casos em que a suposição de normalidade não é satisfeita ou quando não for possível checar essa suposição.</p>
+<div class="cell" data-hash="Aula9_cache/html/unnamed-chunk-15_f9f89ddbd625a0faadf6b364cb53431d">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wilcox.test</span>(escala3<span class="sc">$</span>Aided1, escala3<span class="sc">$</span>Unaided, <span class="at">paired =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Wilcoxon signed rank exact test
@@ -517,6 +617,7 @@ alternative hypothesis: true location shift is not equal to 0</code></pre>
 </div>
 
 
+</section>
 </section>
 </section>
 

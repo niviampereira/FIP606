@@ -1,7 +1,0 @@
-"0","data_mg2 <- data_mg |>"
-"0","  pivot_wider(1,"
-"0","              names_from = trat,"
-"0","              values_from = comp)"
-"2","Warning: Specifying the `id_cols` argument by position was deprecated in tidyr 1.3.0.
-Please explicitly name `id_cols`, like `id_cols = 1`."
-"0","data_mg2"

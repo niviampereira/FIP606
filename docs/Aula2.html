@@ -92,7 +92,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.png" rel="icon" type="image/png">
+<link href="./img/favicon_site.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./icon.png" alt="" class="navbar-logo">
+    <img src="./img/icon.png" alt="" class="navbar-logo">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">FIP606</span>
@@ -192,7 +192,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <ul class="dropdown-menu" aria-labelledby="nav-menu-análise-estatística-em-r">    
         <li>
     <a class="dropdown-item" href="./Aula7.html">
- <span class="dropdown-text">Transformando dados</span></a>
+ <span class="dropdown-text">Transformação de dados</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./Aula18.html">
+ <span class="dropdown-text">Transformação (Box-Cox)</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./Aula8.html">
@@ -303,11 +307,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="pacotes-no-r" class="level1">
 <h1>Pacotes no R</h1>
-<p>Os pacotes necessários para realizar análises no R depende do objetivo do trabalho a ser realizado, mas pacotes alguns pacotes são básicos e essenciais para a maioria das análises, como: Tidyverse, readxl, ggplot, etc. Nas próximas aulas, aprofundaremos um pouco mais sobre esses pacotes.</p>
+<p>Um pacote é como uma coleção de funções, dados e arquivos de ajuda agrupados em uma estrutura padrão bem definida que pode ser baixada e instalada em R. Então, pode-se dizer que os pacotes são códigos uteis e instaláveis que permitem estender os recursos do R para realizar as funções desejadas. Esses pacotes são compartilhados e podem ser baixados de várias fontes, sendo as mais populares o CRAN, Bioconductor e o GitHub. <strong>CRAN</strong> – é o repositório oficial do R para pacotes montados por usuários. <strong>Bioconductor</strong> – fornece software de código aberto orientado para bioinformática. <strong>GitHub</strong> – é um site que hospeda repositórios git para todos os tipos de software e projetos (não apenas R). É onde as versões de desenvolvimento de ponta dos pacotes R são hospedadas</p>
+<p>Os pacotes necessários para rodar análises no R depende do objetivo do trabalho a ser realizado, mas alguns pacotes são básicos e essenciais para a maioria das análises, como: Tidyverse, dplyr, readxl, ggplot, etc. Nas próximas aulas, aprofundaremos um pouco mais sobre esses pacotes.</p>
 <section id="instalação-e-carregamento-pacotes" class="level2">
 <h2 class="anchored" data-anchor-id="instalação-e-carregamento-pacotes">Instalação e carregamento pacotes</h2>
-<p>A instalação e o carregamento de <strong>pacotes</strong> pode ser feito pelo menu ou então com um comando no <em>console</em>. O fluxo básico pode ser conferido <a href="https://r4ds.hadley.nz/workflow-basics.html">neste link</a>.</p>
-<p>A instalação é feita através do menu: tools &gt; install packages, indo em packages &gt; install e digitando o nome do pacote para baixar ou usando a função instal.packages(nome do pacote) no console. Para o carregamento de pacotes, a função utilizada é library(nome do pacote). O carregamento pode ser feito tanto pelo library, anotando entre parênteses o nome do pacote, quanto separando os programas por vírgula dentro do mesmo parêntese. Muitas vezes, durante o carregamento de pacotes, usamos as hashtags (#) seguidas por / warning: false e / message: false para desativar a exibição de avisos (warnings) e mensagens durante a execução do código, já que muitos pacotes exibem mensagens e avisos grandes após o carregamento que poluem o arquivo.</p>
+<p>A instalação e o carregamento de <strong>pacotes</strong> pode ser feito pelo menu ou então com um comando no <em>console</em>. O fluxo básico pode ser conferido <a href="https://r4ds.hadley.nz/workflow-basics.html">neste link</a>. A instalação é feita através do menu: tools &gt; install packages, indo em packages &gt; install e digitando o nome do pacote para baixar ou usando a função instal.packages(nome do pacote) no console. Para o carregamento de pacotes, a função utilizada é library(nome do pacote). O carregamento pode ser feito tanto pelo library, anotando entre parênteses o nome do pacote, quanto separando os programas por vírgula dentro do mesmo parêntese. Muitas vezes, durante o carregamento de pacotes, usamos as hashtags (#) seguidas por / warning: false e / message: false para desativar a exibição de avisos (warnings) e mensagens durante a execução do código, já que muitos pacotes exibem mensagens e avisos grandes após o carregamento que poluem o arquivo.</p>
 <div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-1_d78866d77a9569f7a6b321975d9f837a">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(metafor)</span>
@@ -317,7 +321,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </section>
 <section id="funções-de-pacotes" class="level2">
 <h2 class="anchored" data-anchor-id="funções-de-pacotes">Funções de pacotes:</h2>
-<p>Vamos ver como invocar uma função de um pacote. O sinal de igual é utilizado para atribuição, que pode ser substituido por &lt;-.</p>
+<p>As funções de pacotes são variadas e serão apresentadas de forma mais aprofundada na próxima aula (Dataframe). Enquanto isso, veremos rapidamente como invocar uma função de um pacote, mais especificamente a função arrange, do pacote dplyr. Para isso, utilizaremos o conjunto de dados mtcars, um conjunto de dados incorporado no R. “arrange()” é uma função do pacote dplyr que permite ordenar os dados com base em uma ou mais variáveis. Nesse caso, a função “arrange()” está sendo aplicada ao conjunto de dados “mtcars”, e a variável “cyl” está sendo especificada como a variável de ordenação. Isso significa que os dados serão reorganizados de forma ascendente com base na variável “cyl”). Nas linhas seguintes, os comandos utilizados referem-se a busca de uma planilha especifica do google sheet e a instalação de um pacote “r4pde” diretamente do repositório GitHub do uduário Emerson Del Ponte. O sinal de igual é utilizado para atribuição, que pode ser substituido por &lt;-. A função head() retorna as primeiras linhas de um objeto de dados ou de um conjunto de dados, nesse caso, foi utilizado para retornar as primeiras linhas do conjunto mtcars.</p>
 <div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-2_e344fb3be6df37f046141f45ba476211">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mtcars</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -471,6 +475,7 @@ Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
 Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1</code></pre>
 </div>
 </div>
+<p><strong>Pacote r4pde</strong>: Em linhas gerais, a variável “unit” é criada e atribuída com os valores de 1 a 12 através da função c(1:12), depois a variável “class” também é criada. Posteriormente, é feita a criação de um data frame “ratings” com essas variáveis e, em seguida, aplica a função “DSI” do pacote r4pde aos dados. O bloco de comandos mais abaixo fornece instruções para visualizar os valores, calcular a média (mean), o desvio padrão (sd) e obter um resumo estatístico da variável “class” do conjunto de dados “ratings” (função summary).</p>
 <div class="cell" data-hash="Aula2_cache/html/unnamed-chunk-3_4d8804db36cfcd01c39df93bfc66666c">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(r4pde)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>unit <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">12</span>)</span>
