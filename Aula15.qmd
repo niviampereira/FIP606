@@ -6,7 +6,7 @@ format: html
 
 # Variáveis categóricas e tabelas de contingência
 
-No caso de variáveis resposta categóricas, não se tira a média dos dados, ao invés disso, se monta uma tabela de contigência. As tabelas são usadas para resumir e apresentar a distribuição conjunta de duas ou mais variáveis categóricas. Elas são muito úteis para analisar a relação entre essas variáveis e identificar possíveis associações ou dependências. 
+No caso de variáveis resposta categóricas, não se tira a média dos dados, ao invés disso, se monta uma tabela de contigência. As tabelas são usadas para resumir e apresentar a distribuição conjunta de duas ou mais variáveis categóricas. Elas são muito úteis para analisar a relação entre essas variáveis e identificar possíveis associações ou dependências.
 
 As tabelas de contingência são bastante utilizadas em estatística descritiva, análise exploratória de dados e testes de associação, como o teste qui-quadrado. Essas tabelas de contingência podem ser visualizadas por meio de gráfico de barras/colunas, pois é melhor para a compreensão da distribuição conjunta das variáveis, se visualiza a frequência de ocorrências, quando se tem variáveis categóricas nominais.
 
@@ -22,6 +22,7 @@ library(epifitter)
 ```
 
 *Função table()*: Essa função é utilizada para criar a tabela de contingência. A tabela é construída a partir das variáveis residue e species (pertencentes ao objeto survey. A função table() conta o número de ocorrências de cada combinação de categorias dessas variáveis e armazena os resultados na variável q.
+
 ```{r}
 survey <- read_excel("dados-diversos.xlsx","survey")
 survey |>
@@ -30,6 +31,7 @@ q <- table(survey$residue, survey$species)
 ```
 
 *Pacote janitor*: O pacote janitor fornece funções úteis para limpeza e organização de dados, como: renomear colunas, remover valores ausentes, formatar dados em uma estrutura tabular, etc. Para dar os valores em porcentagem usa-se a função adorn_percentages(). A função tabyl() cria uma tabela de frequência tabular, mostrando a contagem de ocorrências de diferentes combinações de valores em variáveis categóricas.
+
 ```{r}
 #library(janitor)
 survey |>
@@ -37,6 +39,7 @@ survey |>
 ```
 
 **Visualizando os dados**:
+
 ```{r}
 survey |>
   filter(residue != "NA") |>
@@ -47,8 +50,8 @@ survey |>
 
 ## Teste qui-quadrado
 
-O teste qui-quadrado é utilizado para avaliar a associação entre duas variáveis categóricas e quando queremos determinar se existe uma associação significativa entre elas.
-Este teste é baseado na comparação das frequências observadas em uma tabela de contingência com as frequências esperadas sob a hipótese nula de independência entre as variáveis. Esse teste é realizado usando a função chisq.test(), que faz parte do pacote base do R.
+O teste qui-quadrado é utilizado para avaliar a associação entre duas variáveis categóricas e quando queremos determinar se existe uma associação significativa entre elas. Este teste é baseado na comparação das frequências observadas em uma tabela de contingência com as frequências esperadas sob a hipótese nula de independência entre as variáveis. Esse teste é realizado usando a função chisq.test(), que faz parte do pacote base do R.
+
 ```{r}
 q <- table(survey$residue, survey$species)
 chisq.test(q)
@@ -56,9 +59,10 @@ chisq.test(q)
 
 Hipótese nula: as populações são iguais.
 
-Função fisher.test(): Este teste é usado para avaliar a associação entre duas variáveis categóricas em uma tabela de contingência 2x2, ou seja, usa-se esta função quando o número de observações é baixo, algo em torno de 6 ou 7. 
+Função fisher.test(): Este teste é usado para avaliar a associação entre duas variáveis categóricas em uma tabela de contingência 2x2, ou seja, usa-se esta função quando o número de observações é baixo, algo em torno de 6 ou 7.
 
 **A severidade é influenciada pelo resíduo**?
+
 ```{r}
 q <- table(survey$residue, survey$inc_class)
 chisq.test(q)
@@ -73,6 +77,7 @@ survey|>
 *Conclusão*: Pelo p valor, a classe de severidade independe do resto cultural, ou seja, o resto cultural não influencia na severidade.
 
 Novo conjunto de dados:
+
 ```{r}
 curve <- read_excel("dados-diversos.xlsx", "curve")
 
@@ -112,6 +117,7 @@ summarise(mean_lesion = mean(lesion_size), sd_lesion = sd(lesion_size))
 ```
 
 Visualizando os dados graficamente:
+
 ```{r}
 lesion2 |>
   ggplot(aes(hai, mean_lesion, color = silicio))+
@@ -133,6 +139,7 @@ A AUDPC (Area Under the Disease Progress Curve) é uma medida utilizada na fitop
 A AUDPC é calculada pelos dados de observações repetidas do tamanho ou severidade da lesão em diferentes momentos. A curva do progresso da doença é plotada com o tempo no eixo x e a variável de interesse (ex. tamanho da lesão) no eixo y. A área abaixo dessa curva é então calculada para determinar AUDPC. Valores mais altos de AUDPC indicam um maior impacto da doença, enquanto valores mais baixos indicam um impacto menor.
 
 **Aplicando a AUDPC e visualizando em boxplot**: Nesse bloco de comandos, calculamos a AUDPC para o tamanho da lesão com base nas informações de lesion_size, hai e nos grupos definidos pelas variáveis exp, cult, silicio e rep.
+
 ```{r}
 lesion3 <- lesion_size |>
   mutate(lesion_size = as.numeric(lesion_size)) |>
@@ -151,18 +158,21 @@ Função summarise(audpc = AUDPC(lesion_size, hai)): usamos a função summarise
 ## Teste ANOVA
 
 Os resultados da análise de variância podem ajudar a identificar quais variáveis e interações têm efeito significativo na variável resposta audpc.
+
 ```{r}
 aov1<- aov(audpc ~ exp*cult*silicio, data = lesion3)
 summary(aov1)
 ```
 
 Se não der significativo, reduz o modelo:
+
 ```{r}
 aov1<- aov(audpc ~ cult*silicio, data = lesion3)
 summary(aov1)
 ```
 
 Para ver se o modelo está correto, checa as *premissas*.
+
 ```{r}
 library(performance)
 check_normality(aov1)
@@ -170,6 +180,7 @@ check_heteroscedasticity(aov1)
 ```
 
 Se não atende as premissas, *transforma os dados* e verifica as médias:
+
 ```{r}
 aov1<- aov(sqrt(audpc) ~ cult*silicio, data = lesion3)
 summary(aov1)
