@@ -1,0 +1,86 @@
+project:
+  type: website
+  output-dir: docs
+
+execute: 
+  cache: true
+  freeze: auto
+  
+website:
+  title: "FIP606"
+  favicon: img/favicon_site.png
+  image: img/nivia.png
+  
+  navbar:
+    pinned: true
+    logo: img/icon.png
+    left:
+      - text: Básico do R
+        menu:
+          - href: Aula1.qmd
+            text: Introdução ao R
+          - href: Aula2.qmd
+            text: Pacotes e carregamento em R
+          - href: Aula3.qmd
+            text: Data frame
+      - text: Gráficos em R
+        menu: 
+        - href: Aula4.qmd
+          text: Visualização de dados em GGPLOT
+        - href: Aula5.qmd
+          text: Boxplot
+        - href: Aula6.qmd
+          text: Scatterplot
+      - text: Análise estatística em R
+        menu:  
+        - href: Aula7.qmd
+          text: Transformação de dados
+        - href: Aula18.qmd
+          text: Transformação (Box-Cox)
+        - href: Aula8.qmd
+          text: Teste de hipóteses
+        - href: Aula9.qmd
+          text: Tipos de análise  
+        - href: Aula10.qmd
+          text: ANOVA - um fator
+        - href: Aula11.qmd
+          text: ANOVA Fatorial
+        - href: Aula12.qmd
+          text: ANOVA com bloco (DBC)
+        - href: Aula13.qmd
+          text: Regressão linear
+        - href: Aula17.qmd
+          text: Regressão não-linear
+        - href: Aula14.qmd
+          text: Análise de correlação 
+        - href: Aula15.qmd
+          text: Tabela de contigência
+      - text: Mapas em R
+        menu: 
+        - href: Aula16.qmd
+          text: Elaboração de Mapas
+  
+  
+    right: 
+     - icon: github
+       href: https://github.com/niviampereira
+     - icon: instagram
+       href: https://www.instagram.com/oxenivia/
+
+  page-navigation: true
+  page-footer: 
+    center: "Copyright 2023, Nívia Maria Pereira"
+    background: light
+
+format:
+  html:
+    fontsize: 1.1em
+    theme: 
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+    warning: false
+
+editor: visual
+

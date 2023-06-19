@@ -8,7 +8,7 @@
 
 <meta name="author" content="Nívia">
 
-<title>FIP606 - Tabela de contingência</title>
+<title>FIP606 - Tabela de contingência e AUDPC</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -278,9 +278,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#variáveis-categóricas-e-tabelas-de-contingência" id="toc-variáveis-categóricas-e-tabelas-de-contingência" class="nav-link active" data-scroll-target="#variáveis-categóricas-e-tabelas-de-contingência">Variáveis categóricas e tabelas de contingência</a></li>
+  <li><a href="#variáveis-categóricas-e-tabelas-de-contingência" id="toc-variáveis-categóricas-e-tabelas-de-contingência" class="nav-link active" data-scroll-target="#variáveis-categóricas-e-tabelas-de-contingência">Variáveis categóricas e tabelas de contingência</a>
+  <ul class="collapse">
+  <li><a href="#teste-qui-quadrado" id="toc-teste-qui-quadrado" class="nav-link" data-scroll-target="#teste-qui-quadrado">Teste qui-quadrado</a></li>
+  </ul></li>
   <li><a href="#exercício-prático" id="toc-exercício-prático" class="nav-link" data-scroll-target="#exercício-prático">Exercício prático:</a></li>
-  <li><a href="#análise-de-área-abaixo-da-curva-da-doença" id="toc-análise-de-área-abaixo-da-curva-da-doença" class="nav-link" data-scroll-target="#análise-de-área-abaixo-da-curva-da-doença">Análise de área abaixo da curva da doença</a></li>
+  <li><a href="#análise-de-área-abaixo-da-curva-de-progresso-da-doença---audpc" id="toc-análise-de-área-abaixo-da-curva-de-progresso-da-doença---audpc" class="nav-link" data-scroll-target="#análise-de-área-abaixo-da-curva-de-progresso-da-doença---audpc">Análise de área abaixo da curva de progresso da doença - AUDPC</a>
+  <ul class="collapse">
+  <li><a href="#teste-anova" id="toc-teste-anova" class="nav-link" data-scroll-target="#teste-anova">Teste ANOVA</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -289,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tabela de contingência</h1>
+<h1 class="title">Tabela de contingência e AUDPC</h1>
 </div>
 
 
@@ -312,7 +318,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <section id="variáveis-categóricas-e-tabelas-de-contingência" class="level1">
 <h1>Variáveis categóricas e tabelas de contingência</h1>
-<p>Para variaveis resposta categoricas, não se tira a média dos dados, ao inves disso, se monta uma tabela de contigencia e visualiza por meio de grafico de barras/colunas, pois se é sada para ver frequencia de ocorrencias, quando se tem variáveis categóricas nominais.</p>
+<p>No caso de variáveis resposta categóricas, não se tira a média dos dados, ao invés disso, se monta uma tabela de contigência. As tabelas são usadas para resumir e apresentar a distribuição conjunta de duas ou mais variáveis categóricas. Elas são muito úteis para analisar a relação entre essas variáveis e identificar possíveis associações ou dependências.</p>
+<p>As tabelas de contingência são bastante utilizadas em estatística descritiva, análise exploratória de dados e testes de associação, como o teste qui-quadrado. Essas tabelas de contingência podem ser visualizadas por meio de gráfico de barras/colunas, pois é melhor para a compreensão da distribuição conjunta das variáveis, se visualiza a frequência de ocorrências, quando se tem variáveis categóricas nominais.</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-1_5861711ce0c8f2e22ae5a04055df5db6">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -321,7 +328,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(epifitter)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Dados: Quantas ocorrências tem em cada ano. Cruzando duas variáveis. Quantas espécies dos dados tem em cada ano (função table)</p>
+<p><em>Função table()</em>: Essa função é utilizada para criar a tabela de contingência. A tabela é construída a partir das variáveis residue e species (pertencentes ao objeto survey. A função table() conta o número de ocorrências de cada combinação de categorias dessas variáveis e armazena os resultados na variável q.</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-2_18e1f39f83dab2b77748c714190e47b8">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>,<span class="st">"survey"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
@@ -336,6 +343,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">table</span>(survey<span class="sc">$</span>residue, survey<span class="sc">$</span>species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p><em>Pacote janitor</em>: O pacote janitor fornece funções úteis para limpeza e organização de dados, como: renomear colunas, remover valores ausentes, formatar dados em uma estrutura tabular, etc. Para dar os valores em porcentagem usa-se a função adorn_percentages(). A função tabyl() cria uma tabela de frequência tabular, mostrando a contagem de ocorrências de diferentes combinações de valores em variáveis categóricas.</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-3_f643d10c3729637d480f88ade35e8420">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#library(janitor)</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
@@ -347,7 +355,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
  2011  140   45</code></pre>
 </div>
 </div>
-<p><strong>Pacote janitor</strong>: Para dar os valores em porcentagem usa-se a função adorn_percentages().</p>
+<p><strong>Visualizando os dados</strong>:</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-4_474af174dd1601a04f7bb02f460a414b">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(residue <span class="sc">!=</span> <span class="st">"NA"</span>) <span class="sc">|&gt;</span></span>
@@ -358,8 +366,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="Aula15_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Teste q quadrado:</p>
-<div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-5_15d04614774ca6d006bb5d7aa4da1592">
+<section id="teste-qui-quadrado" class="level2">
+<h2 class="anchored" data-anchor-id="teste-qui-quadrado">Teste qui-quadrado</h2>
+<p>O teste qui-quadrado é utilizado para avaliar a associação entre duas variáveis categóricas e quando queremos determinar se existe uma associação significativa entre elas. Este teste é baseado na comparação das frequências observadas em uma tabela de contingência com as frequências esperadas sob a hipótese nula de independência entre as variáveis. Esse teste é realizado usando a função chisq.test(), que faz parte do pacote base do R.</p>
+<div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-5_c309d48cd0b43bdfff99e8d7d1a2557e">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">table</span>(survey<span class="sc">$</span>residue, survey<span class="sc">$</span>species)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -371,8 +381,8 @@ X-squared = 1.1997, df = 1, p-value = 0.2734</code></pre>
 </div>
 </div>
 <p>Hipótese nula: as populações são iguais.</p>
-<p>Usa-se o fisher.test(q) quando o número de observações é baixo, algo em torno de 6 ou 7.</p>
-<p>A severidade é influenciada pelo resíduo?</p>
+<p>Função fisher.test(): Este teste é usado para avaliar a associação entre duas variáveis categóricas em uma tabela de contingência 2x2, ou seja, usa-se esta função quando o número de observações é baixo, algo em torno de 6 ou 7.</p>
+<p><strong>A severidade é influenciada pelo resíduo</strong>?</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-6_1402aada1606f76632a0c164ad65db49">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fu">table</span>(survey<span class="sc">$</span>residue, survey<span class="sc">$</span>inc_class)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chisq.test</span>(q)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -392,7 +402,7 @@ X-squared = 2.6165, df = 1, p-value = 0.1058</code></pre>
 <p><img src="Aula15_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Pelo p valor, a classe de severidade independe do resto cultura, ou seja, o resto cultural não influencia na severidade.</p>
+<p><em>Conclusão</em>: Pelo p valor, a classe de severidade independe do resto cultural, ou seja, o resto cultural não influencia na severidade.</p>
 <p>Novo conjunto de dados:</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-7_813d2c0aeb7e1700c18bed5ad849989b">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>curve <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"dados-diversos.xlsx"</span>, <span class="st">"curve"</span>)</span>
@@ -433,6 +443,7 @@ mean of x
 </div>
 </div>
 </section>
+</section>
 <section id="exercício-prático" class="level1">
 <h1>Exercício prático:</h1>
 <ul>
@@ -463,8 +474,11 @@ mean of x
 </div>
 </div>
 </section>
-<section id="análise-de-área-abaixo-da-curva-da-doença" class="level1">
-<h1>Análise de área abaixo da curva da doença</h1>
+<section id="análise-de-área-abaixo-da-curva-de-progresso-da-doença---audpc" class="level1">
+<h1>Análise de área abaixo da curva de progresso da doença - AUDPC</h1>
+<p>A AUDPC (Area Under the Disease Progress Curve) é uma medida utilizada na fitopatologia para quantificar e comparar o progresso de doenças em plantas ao longo do tempo.</p>
+<p>A AUDPC é calculada pelos dados de observações repetidas do tamanho ou severidade da lesão em diferentes momentos. A curva do progresso da doença é plotada com o tempo no eixo x e a variável de interesse (ex. tamanho da lesão) no eixo y. A área abaixo dessa curva é então calculada para determinar AUDPC. Valores mais altos de AUDPC indicam um maior impacto da doença, enquanto valores mais baixos indicam um impacto menor.</p>
+<p><strong>Aplicando a AUDPC e visualizando em boxplot</strong>: Nesse bloco de comandos, calculamos a AUDPC para o tamanho da lesão com base nas informações de lesion_size, hai e nos grupos definidos pelas variáveis exp, cult, silicio e rep.</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-10_23e025c58a8993aa35f927ea36a7cde0">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>lesion3 <span class="ot">&lt;-</span> lesion_size <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lesion_size =</span> <span class="fu">as.numeric</span>(lesion_size)) <span class="sc">|&gt;</span></span>
@@ -479,7 +493,10 @@ mean of x
 <p><img src="Aula15_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
-<p>Teste:</p>
+<p>Função summarise(audpc = AUDPC(lesion_size, hai)): usamos a função summarise para calcular a AUDPC usando a função AUDPC() com as variáveis lesion_size e hai. O resultado é armazenado na nova variável audpc.</p>
+<section id="teste-anova" class="level2">
+<h2 class="anchored" data-anchor-id="teste-anova">Teste ANOVA</h2>
+<p>Os resultados da análise de variância podem ajudar a identificar quais variáveis e interações têm efeito significativo na variável resposta audpc.</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-11_a4ef55217ed0211d1e18f9dbbfc51f46">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>aov1<span class="ot">&lt;-</span> <span class="fu">aov</span>(audpc <span class="sc">~</span> exp<span class="sc">*</span>cult<span class="sc">*</span>silicio, <span class="at">data =</span> lesion3)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -511,7 +528,7 @@ Residuals    40 3922047   98051
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-<p>Para ver se o modelo está correto, checa as premissas:</p>
+<p>Para ver se o modelo está correto, checa as <em>premissas</em>.</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-13_87b5ee5ab8b7d1a31f19a0b791a4cde1">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(performance)</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">check_normality</span>(aov1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -523,7 +540,7 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code>Warning: Heteroscedasticity (non-constant error variance) detected (p = 0.040).</code></pre>
 </div>
 </div>
-<p>Se não atende as premissas, transforma:</p>
+<p>Se não atende as premissas, <em>transforma os dados</em> e verifica as médias:</p>
 <div class="cell" data-hash="Aula15_cache/html/unnamed-chunk-14_8fd94184d4e991bbe258eb84dbd64c8e">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>aov1<span class="ot">&lt;-</span> <span class="fu">aov</span>(<span class="fu">sqrt</span>(audpc) <span class="sc">~</span> cult<span class="sc">*</span>silicio, <span class="at">data =</span> lesion3)</span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(aov1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -566,6 +583,7 @@ Intervals are back-transformed from the sqrt scale </code></pre>
 </div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
