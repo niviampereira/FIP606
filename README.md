@@ -1,3 +1,3 @@
 # FIP606
 
-Material top das aulas do prof. Emerson organizados em forma de website
+Material fantástico das aulas da disciplina Análise e visualização de dados em Fitopatologia do prof. Emerson organizados em forma de website.
